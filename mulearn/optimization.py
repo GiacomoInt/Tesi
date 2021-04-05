@@ -300,7 +300,7 @@ class TensorFlowSolver(Solver):
           installed
         :returns: list -- optimal values for the independent variables of the
           problem.
-        """
+        """ 
         if not tensorflow_ok:
             raise ValueError('tensorflow not available')
 

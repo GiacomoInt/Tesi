@@ -16,40 +16,38 @@ logger.setLevel(logging.DEBUG)
 
 def create_dataset(name):
 
-    #carico il dataset.
-    iris_X, iris_y = ds.load_iris(return_X_y=True)  # In iris_X matrice con i quattro valori per oggetto
-                                                    # In iris_y etichette rispettive (0,1,2)
+    #load dataset, in iris_X values, in iris_y labels 0 1 2
+    iris_X, iris_y = ds.load_iris(return_X_y=True)  
 
-    labels = ("Setosa", "Versicolor", "Virginica") # Creo le etichette Setosa, Versicolor e Virginica
+    labels = ("Setosa", "Versicolor", "Virginica") 
 
-    #creo dataframe con le etichette per i valori in iris_X 
+    #dataframe with correct labels for respective values
     df = pd.DataFrame(iris_X, columns=["Sepal length", "Sepal width",
                                        "Petal length", "Petal width"])
 
-    #per i valori di iris_y associo le rispettive etichette
+    #associating 
     df['Class'] = iris_y
     df['Class'] = df['Class'].map(lambda c: labels[c])
 
-    iris_dataset = iris_y.copy()
+    #dataset copy for labels 0 1
+    selected_iris_dataset = iris_y.copy()
 
-    if(name == "Setosa"):
-        #creo dataset iris_setosa dove le etichette 0 diventano 1 e le altre a 0        
-        iris_dataset[iris_dataset != 0] = 2
-        iris_dataset[iris_dataset == 0] = 1
-        iris_dataset[iris_dataset == 2] = 0
-
-    if(name == "Versicolor"):
-        iris_dataset[iris_dataset==2] = 0
-    
-    if(name == "Virginica"):
-        iris_dataset[iris_dataset != 2] = 0
-        iris_dataset[iris_dataset == 2] = 1
-
-
-    return iris_X, iris_dataset
+    #dataset selected with labels
+    if(name == "Setosa"):        
+        selected_iris_dataset[selected_iris_dataset != 0] = 2
+        selected_iris_dataset[selected_iris_dataset == 0] = 1
+        selected_iris_dataset[selected_iris_dataset == 2] = 0
+    elif(name == "Versicolor"):
+        selected_iris_dataset[selected_iris_dataset==2] = 0    
+    elif(name == "Virginica"):
+        selected_iris_dataset[selected_iris_dataset != 2] = 0
+        selected_iris_dataset[selected_iris_dataset == 2] = 1
 
 
-def create_logger(path):   
+    return iris_X, selected_iris_dataset
+
+#NEED TO CREATE A REAL LOGGER
+def create_handler(path):   
     
     
     fhandler = logging.FileHandler(filename = path)
@@ -62,53 +60,90 @@ def create_logger(path):
     return fhandler
 
 
+#parametri possibile funzione (path_log, iris_type, c, sigma, penalization)
+def main():
 
+    handler = create_handler('./log/prova6.log')
 
-handler = create_logger('./log/Setosa_c005_sigma01_penalization01.log')
+    iris_X, selected_iris_dataset = create_dataset("Setosa")
 
+    #parametri     
+    c = 75
+    sigma = 0.25
 
-    
-c = 0.05
-sigma = 0.1
-    
-penalization = 0.1
-n_iter = 100
-    
-iris_X, iris_dataset = create_dataset("Setosa")
+    penalization = 0.1 
 
-# Gurobi prova
-fi = FuzzyInductor(c = c, k=GaussianKernel(sigma = sigma))
-fi.fit(iris_X, iris_dataset)
+    n_iter = 100
 
-#rmse gurobi
-rmse_gurobi = mean_squared_error(iris_dataset, fi.predict(iris_X), squared=False)
-logger.debug("RMSE GUROBI: " + str(rmse_gurobi))
+    # Gurobi solver & fit
+    fi = FuzzyInductor(c=c, k=GaussianKernel(sigma=sigma))
+    fi.fit(iris_X, selected_iris_dataset)
 
- 
-    
-while n_iter <= 1500:
-        
-    #TensoFlow prova
+    # rmse gurobi
+    rmse_gurobi = mean_squared_error(selected_iris_dataset, fi.predict(iris_X), squared=False)
+    logger.info("RMSE GUROBI: " + str(rmse_gurobi))
 
+    # TensorFlow solver
+    fi = FuzzyInductor(solver=TensorFlowSolver(n_iter=n_iter, penalization=penalization),
+                        c=c,k=GaussianKernel(sigma=sigma))
     try:
-        fi = FuzzyInductor(solver=TensorFlowSolver(n_iter = n_iter, penalization = penalization), c = c, k=GaussianKernel(sigma = sigma))
+        fi.fit(iris_X, selected_iris_dataset)
     except (ModuleNotFoundError, ValueError):
         print('Tensorflow not available')
 
-    fi.fit(iris_X, iris_dataset) #fi impara iris_X con il confronto con le etichette vere
 
-    rmse_tensorflow = mean_squared_error(iris_dataset, fi.predict(iris_X), squared=False)
-    logger.debug("RMSE TENSORFLOW: "+ str(rmse_tensorflow))
+    # rmse TensorFlow
+    rmse_tensorflow = mean_squared_error(selected_iris_dataset, fi.predict(iris_X), squared=False)
+    logger.info("RMSE TENSORFLOW: " + str(rmse_tensorflow))
 
-    #salvare distanza tra (rmse gurobi) e (rmse tensorFlow)
-    distance = mt.fabs((rmse_tensorflow) - (rmse_gurobi))
-    logger.debug("DISTANCE RMSE: "+ str(distance))
+    # calcolo distanza
+    distance = abs(rmse_tensorflow - rmse_gurobi)
+    logger.info("DISTANCE RMSE: " + str(distance))
 
-    #salvare coppia num iterazioni - distanza
-    couples = [(n_iter, distance)]
-    logger.debug("COUPLE(DISTANCE RMSE): "+ str(couples))
+    #coppia n_iter, distance
+    couple = [(n_iter, distance)]
+    logger.info("COUPLE(N_ITER,DISTANCE RMSE): " + str(couple))
+    
+    # salvo i chi
+    chi_ = fi.chis_
+    logger.info("CHI: " + str(chi_))
+    
+    #incremento n
+    n = 200
 
-    n_iter += 100 
+    # faccio ciclo fino a 1500
+    while n <= 1500:
+
+        # TensorFlow solver
+        fi = FuzzyInductor(solver=TensorFlowSolver(initial_values=chi_, n_iter=n_iter, penalization=penalization),
+                            c=c,k=GaussianKernel(sigma=sigma))
+        try:
+            fi.fit(iris_X, selected_iris_dataset)
+        except (ModuleNotFoundError, ValueError):
+            print('Tensorflow not available')
 
 
-logger.removeHandler(handler)
+        # rmse TensorFlow
+        rmse_tensorflow = mean_squared_error(selected_iris_dataset, fi.predict(iris_X), squared=False)
+        logger.info("RMSE TENSORFLOW: " + str(rmse_tensorflow))
+
+        # calcolo distanza
+        distance = abs(rmse_tensorflow - rmse_gurobi)
+        logger.info("DISTANCE RMSE: " + str(distance))
+
+        #coppia n_iter, distance
+        couple = [(n, distance)]
+        logger.info("COUPLE(N_ITER,DISTANCE RMSE): " + str(couple))
+        
+        # salvo i chi
+        chi_ = fi.chis_
+        logger.info("CHI: " + str(chi_))
+
+        #incremento n_iter
+        n += 100
+
+    logger.removeHandler(handler)
+
+
+if __name__ == "__main__":
+    main()
