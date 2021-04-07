@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import math as mt
 
-
+from itertools import product
 from sklearn.metrics import mean_squared_error
 from mulearn import FuzzyInductor
 from mulearn.optimization import TensorFlowSolver
@@ -13,6 +13,17 @@ from mulearn.kernel import GaussianKernel
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
+def create_handler(path):   
+    
+    
+    fhandler = logging.FileHandler(filename = path)
+    
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    fhandler.setFormatter(formatter)
+    
+    logger.addHandler(fhandler)  
+    
+    return fhandler
 
 def create_dataset(name):
 
@@ -46,32 +57,17 @@ def create_dataset(name):
 
     return iris_X, selected_iris_dataset
 
-#NEED TO CREATE A REAL LOGGER
-def create_handler(path):   
-    
-    
-    fhandler = logging.FileHandler(filename = path)
-    
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fhandler.setFormatter(formatter)
-    
-    logger.addHandler(fhandler)  
-    
-    return fhandler
-
-
 #parametri possibile funzione (path_log, iris_type, c, sigma, penalization)
-def main():
-
-    handler = create_handler('./log/prova6.log')
+def shot(nome, c, sigma, penalization):  
+    
+    handler = create_handler(f"../log/{nome}-Chi/c{str(c).replace('.','')}_sigma{str(sigma).replace('.','')}_penalization{str(penalization).replace('.','')}.log")
 
     iris_X, selected_iris_dataset = create_dataset("Setosa")
 
     #parametri     
-    c = 75
-    sigma = 0.25
-
-    penalization = 0.1 
+    #c = 0.05
+    #sigma = 0.1
+    #penalization = 0.1 
 
     n_iter = 100
 
@@ -85,7 +81,7 @@ def main():
 
     # TensorFlow solver
     fi = FuzzyInductor(solver=TensorFlowSolver(n_iter=n_iter, penalization=penalization),
-                        c=c,k=GaussianKernel(sigma=sigma))
+                         c=c,k=GaussianKernel(sigma=sigma))
     try:
         fi.fit(iris_X, selected_iris_dataset)
     except (ModuleNotFoundError, ValueError):
@@ -103,16 +99,16 @@ def main():
     #coppia n_iter, distance
     couple = [(n_iter, distance)]
     logger.info("COUPLE(N_ITER,DISTANCE RMSE): " + str(couple))
-    
+
     # salvo i chi
     chi_ = fi.chis_
     logger.info("CHI: " + str(chi_))
-    
+
     #incremento n
     n = 200
 
-    # faccio ciclo fino a 1500
-    while n <= 1500:
+    # faccio ciclo fino a 10000
+    while n <= 10000:
 
         # TensorFlow solver
         fi = FuzzyInductor(solver=TensorFlowSolver(initial_values=chi_, n_iter=n_iter, penalization=penalization),
@@ -134,7 +130,7 @@ def main():
         #coppia n_iter, distance
         couple = [(n, distance)]
         logger.info("COUPLE(N_ITER,DISTANCE RMSE): " + str(couple))
-        
+
         # salvo i chi
         chi_ = fi.chis_
         logger.info("CHI: " + str(chi_))
@@ -143,6 +139,13 @@ def main():
         n += 100
 
     logger.removeHandler(handler)
+
+
+def main():
+
+    for i in list(product(["Setosa","Versicolor","Virginica"],[0.05,1,75,200],[0.1,0.25,0.5],[0.1,10,100], repeat=1)):
+        shot(*i)
+
 
 
 if __name__ == "__main__":
