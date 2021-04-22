@@ -1,6 +1,12 @@
-from code import Parser
+
+from code import MyParser
 
 def main():
 
-    parser = Parser("../log/Setosa/base.log")
+    parser = MyParser("../log/Prove-1/Setosa/base.log")
+
+    print(parser.find_distance_rmse())
+
+
+
 
