@@ -9,6 +9,7 @@ from sklearn.exceptions import NotFittedError
 
 import mulearn.kernel as kernel
 
+
 from mulearn.kernel import GaussianKernel
 from mulearn.optimization import GurobiSolver
 from mulearn.fuzzifier import ExponentialFuzzifier
@@ -129,7 +130,7 @@ class FuzzyInductor(BaseEstimator, RegressorMixin):
             if self.chis_ is None:
                 raise NotFittedError("chis variable are set to None")
             self.solver.initial_values = self.chis_
-        
+
         self.chis_ = self.solver.solve(X, y, self.c, self.k)
 
         if type(self.k) is kernel.PrecomputedKernel:

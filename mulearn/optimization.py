@@ -13,6 +13,10 @@ graphically depict the progress of some learning processes using a progress
 bar. However, this package is not strictly needed: if it is not installed,
 the above mentioned progress bars will not be displayed.
 """
+from cvxopt.modeling import variable
+from cvxopt import solvers, matrix
+import cvxpy as cp
+
 
 import numpy as np
 import itertools as it
@@ -356,3 +360,52 @@ class TensorFlowSolver(Solver):
             if self.__getattribute__(a) != self.default_values[a]:
                 obj_repr += f", {a}={self.default_values[a]}"
         return obj_repr + ")"
+
+
+class CVXPYSolver(Solver):
+
+    default_values = {"initial_values": None}
+
+    def __init__(self, initial_values = default_values['initial_values']):
+
+        self.initial_values = initial_values
+    
+    def solve_problem(self, xs, mus, c, k):
+        
+        m = len(xs)
+
+        #matrice P
+        P = []        
+        for i, j in it.product(range(m),range(m)):
+            line = []
+            for j in range(m):
+                line.append(k.compute(xs[i],xs[j]))
+            P.append(line)
+            
+        P = np.array(P)
+
+        # matrice q
+        q = []
+        for i in range(m):
+            q.append(k.compute(xs[i], xs[i]))
+        
+        q = np.array(q)
+
+        #variable
+        chis = cp.Variable(m)
+
+        #constraints
+        constraints = [cp.sum(chis) == 1]
+        for i in range(m):            
+            constraints.append(mus[i]*c - chis[i] >= 0)  
+            constraints.append((1-mus[i])*c + chis[i] >= 0)
+      
+        P = P.T @ P
+
+        expression = cp.Minimize(cp.quad_form(chis, P) - q.T @ chis)
+
+        prob = cp.Problem(expression, constraints)
+        prob.solve()
+
+        return chis.value
+
