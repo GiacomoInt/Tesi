@@ -9,6 +9,8 @@ from mulearn import FuzzyInductor
 from mulearn.optimization import TensorFlowSolver
 from mulearn.kernel import GaussianKernel
 from mulearn.optimization import CVXPYSolver
+from mulearn.optimization import CVXOPTSolver
+
 
 
 def create_dataset(name):
@@ -73,11 +75,14 @@ def main(nome):
     logger.info(f"GUROBI_START: {start}")
     logger.info(f"GUROBI_END: {end}")
     logger.info(f"TEMPO_ESECUZIONE GUROBI(IN EPOCH): {(end-start)}")'''
-    fi = FuzzyInductor(solver=CVXPYSolver())
+    fi = FuzzyInductor(solver=CVXOPTSolver())
     
     fi.fit(iris_X, selected_iris_dataset)
     
     cvxpy_chis = fi.chis_
+
+    # print(f'Gurobi chis:  {str(gurobi_chis)} \n')
+    # print(f'CVXPY chis: {str(cvxpy_chis)}')
     
     rmse_distance = abs(mean_squared_error(gurobi_chis, cvxpy_chis, squared=False))
 
@@ -88,4 +93,4 @@ def main(nome):
 
 
 x = main("Setosa")
-print(x)
+print(f'Rmse: {str(x)}')

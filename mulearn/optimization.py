@@ -13,8 +13,11 @@ graphically depict the progress of some learning processes using a progress
 bar. However, this package is not strictly needed: if it is not installed,
 the above mentioned progress bars will not be displayed.
 """
-from cvxopt.modeling import variable
+from random import random
+
+from cvxopt.modeling import variable, constraint
 from cvxopt import solvers, matrix
+
 import cvxpy as cp
 
 
@@ -391,21 +394,238 @@ class CVXPYSolver(Solver):
         
         q = np.array(q)
 
+        # #matrice G
+        # G=[]
+        # for i in range(m):
+        #     G.append([1])
+        #     G.append([-1])
+
+        # G = np.array(G)
+        
+        # #matrice h
+        # h=[]
+        # for i in range(m):
+        #     h.append(mus[i]*c)
+        #     h.append((1-mus[i])*c) 
+        
+        # h = np.array(h)
+        
+
+
         #variable
         chis = cp.Variable(m)
 
-        #constraints
+        #constraints , G @ chis <= h
         constraints = [cp.sum(chis) == 1]
+       
         for i in range(m):            
             constraints.append(mus[i]*c - chis[i] >= 0)  
             constraints.append((1-mus[i])*c + chis[i] >= 0)
       
         P = P.T @ P
 
-        expression = cp.Minimize(cp.quad_form(chis, P) - q.T @ chis)
+        expression = cp.Minimize(cp.quad_form(chis, P) - q @ chis)
 
         prob = cp.Problem(expression, constraints)
         prob.solve()
 
         return chis.value
 
+class CVXOPTSolver(Solver):
+
+    default_values = {"initial_values": None}
+
+    def __init__(self, initial_values = default_values['initial_values']):
+
+        self.initial_values = initial_values
+    
+    def solve_problem(self, xs, mus, c, k):
+        
+        m = len(xs)
+
+        #matrice P
+        P = []        
+        for i in range(m):
+            line = []
+            for j in range(m):
+                line.append(k.compute(xs[i],xs[j]))
+            P.append(line)
+
+           
+        P = np.array(P)
+        P = P.astype(np.double)
+        P = matrix(P, tc= 'd')
+
+        # matrice q
+        q = []
+        for i in range(m):
+            q.append(k.compute(xs[i], xs[i]))
+        
+        q=np.array(q)
+        q = q.astype(np.double)
+        q = matrix(q, tc= 'd')
+
+        #matrice G
+        G=[]
+        for i in range(m):
+            riga1 = []
+            riga2 = []
+            for j in range(m):
+                if i == j:
+                    riga1.append(1.)
+                    riga2.append(-1.)
+                else:
+                    riga1.append(0.)
+                    riga2.append(0.)
+            G.append(riga1)  
+            G.append(riga2)
+
+        G = np.array(G)
+        G = G.astype(np.double)
+        G = matrix(G, tc= 'd')
+        
+        #matrice h
+        h=[]
+        for i in range(m):
+            h.append([mus[i]*c])
+            h.append([(1-mus[i])*c]) 
+        
+        h = np.array(h)
+        h = h.astype(np.double)
+        h = matrix(h, tc= 'd')
+        
+        #matrice A
+        A = []
+        for i in range(m):
+            A.append(1.)
+
+        A = np.array(A)
+        A = A.astype(np.double)
+        A = matrix(A,(1,m), tc= 'd')
+
+        #matrice b
+        b = [1.]
+
+        b = np.array(b)
+        b = b.astype(np.double)
+        b = matrix(b, tc= 'd')
+
+        solvers.options['show_progress'] = False
+
+        sol = solvers.qp(P,q,G,h,A,b)
+
+        return  sol['x']
+
+
+# class TensorFlowOptimizedSolver(Solver):
+#     """Solver based on TensorFlow.
+
+#     Using this class requires that TensorFlow 2.X is installed."""
+
+#     default_values = {"initial_values": "random",
+#                       "init_bound": 0.1,
+#                       "n_iter": 100,
+#                       "optimizer": Adam(learning_rate=1e-4)
+#                                    if tensorflow_ok else None,  # noqa
+#                       "tracker": tqdm.trange if tqdm_ok else range,
+#                       "penalization": 10}
+
+#     def __init__(self,
+#                  initial_values=default_values["initial_values"],
+#                  init_bound=default_values["init_bound"],
+#                  n_iter=default_values["n_iter"],
+#                  optimizer=default_values["optimizer"],
+#                  tracker=default_values["tracker"],
+#                  penalization=default_values["penalization"]):
+#         """Build an object of type TensorFlowSolver.
+
+#         :param initial_values: values to be used for initializing the
+#           independent  variables, either randomly (if set to `'random'`)` or
+#           seting them to a given sequence of initial values (if set to an
+#           iterable of floats), defaults to `'random'`.
+#         :type initial_values: `str` or iterable of `float`
+#         :param init_bound: Absolute value of the extremes of the interval used
+#           for random initialization of independent variables, defaults to 0.1.
+#         :type init_bound: `float`
+#         :param n_iter: Number of iterations of the optimization process,
+#           defaults to 100.
+#         :type n_iter: `int`
+#         :param optimizer: Optimization algorithm to be used, defaults to Adam
+#           with learning rate=1e-4 if tensorflow is available, to None otherwise.
+#         :type optimizer: :class:`tf.keras.optimizers.Optimizer`
+#         :param tracker: Tool to graphically depict the optimization progress,
+#           defaults to `tqdm.trange` if tqdm is available, to `range` (i.e., no
+#           graphical tool) otherwise.
+#         :type tracker: `object`
+#         :param penalization: Lagrange penalization for the equality constraint
+#           in the original problem, defaults to 10.
+#         :type penalization: `float`
+#         """
+#         self.init_bound = init_bound
+#         self.initial_values = initial_values
+#         self.n_iter = n_iter
+#         self.optimizer = optimizer
+#         self.tracker = tracker
+#         self.penalization = penalization
+
+
+#         obj_repr = f"TensorFlowSolver("
+
+#         for a in ("initial_values", "init_bound", "n_iter",
+#                   "optimizer", "tracker", "penalization"):
+#             if self.__getattribute__(a) != self.default_values[a]:
+#                 obj_repr += f", {a}={self.default_values[a]}"
+#         return obj_repr + ")"
+    
+#     def original_obj(self, xs, k, chis):
+        
+#         m = len(xs)
+#         sum = 0
+
+#         for i, j in it.product(range(m),range(m)):
+#             sum1 += chis(i)*k.compute(xs[i], xs[i])
+#             sum2 += chis(i)*chis(j)*k.compute(xs[i], xs[j])
+
+#         sum = sum1 - sum2
+
+#         return sum
+    
+#     def lagrangian_obj(self,xs, k, chis, mus, c, lambda1, lambda2, lambda3, lambda4):
+
+#         m = len(xs)
+
+#         for i in range(m):
+#             last_lambdas += lambda3[i]*(mus[i]*c - chis[i]) + lambda4[i]*(chis[i]+(1-mus[i])*c)
+
+#         return original_obj(xs, k, chis) - (lambda1*sum(chis) -1) - lambda2*(1-sum(chis)) - (last_lambdas)
+
+#     def optimize_lagrangian(self, xs, k, chis, mus, c, lambda1, lambda2, lambda3, lambda4):
+#         chis_opt = lagrangian_obj(xs, k, chis, mus, c, lambda1, lambda2, lambda3, lambda4) #da massimizzare
+#         return chis_opt
+    
+#     def optimize(self, xs, k, c):
+
+#         m = len(xs)
+
+#         #da inizializzare random (?)
+#         lambda1 = random() 
+#         lambda2 = random() 
+#         lambda3 = np.random.rand(m)
+#         lambda4 = np.random.rand(m)
+
+#         epsilon = 1 # quanto inizializzare? 
+
+#         do {  
+            
+#             chis = optimize_lagrangian(xs, k, chis, mus, c, lambda1, lambda2, lambda3, lambda4)
+
+#             lambda1 -= (1- sum(chis))
+#             lambda2 -= (sum(chis) - 1)
+
+#             for i in range(m):
+#                 lambda3[i] -= (c*mus[i] - chis[i])
+#                 lambda4[i] -= (chis[i] + (1-mus[i])*c)
+
+#             gap = original_obj(xs, k, chis) - lagrangian_obj(xs, k, chis, mus, c, lambda1, lambda2, lambda3, lambda4)
+            
+#         } while (gap > epsilon);  
