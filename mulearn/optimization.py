@@ -459,7 +459,7 @@ class CVXPYSolver(Solver):
         chis_value =  chis.value    
         chis_T=(chis.value).T
 
-        return chis.value
+        return np.squeeze(np.array(chis.value))
 
 
 class CVXOPTSolver(Solver):
