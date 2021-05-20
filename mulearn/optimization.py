@@ -226,6 +226,9 @@ class GurobiSolver(Solver):
                 if model.Status != GRB.OPTIMAL:
                     raise ValueError('optimal solution not found!')
 
+                print(f"Objective value GUROBI: {str(model.getObjective().getValue())}")
+
+
                 return [ch.x for ch in chis]
 
     def __repr__(self):
@@ -379,12 +382,12 @@ class CVXPYSolver(Solver):
 
         #matrice P
         P = []        
-        for i, j in it.product(range(m),range(m)):
+        for i in range(m):
             line = []
             for j in range(m):
                 line.append(k.compute(xs[i],xs[j]))
             P.append(line)
-            
+   
         P = np.array(P)
 
         # matrice q
@@ -394,42 +397,70 @@ class CVXPYSolver(Solver):
         
         q = np.array(q)
 
-        # #matrice G
-        # G=[]
-        # for i in range(m):
-        #     G.append([1])
-        #     G.append([-1])
-
-        # G = np.array(G)
+        #matrice G1
+        G1 = np.identity(m)
         
+        #matrice G2
+        G2 = np.identity(m)
+
+        #matrice h1
+        h1=[]
+        for i in range(m):
+            h1.append([mus[i]*c])
+        
+        h1 = np.array(h1)
+
+        #matrice h2
+        h2=[]
+        for i in range(m):
+            h2.append([(1-mus[i])*c])
+        
+        h2 = np.array(h2)
+
         # #matrice h
         # h=[]
         # for i in range(m):
-        #     h.append(mus[i]*c)
-        #     h.append((1-mus[i])*c) 
+        #     h.append([mus[i]*c])
+        #     h.append([(1-mus[i])*c]) 
         
         # h = np.array(h)
+        # h = h.astype(np.double)
         
+        #matrice A
+        A = np.ones(m)
+
+        #matrice b
+        b = [1.]
+
+        b = np.array(b)
 
 
         #variable
-        chis = cp.Variable(m)
+        chis = cp.Variable(shape = (m,1))
 
-        #constraints , G @ chis <= h
+        #constraints
         constraints = [cp.sum(chis) == 1]
        
         for i in range(m):            
             constraints.append(mus[i]*c - chis[i] >= 0)  
             constraints.append((1-mus[i])*c + chis[i] >= 0)
       
-        P = P.T @ P
 
-        expression = cp.Minimize(cp.quad_form(chis, P) - q @ chis)
+        expression = cp.Minimize(cp.quad_form(chis, P) - q.T @ chis)
 
         prob = cp.Problem(expression, constraints)
         prob.solve()
 
+        #[G1 @ chis <= h1, G2 @ chis >= h2, A @ chis == b]
+
+        print(f"Objective value CVXPY: {str(prob.value)}")
+        
+        chis_value_1 = chis.value[1]
+        chis_value =  chis.value    
+        chis_T=(chis.value).T
+
         return chis.value
+
 
 class CVXOPTSolver(Solver):
 
@@ -448,7 +479,7 @@ class CVXOPTSolver(Solver):
         for i in range(m):
             line = []
             for j in range(m):
-                line.append(k.compute(xs[i],xs[j]))
+                line.append(2*(k.compute(xs[i],xs[j])))
             P.append(line)
 
            
@@ -461,7 +492,7 @@ class CVXOPTSolver(Solver):
         for i in range(m):
             q.append(k.compute(xs[i], xs[i]))
         
-        q=np.array(q)
+        q = np.array(q)
         q = q.astype(np.double)
         q = matrix(q, tc= 'd')
 
@@ -494,12 +525,8 @@ class CVXOPTSolver(Solver):
         h = h.astype(np.double)
         h = matrix(h, tc= 'd')
         
-        #matrice A
-        A = []
-        for i in range(m):
-            A.append(1.)
-
-        A = np.array(A)
+        # #matrice A
+        A = np.ones(m)
         A = A.astype(np.double)
         A = matrix(A,(1,m), tc= 'd')
 
@@ -517,115 +544,87 @@ class CVXOPTSolver(Solver):
         return  sol['x']
 
 
-# class TensorFlowOptimizedSolver(Solver):
-#     """Solver based on TensorFlow.
+class TensorFlowOptimizedSolver(Solver):
+    """Solver based on TensorFlow.
 
-#     Using this class requires that TensorFlow 2.X is installed."""
+    Using this class requires that TensorFlow 2.X is installed."""
 
-#     default_values = {"initial_values": "random",
-#                       "init_bound": 0.1,
-#                       "n_iter": 100,
-#                       "optimizer": Adam(learning_rate=1e-4)
-#                                    if tensorflow_ok else None,  # noqa
-#                       "tracker": tqdm.trange if tqdm_ok else range,
-#                       "penalization": 10}
+    default_values = {"initial_values": None}
 
-#     def __init__(self,
-#                  initial_values=default_values["initial_values"],
-#                  init_bound=default_values["init_bound"],
-#                  n_iter=default_values["n_iter"],
-#                  optimizer=default_values["optimizer"],
-#                  tracker=default_values["tracker"],
-#                  penalization=default_values["penalization"]):
-#         """Build an object of type TensorFlowSolver.
-
-#         :param initial_values: values to be used for initializing the
-#           independent  variables, either randomly (if set to `'random'`)` or
-#           seting them to a given sequence of initial values (if set to an
-#           iterable of floats), defaults to `'random'`.
-#         :type initial_values: `str` or iterable of `float`
-#         :param init_bound: Absolute value of the extremes of the interval used
-#           for random initialization of independent variables, defaults to 0.1.
-#         :type init_bound: `float`
-#         :param n_iter: Number of iterations of the optimization process,
-#           defaults to 100.
-#         :type n_iter: `int`
-#         :param optimizer: Optimization algorithm to be used, defaults to Adam
-#           with learning rate=1e-4 if tensorflow is available, to None otherwise.
-#         :type optimizer: :class:`tf.keras.optimizers.Optimizer`
-#         :param tracker: Tool to graphically depict the optimization progress,
-#           defaults to `tqdm.trange` if tqdm is available, to `range` (i.e., no
-#           graphical tool) otherwise.
-#         :type tracker: `object`
-#         :param penalization: Lagrange penalization for the equality constraint
-#           in the original problem, defaults to 10.
-#         :type penalization: `float`
-#         """
-#         self.init_bound = init_bound
-#         self.initial_values = initial_values
-#         self.n_iter = n_iter
-#         self.optimizer = optimizer
-#         self.tracker = tracker
-#         self.penalization = penalization
-
-
-#         obj_repr = f"TensorFlowSolver("
-
-#         for a in ("initial_values", "init_bound", "n_iter",
-#                   "optimizer", "tracker", "penalization"):
-#             if self.__getattribute__(a) != self.default_values[a]:
-#                 obj_repr += f", {a}={self.default_values[a]}"
-#         return obj_repr + ")"
-    
-#     def original_obj(self, xs, k, chis):
+    def __init__(self,
+                 initial_values=default_values["initial_values"],
+                ):
         
-#         m = len(xs)
-#         sum = 0
-
-#         for i, j in it.product(range(m),range(m)):
-#             sum1 += chis(i)*k.compute(xs[i], xs[i])
-#             sum2 += chis(i)*chis(j)*k.compute(xs[i], xs[j])
-
-#         sum = sum1 - sum2
-
-#         return sum
+        self.initial_values = initial_values
     
-#     def lagrangian_obj(self,xs, k, chis, mus, c, lambda1, lambda2, lambda3, lambda4):
+    def original_obj(self, xs, k, chis):
+        
+        m = len(xs)
+        sum1 = 0
+        sum2 = 0
 
-#         m = len(xs)
+        for i, j in it.product(range(m),range(m)):
+            sum1 += chis[i]*k.compute(xs[i], xs[i])
+            sum2 += chis[i]*chis[j]*k.compute(xs[i], xs[j])
 
-#         for i in range(m):
-#             last_lambdas += lambda3[i]*(mus[i]*c - chis[i]) + lambda4[i]*(chis[i]+(1-mus[i])*c)
+        sum = sum1 - sum2
 
-#         return original_obj(xs, k, chis) - (lambda1*sum(chis) -1) - lambda2*(1-sum(chis)) - (last_lambdas)
-
-#     def optimize_lagrangian(self, xs, k, chis, mus, c, lambda1, lambda2, lambda3, lambda4):
-#         chis_opt = lagrangian_obj(xs, k, chis, mus, c, lambda1, lambda2, lambda3, lambda4) #da massimizzare
-#         return chis_opt
+        return sum
     
-#     def optimize(self, xs, k, c):
+    def lagrangian_obj(self,xs, k, chis, mus, c, lambda1, lambda2, lambda3, lambda4):
 
-#         m = len(xs)
+        m = len(xs)
+        last_lambdas = 0
 
-#         #da inizializzare random (?)
-#         lambda1 = random() 
-#         lambda2 = random() 
-#         lambda3 = np.random.rand(m)
-#         lambda4 = np.random.rand(m)
-
-#         epsilon = 1 # quanto inizializzare? 
-
-#         do {  
+        for i in range(m):            
+            last_lambdas += lambda3[i]*(mus[i]*c - chis[i]) + lambda4[i]*(chis[i]+(1-mus[i])*c)
             
-#             chis = optimize_lagrangian(xs, k, chis, mus, c, lambda1, lambda2, lambda3, lambda4)
 
-#             lambda1 -= (1- sum(chis))
-#             lambda2 -= (sum(chis) - 1)
+        return self.original_obj(xs, k, chis) - (lambda1*sum(chis) -1) - lambda2*(1-sum(chis)) - (last_lambdas)
 
-#             for i in range(m):
-#                 lambda3[i] -= (c*mus[i] - chis[i])
-#                 lambda4[i] -= (chis[i] + (1-mus[i])*c)
+    def optimize_lagrangian(self, xs, k, chis, mus, c, lambda1, lambda2, lambda3, lambda4):
+        
 
-#             gap = original_obj(xs, k, chis) - lagrangian_obj(xs, k, chis, mus, c, lambda1, lambda2, lambda3, lambda4)
+        chis_tf = [tf.Variable(ch, name=f'chi_{i}',
+                            trainable=True, dtype=tf.float32)
+                    for i, ch in enumerate(chis)]
+        
+        f_x = self.lagrangian_obj(xs, k, chis_tf, mus, c, lambda1, lambda2, lambda3, lambda4)
+
+        opt = Adam.minimize(f_x, var_list=chis_tf)
+
+        # with tf.Session() as sess:
+        #     sess.run(tf.global_variables_initializer())
+        #     for i in range(100):
+        #         sess.run(opt)
+
+        return [ch.numpy() for ch in chis_tf]       
+
+    
+    def solve_problem(self, xs, mus, c, k):
+
+        m = len(xs)
+        chis = np.empty(shape=m)
+        #da inizializzare random (?)
+        lambda1 = random() 
+        lambda2 = random() 
+        lambda3 = np.random.rand(m)
+        lambda4 = np.random.rand(m)
+
+        gap = 2 # prova
+        epsilon = 0.1 # quanto inizializzare? 
+
+        while (gap > epsilon):
             
-#         } while (gap > epsilon);  
+            chis = self.optimize_lagrangian(xs, k, chis, mus, c, lambda1, lambda2, lambda3, lambda4)
+
+            lambda1 -= (1- sum(chis))
+            lambda2 -= (sum(chis) - 1)
+
+            for i in range(m):
+                lambda3[i] -= (c*mus[i] - chis[i])
+                lambda4[i] -= (chis[i] + (1-mus[i])*c)
+
+            gap = self.original_obj(xs, k, chis) - self.lagrangian_obj(xs, k, chis, mus, c, lambda1, lambda2, lambda3, lambda4)
+            
+        return chis  
