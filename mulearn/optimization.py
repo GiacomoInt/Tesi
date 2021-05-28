@@ -397,44 +397,6 @@ class CVXPYSolver(Solver):
         
         q = np.array(q)
 
-        #matrice G1
-        G1 = np.identity(m)
-        
-        #matrice G2
-        G2 = np.identity(m)
-
-        #matrice h1
-        h1=[]
-        for i in range(m):
-            h1.append([mus[i]*c])
-        
-        h1 = np.array(h1)
-
-        #matrice h2
-        h2=[]
-        for i in range(m):
-            h2.append([(1-mus[i])*c])
-        
-        h2 = np.array(h2)
-
-        # #matrice h
-        # h=[]
-        # for i in range(m):
-        #     h.append([mus[i]*c])
-        #     h.append([(1-mus[i])*c]) 
-        
-        # h = np.array(h)
-        # h = h.astype(np.double)
-        
-        #matrice A
-        A = np.ones(m)
-
-        #matrice b
-        b = [1.]
-
-        b = np.array(b)
-
-
         #variable
         chis = cp.Variable(shape = (m,1))
 
@@ -451,13 +413,7 @@ class CVXPYSolver(Solver):
         prob = cp.Problem(expression, constraints)
         prob.solve()
 
-        #[G1 @ chis <= h1, G2 @ chis >= h2, A @ chis == b]
-
         print(f"Objective value CVXPY: {str(prob.value)}")
-        
-        chis_value_1 = chis.value[1]
-        chis_value =  chis.value    
-        chis_T=(chis.value).T
 
         return np.squeeze(np.array(chis.value))
 
@@ -483,18 +439,14 @@ class CVXOPTSolver(Solver):
             P.append(line)
 
            
-        P = np.array(P)
-        P = P.astype(np.double)
-        P = matrix(P, tc= 'd')
+        P = matrix(np.array(P), tc= 'd')
 
         # matrice q
         q = []
         for i in range(m):
-            q.append(k.compute(xs[i], xs[i]))
+            q.append(-(k.compute(xs[i], xs[i])))
         
-        q = np.array(q)
-        q = q.astype(np.double)
-        q = matrix(q, tc= 'd')
+        q = matrix(np.array(q), tc= 'd')
 
         #matrice G
         G=[]
@@ -511,35 +463,29 @@ class CVXOPTSolver(Solver):
             G.append(riga1)  
             G.append(riga2)
 
-        G = np.array(G)
-        G = G.astype(np.double)
-        G = matrix(G, tc= 'd')
+        G = matrix(np.array(G), tc= 'd')
         
         #matrice h
         h=[]
         for i in range(m):
-            h.append([mus[i]*c])
-            h.append([(1-mus[i])*c]) 
+            h.append(mus[i]*c)
+            h.append((1-mus[i])*c) 
         
-        h = np.array(h)
-        h = h.astype(np.double)
-        h = matrix(h, tc= 'd')
+        h = matrix(np.array(h), tc= 'd')
         
         # #matrice A
         A = np.ones(m)
-        A = A.astype(np.double)
         A = matrix(A,(1,m), tc= 'd')
 
         #matrice b
         b = [1.]
+        b = matrix(np.array(b), tc= 'd')
 
-        b = np.array(b)
-        b = b.astype(np.double)
-        b = matrix(b, tc= 'd')
-
+        
         solvers.options['show_progress'] = False
-
         sol = solvers.qp(P,q,G,h,A,b)
+        
+        print(f"Objective value CVXOPT: {str(sol['primal objective'])}")
 
         return  sol['x']
 
