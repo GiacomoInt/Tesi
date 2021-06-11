@@ -1,10 +1,13 @@
 import sklearn.datasets as ds
 import pandas as pd
+import numpy as np
+import math as mt
 
+from itertools import product
 from sklearn.metrics import mean_squared_error
 from mulearn import FuzzyInductor
 from mulearn.kernel import GaussianKernel
-from mulearn.optimization import CVXOPTSolver
+from mulearn.optimization import TensorFlowOptimizedSolver
 
 
 
@@ -64,19 +67,22 @@ def main(nome):
     fi.fit(iris_X, selected_iris_dataset)
     '''end = time.time()'''
     
-    # chis gurobi
+    # rmse gurobi
     gurobi_chis = fi.chis_
     '''logger.info(f"GUROBI_CHIS: {gurobi_chis}")
     logger.info(f"GUROBI_START: {start}")
     logger.info(f"GUROBI_END: {end}")
     logger.info(f"TEMPO_ESECUZIONE GUROBI(IN EPOCH): {(end-start)}")'''
-    fi = FuzzyInductor(solver=CVXOPTSolver())
+    fi = FuzzyInductor(solver=TensorFlowOptimizedSolver())
     
     fi.fit(iris_X, selected_iris_dataset)
     
-    cvxopt_chis = fi.chis_
+    tf_chis = fi.chis_
+
+    # print(f'Gurobi chis:  {str(gurobi_chis)} \n')
+    # print(f'CVXPY chis: {str(cvxpy_chis)}')
     
-    rmse_distance = abs(mean_squared_error(gurobi_chis, cvxopt_chis, squared=False))
+    rmse_distance = abs(mean_squared_error(gurobi_chis, tf_chis, squared=False))
 
     '''logger.removeHandler(handler)'''
     
@@ -84,5 +90,5 @@ def main(nome):
 
 
 
-x = main("Versicolor")
+x = main("Setosa")
 print(f'Rmse: {str(x)}')

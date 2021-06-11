@@ -60,7 +60,7 @@ def create_dataset(name):
 #parametri possibile funzione (path_log, iris_type, c, sigma, penalization)
 def shot(nome, c, sigma, penalization):  
     
-    handler = create_handler(f"../log/{nome}-Chi/c{str(c).replace('.','')}_sigma{str(sigma).replace('.','')}_penalization{str(penalization).replace('.','')}.log")
+    handler = create_handler(f"./log/Prove-1/{nome}/Prove.log")
 
     iris_X, selected_iris_dataset = create_dataset("Setosa")
 
