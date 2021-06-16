@@ -143,5 +143,9 @@ checklink/cookies.txt
 
 
 #ignore tesi
-/tesi/*
-!/tesi/Tesi.pdf
+/tesi/Tesi.pdf
+/tesi/Tesi.log
+/tesi/Tesi.out
+/tesi/Tesi.aux
+/tesi/Tesi.synctex.gz
+/tesi.Tesi.toc
