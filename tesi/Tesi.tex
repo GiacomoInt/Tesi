@@ -1,0 +1,513 @@
+%
+% Tesi D.S.I. - modello preso da
+% Stanford University PhD thesis style -- modifications to the report style
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                         %
+%			TESI DOTTORATO                                                   %
+%			______________                                                   %
+%                                                                         %
+%			AUTORE: Elena Pagani                                             %
+%                                                                         %
+%			Ultima revisione: 7.X.1998                                       %
+%           correzioni atrent                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+\documentclass[a4paper,12pt]{report}
+%\renewcommand{\baselinestretch}{1.6}      % interline spacing
+%
+% \includeonly{}
+%
+%			PREAMBOLO
+%
+\usepackage[a4paper]{geometry}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{epsfig}
+\usepackage[italian]{babel}
+\usepackage{setspace}
+\usepackage{tesi}
+\usepackage{nameref}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% \captionsetup{width=1\textwidth,font={small, sl},labelfont={bf}}
+
+
+% per le accentate
+\usepackage[utf8]{inputenc}
+% \graphicspath{.\Images}
+%
+\newtheorem{myteor}{Teorema}[section]
+%
+\newenvironment{teor}{\begin{myteor}\sl}{\end{myteor}}
+%
+%
+%			TITOLO
+%
+% \includegraphics{Logo}
+\begin{document}
+\title{Implementazione e confronto di algoritmi di ottimizzazione per l'apprendimento di insiemi fuzzy}
+\author{Giacomo Intagliata}
+\dept{Corso di Laurea Triennale in Informatica} 
+\anno{2020-2021}
+\matricola{873511}
+\relatore{Prof. Dario MALCHIODI}
+\correlatore{Prof. Alberto CESELLI}
+%
+%        \submitdate{month year in which submitted to GPO}
+%		- date LaTeX'd if omitted
+%	\copyrightyear{year degree conferred (next year if submitted in Dec.)}
+%		- year LaTeX'd (or next year, in December) if omitted
+%	\copyrighttrue or \copyrightfalse
+%		- produce or don't produce a copyright page (false by default)
+%	\figurespagetrue or \figurespagefalse
+%		- produce or don't produce a List of Figures page
+%		  (false by default)
+%	\tablespagetrue or \tablespagefalse
+%		- produce or don't produce a List of Tables page
+%		  (false by default)
+% 
+%			DEDICA
+%
+\beforepreface
+% \prefacesection{}
+%          {\hfill \Large {\sl dedicato a \dots}}
+
+% %
+%
+%			RINGRAZIAMENTI
+%
+% \prefacesection{Ringraziamenti}
+% asdjhgftry.
+\afterpreface
+
+%
+\chapter*{Introduzione}
+\addcontentsline{toc}{chapter}{Introduzione}
+\label{Introduzione}
+%
+Insiemi fuzzy e come è strutturata la tesi
+% 
+
+%			CAPITOLO 1: descrizione problema da affrontare
+
+\chapter{Induzione insiemi fuzzy}
+\label{Capitolo 1}
+\section{Logica fuzzy}
+La logica fuzzy è un' estensione della logica booleana. Generalmente la logica booleana permette alle nostre variabili di assumere solo i valori \textit{vero} o \textit{falso}, denotati con 1 e 0.
+
+La logica fuzzy, a differenza della logica booleana, è in grado di trattare contesti ambigui e non esattamente definiti.
+Nella logica fuzzy le variabili in gioco possono assumere valori compresi nell'intervallo $[0,1]$, dove gli estremi corrispondono rispettivamente a \textit{vero} e \textit{falso}.
+
+Il valore assunto è chiamato \textit{valore di appartenenza} o \textit{grado di verità}, e indica quanto è vera una proprietà, permettendo ad una variabile di essere parzialmente vera o parzialmente falsa, e non necessariamente completamente vera o completamente falsa.
+
+\bigskip
+
+Per capire meglio questo concetto possiamo fare qualche esempio che rispecchia la vita reale, dove molte cose non vengono valutate in maniera netta e non sempre è tutto o niente:
+
+
+\begin{itemize}
+    \item l'acqua che esce dal rubinetto è  \textit{fredda} con un grado di verità 0.4;
+    \item un diciottenne è \textit{giovane} con un grado di verità 0.8;
+    \item una persona di 180cm è \textit{alta} con un grado di verità 0.7;
+\end{itemize}
+
+
+
+\section{Insiemi Fuzzy}
+Quando $x$ appartiene ad un insieme e non è più valutato in termini di logica classica ma di logica fuzzy otteniamo l'insieme fuzzy. 
+Formalmente il grado di verità è determinato da un' opportuna \textit{funzione di appartenenza} '$\mu_A(x) = \mu$'. 
+La $x$ rappresenta i predicati da valutare ed appartenenti ad un insieme di predicati $U$. La $\mu$ rappresenta il valore di appartenenza del predicato all'insieme fuzzy $A$ considerato ed è un valore reale compreso tra 0 e 1. 
+Per $x$ pari a 1 l’elemento è certamente incluso nell’ insieme, per $x$ pari a 0
+l’elemento non è per niente incluso nell’ insieme (questi due valori corrispondono alla teoria classica degli insiemi), mentre per tutti i valori compresi tra 0 e 1 l’appartenenza può essere più o meno forte.
+
+\bigskip
+
+Consideriamo per esempio lo spazio $U$, come l' universo delle persone e un insieme $A$ che include tutte le persone giovani. Per ognuna di queste categorie in $U$:
+\begin{itemize}
+    \item ottantenne;
+    \item ventenne;
+    \item neonato;
+\end{itemize}
+possiamo definire un grado di appartenenza all'insieme $A$. Per esempio:
+\begin{itemize}
+    \item l'ottantenne appartiene ad $A$ con un valore pari a 0.1;
+    \item il ventenne appartiene ad $A$ con un valore pari a 0.8;
+    \item il neonato appartiene ad $A$ con un valore pari a 1;
+\end{itemize}
+Possiamo formalizzare questo ragionamento. 
+
+Dato un universo $U$ e una funzione di appartenenza, che definisce il grado di appartenenza ad $A$ per ogni elemento nell'universo dell'insieme $U$ :
+\begin{equation*}
+    \mu_A : U \to [0,1]
+\end{equation*}
+si definisce l'insieme fuzzy $A$ l'insieme delle coppie:
+\begin{equation*}
+    A = {(u, \mu_A(u)) \hspace{0,3cm} | \hspace{0,3cm} u\in U}
+\end{equation*}
+
+% GRAFICO DIFFERENZA INSIEMI FUZZY E INSIEMI NORMALI
+
+\subsection*{Operazioni tra insiemi fuzzy}
+La teoria degli insiemi fuzzy è un' estensione della teoria classica, ovvero è una teoria che è inclusa in quella classica, ma allo stesso tempo la allarga. 
+Gli insiemi fuzzy non godono di relazioni di univocità e biunivocità fra gli elementi di insiemi diversi.
+Sugli insiemi fuzzy valgono invece gli operatori insiemistici classici: unione, intersezione, complementare e differenza.
+Queste operazioni vengono definite attraverso le relative funzioni di appartenenza.
+
+\bigskip
+
+Definiamo due insiemi fuzzy, $A$ e $B$, di un universo $U$, allora varranno le seguenti proprietà:
+
+\begin{itemize}
+    \item \subsubsection{Unione}
+La loro unione è indicata con $A \cup B$ risulta anche essa un sottoinsieme fuzzy di $U$, con una funzione di appartenenza pari a:
+\begin{equation*}
+    \mu_{A\cup B} (u) = max\{\mu_A(u),\mu_B(u)\} \hspace{1cm}  u\in U
+\end{equation*}
+
+L' unione è matematicamente rappresentabile come :
+
+\begin{equation*}
+    A \cup B = \int_{U} \frac{max(\mu_A(u),\mu_B(u))}{u}
+\end{equation*}
+
+\item \subsubsection{Intersezione}
+La loro intersezione è indicata con $A \cap B$ e risulta anche essa sottoinsieme fuzzy di $U$, con una funzione di appartenenza pari a:
+\begin{equation*}
+    \mu_{A \cap B} (u) = min\{\mu_A(u),\mu_B(u)\} \hspace{1cm}  u\in U
+\end{equation*}
+
+L' intersezione è matematicamente rappresentabile come :
+
+\begin{equation*}
+    A \cap B = \int_{U} \frac{max(\mu_A(u),\mu_B(u))}{u}
+\end{equation*}
+
+\item \subsubsection{Complemento}
+Il complemento è un insieme fuzzy indicato con $\neg A$ e con funzione di appartenenza:
+\begin{equation*}
+    \mu_{\neg A}(u) = 1 - \mu_A(u) \hspace{1cm}  u\in U
+\end{equation*}
+
+\item \subsubsection{Differenza}
+La loro differenza è un insieme fuzzy indicato con $A \setminus B$ e la sua funzione di appartenenza è pari a:
+\begin{equation*}
+    \mu_{A \setminus B} (u) = min\{\mu_A(u),\mu_{\neg B}(u)\} \hspace{1cm}  u\in U
+\end{equation*}
+
+L' intersezione è matematicamente rappresentabile come :
+
+\begin{equation*}
+    A \setminus B = \int_{U} \frac{min(\mu_A(u),\mu_{\neg B}(u))}{u}
+\end{equation*}
+
+\end{itemize}
+
+
+
+% METTERE GRAFICI DELLE OPERAZIONI
+
+
+\section{Machine Learning}
+Il Machine Learning è una branca dell' informatica nella quale in una macchina si predispone l' abilità di apprendere qualcosa dai dati in maniera autonoma.
+
+Il Machine Learning permette ai computer di compiere attività imparando dall' esperienza. \newline
+Gli algoritmi di Machine Learning migliorano le loro prestazioni in modo adattivo mano a mano che gli esempi da cui apprendere aumentano.
+
+%
+% Il Machine Learning si riferisce al processo tramite cui i computer sviluppano il riconoscimento dei modelli, ovvero la capacità di apprendere continuamente ed effettuare previsioni utilizzando i dati per poi apportare modifiche in autonomia, senza essere programmati specificatamente per farlo. Il Machine Learning automatizza in modo efficiente il processo di costruzione di modelli analitici e consente alle macchine di adattarsi a nuovi scenari in modo autonomo.
+%
+
+\bigskip
+
+Gli algoritmi di Machine Learning differiscono tra loro a secondo dell'approccio, dei dati che utilizzano, che producono, e nel tipo di problema da risolvere.
+Possiamo avere degli approcci di diverso tipo:
+\begin{itemize}
+    \item supervisionato;
+    \item non supervisionato;
+    \item semi-supervisionato;
+    \item apprendimento con rinforzo.
+\end{itemize}
+
+\subsection*{Approccio Supervisionato}
+L' approccio supervisionato è una tecnica di apprendimento automatico che punta ad istruire una macchina lavorando su un insieme di dati associati ad etichette definite dall' utente, input che solitamente rispecchiano una serie di esempi ideali.
+
+% L' approccio supervisionato è una tecnica di apprendimento automatico che mira ad istruire un sistema informatico in modo da consentirgli di elaborare automaticamente previsioni sui valori di uscita di un sistema rispetto ad un input sulla base di una serie di esempi ideali, costituiti da coppie di input e di output, che gli vengono inizialmente forniti.
+% Questa tecnica lavora su un insieme di dati associati ad etichette definite dall'utente. 
+Sapendo che ogni dato è associato a un'etichetta si vuole arrivare a cogliere la relazione che vi è tra dati ed etichette, così da poter predire le etichette a partire dai dati, anche lavorando con dati non visti durante la fase di apprendimento. 
+Questa tecnica può fornire due diversi tipi di risultati: discreti o continui. 
+
+%%%%% 
+
+Per fare un esempio, consideriamo delle diagnosi mediche fatte su una serie  di pazienti. 
+Analizzando le diagnosi un medico è in grado di definire se il paziente è in salute o meno. Da qui possiamo estrapolare quindi due etichette differenti per il nostro caso: 'in salute' e 'malato'. 
+Fornendo come input a un classificatore questo insieme di dati con le rispettive etichette appena definite, il calcolatore, tramite un’ algoritmo supervisionato, sarà in grado di fornire delle predizioni sulla possibile etichetta da attribuire ad ogni nuova diagnosi.
+
+Però è necessario che vi siano molti dati da analizzare, perché quando questo non succede la capacità di predizione del sistema che si ottiene è spesso di bassa qualità.
+
+In questo esempio abbiamo utilizzato solamente le classi 'in salute' e 'malato', ma ad esempio se volessimo quantificare l'aspettativa di vita non è più possibile ricorrere ai classificatori. Nasce quindi la necessità di passare da un valore discreto ad uno continuo, pertanto si utilizzano i \textit{regressori} che costituiscono un modello per predire i valori continui.
+Ad esempio, potremmo voler quantificare, data una specifica diagnosi, il tempo di guarigione per un paziente malato che per definizione si definisce su una scala di numeri continui.
+
+Per riuscire ad eseguire una predizione su dati nuovi, mai visti prima, con la maggior precisione possibile, dobbiamo assicurarci che il modello produca stati lontani sia dal sovra-adattamento (\textit{overfitting}) che dal sotto-adattamento (\textit{underfitting}).
+L’\textit{overfitting} si verifica quando il modello tende ad adattarsi in maniera eccessiva ai dati che gli sono stati forniti per allenarsi, non permettendo la generalizzazione a nuovi insiemi di dati. L’\textit{underfitting} invece, si verifica nel caso contrario, ovvero quando il modello si basa su schemi troppo semplici e poco robusti, il che comporta la definizione di regole con scarsa qualità per la predizione di nuovi elementi.
+
+Quello che vogliamo è trovare un modello che si posizioni tra l' \textit{overfitting} e l' \textit{underfitting}.
+Il numero di parametri e variabili utilizzate sono aspetti importanti da considerare.
+
+Con un modello troppo semplice si rischia di utilizzare dati poco significativi, con un troppo complesso rischiamo invece di utilizzare troppe variabili e non concentrarci su quelle davvero significative.
+
+Bisogna trovare lo \textit{Sweet spot}, ovvero il punto che rappresenta il miglior compromesso tra precisione nella predizione e complessità del modello in caso di dati mai visti.
+
+\bigskip
+
+Vediamo nello specifico alcuni algoritmi di apprendimento supervisionato.
+
+\subsubsection{k-Nearest Neighbors}
+
+Il \textit{k-nearest neighbors} è un algoritmo utilizzato nel riconoscimento di pattern sia per la classificazione che per la regressione di oggetti. 
+Questo algoritmo si basa sugli attributi degli oggetti vicini a quello che vogliamo classificare.
+Viene utilizzato un \textit{k} fissato, che indica il numero di vicini da prendere in considerazione per fare la predizione.
+
+La scelta di \textit{k} dipende dalle caratteristiche dei dati. Generalmente all'aumentare di \textit{k} si riduce il rumore che compromette la classificazione, ma il criterio di scelta per la classe diventa più labile.
+
+Nel caso della classificazione è meglio scegliere un \textit{k} dispari per escludere casi di indecisione e quindi poter sempre definire la classe del nuovo dato.
+
+Nel caso di regressione il risultato sarà pari alla media dei valori target dei \textit{k} più vicini.
+
+% come funziona l'algoritmo ? 
+% cercare figura che mostri differenza di K
+
+\subsubsection{Modelli lineari}
+I modelli lineari cercano di effettuare predizioni utilizzando una funzione lineare basata sull' insieme delle caratteristiche dell' elemento da analizzare.
+
+Nel caso della regressione, la funzione è definita come segue: 
+\begin{equation*}
+    y  = w_0x_0 + w_1x_1 + \dots + w_nx_n + b
+\end{equation*}
+
+dove \textit{n} è il numero di \textit{caratteristiche} , $x_i$ le \textit{caratteristiche}, $w_i$ i pesi da attribuire ad esse, e $b$ un termine noto.
+
+\bigskip
+
+I modelli lineari si possono applicare anche al contesto della classificazione, introducendo degli intervalli per definire a quale classe appartiene il singolo caso. Nel caso della classificazione binaria, ad esempio, avremmo una formula del tipo:
+\begin{equation*}
+    y = w_0x_0 + w_1x_1 + \dots + w_nx_n + b > 0
+\end{equation*}
+
+dove, avendo le classi $C_1$ e $C_0$ se la $y$ fosse maggiore dei 0, l'oggetto descritto dagli $x_i$ verrebbe classificato come $C_1$ altrimenti come $C_0$
+
+
+\subsubsection{Alberi di decisione}
+
+%%% Sistemare
+
+Un albero di decisione (\textit{Decisione Learning Tree}) è un modello predittivo   utilizzato sia per la classificazione che per la regressione, la cui logica si basa su una struttura ad albero. In questo ogni nodo che compare rappresenta una variabile mentre ogni foglia è il risultato finale, ovvero la classe che volevamo predire per l' oggetto di partenza.
+
+% Un albero di decisione (\textit{Decision Learning Tree}) è un modello predittivo, dove ogni nodo interno rappresenta una variabile, un arco verso un nodo figlio rappresenta un possibile valore per quella proprietà e una foglia il valore predetto per la variabile obiettivo a partire dai valori delle altre proprietà, che nell' albero è rappresentato dal cammino dal nodo radice al nodo foglia.
+
+
+Nei nodi troviamo delle domande la cui risposta è di tipo binario (vero o falso) mentre le foglie rappresentano le classi che vogliamo predire.
+
+I problemi di \textit{overfitting} e \textit{underfitting} sono problemi ricorrenti che si presentano anche nel caso degli alberi di decisione. Infatti se viene costruito un albero troppo dettagliato, e quindi con un elevato livello di profondità, il modello tende ad adattarsi in maniera eccessiva ai dati usati in fase di allenamento generando un problema di \textit{overfitting}.
+
+Aumentando la profondità dell' albero, infatti, l'errore su un insieme di dati non incluso in quello di allenamento cresce.
+
+Più permettiamo all’ albero di avere tanti livelli, più lui ha la capacità di adattarsi meglio ai dati di training, e a partire da una certa lunghezza inizia a farlo a detrimento della sua capacità di generalizzazione. Questo succede proprio perché il modello si è adattato in maniera eccessiva all’ insieme di dati di allenamento.
+
+Per risolvere questo problema esistono due strategie:
+\begin{itemize}
+    \item limitare a priori la profondità dell'albero, 
+    \item eliminare i nodi che contengono informazioni poco significative.
+\end{itemize}
+
+\subsubsection{Support Vector Machine}
+Le \textit{Support Vector Machine} sono dei modelli di apprendimento utilizzati sia per la regressione che la classificazione.
+
+Una \textit{Support Vector Machine} individua un iperpiano o un insieme di iperpiani per separare i punti in uno spazio e quindi dividerli in diversi gruppi.
+
+Mentre il problema originale può essere definito in uno spazio di finite dimensioni, spesso succede che gli insiemi da distinguere non siano linearmente separabili in quello spazio. Per risolvere questo problema si ricorre alle funzioni \textit{kernel} che sono in grado di mappare dei vettori da uno spazio n-dimensionale a uno spazio m-dimensionale.
+
+\subsection*{Approccio Non Supervisionato}
+Con \textit{Approccio Non Supervisionato} ci riferiamo ad una tecnica di apprendimento automatico che consiste nel fornire in input una serie di dati non etichettati ma che verranno classificati sulla base di caratteristiche comuni  per cercare di effettuare delle previsioni su input futuri.
+
+%%%%% Sistemare
+
+% L'apprendimento non supervisionato è una tecnica di apprendimento automatico che consiste nel fornire alla macchina una serie di input che verranno riclassificati e organizzati sulla base di caratteristiche comuni per cercare di effettuare ragionamenti e previsioni sugli input successivi. 
+
+Al contrario dell'apprendimento supervisionato, durante l'apprendimento vengono forniti solo esempi non annotati, in quanto le classi non sono note a priori ma devono essere apprese automaticamente.
+
+\bigskip
+
+Il principale algoritmo di questa categoria è il \textit{clustering}, ovvero una tecnica in grado di suddividere in gruppi distinti elementi che hanno dati e caratteristiche in comune.
+
+Un esempio di utilizzo ricade nell' ambito della sicurezza informatica. I tipi di attacco conosciuti sono probabilmente solo la punta dell' iceberg. Utilizzando tecniche di clustering è possibile individuare e bloccare attacchi ancora sconosciuti.
+Il Machine Learning non supervisionato potrebbe utilizzare informazioni dei clienti sugli utilizzi abituali dei servizi di una banca. Se un malintenzionato provasse ad effettuare delle operazioni tramite il nostro conto bancario dall' altra parte del mondo ad un orario differente da quello abituale, il calcolatore tramite tecniche di clustering, è in grado di riconoscere le operazioni abituali e mandare un messaggio di allarme se individua casi anomali.
+
+\subsection*{Approccio Semi-Supervisionato}
+A metà strada tra l'apprendimento supervisionato e quello non supervisionato c'è l'apprendimento semi-supervisionato.
+
+Questo approccio consiste nel combinare le due tecniche e fornire un risultato basandosi su un input eterogeneo costituito da dati etichettati e dati non etichettati.
+Questo perché i dati etichettati a volte possono essere difficili, costosi e dispendiosi in termini di tempo da recuperare, perché spesso i dati vengono etichettati manualmente da utenti specializzati. Allo stesso tempo i dati non etichettati possono essere relativamente facile da raccogliere, ma ci sono pochi modi di utilizzarli. 
+
+L' approccio semi-supervisionato risolve questi problemi utilizzando una grande quantità di dati non etichettati, insieme a una porzione di dati etichettati, per costruire classificatori migliori.
+
+\subsection*{Apprendimento con rinforzo}
+%%
+Il quarto e ultimo approccio, chiamato approccio con rinforzo, ha come finalità quella di costruire degli agenti autonomi che hanno il compito di scegliere le azioni da compiere per conseguire determinati scopi attraverso lo studio e l' interazione con il sistema circostante.
+
+In sostanza, utilizzando questo approccio, la macchina decide le azioni da compiere a seconda dello stato attuale del sistema, così facendo ne determina quello futuro.
+%%
+
+Quando la macchina prende una decisione otterrà successivamente una “ricompensa”, sotto forma di punteggio, che sarà alto o basso a seconda che la decisione presa sia giusta o sbagliata. Così l'agente cercherà di fare sempre meglio per arrivare ad ottenere il punteggio più alto possibile, prendendo decisioni corrette.
+
+
+
+% Link tra insiemi fuzzy e machine learning.
+
+\section{\texorpdfstring{$\mu$}{mu}-learn}
+Nel capitolo precedente abbiamo visto le diverse tecniche utilizzate nel Machine Learning. L’algoritmo che andremo a descrivere, denominato \textit{$\mu$-learn} \cite{mulearn}, si basa sull’ induzione di insiemi fuzzy e ricade nell’approccio supervisionato, ovvero quella tecnica che necessita di dati preventivamente valutati per effettuare predizioni. In questo caso la predizione è il grado di appartenenza.
+
+\bigskip
+
+Supponiamo di avere un campione {$x_1,\dots,x_m$} in un dominio $X$, ed un insieme di gradi di appartenenza {$\mu_1,\dots,\mu_m$} associati ad un generico insieme fuzzy $A$. 
+
+Il problema di apprendere $\mu_A$ può essere suddiviso in due parti:
+\begin{itemize}
+    \item determinare la forma di A;
+    \item dedurre i parametri della funzione di membership $\mu_A$
+\end{itemize}
+
+Per fare ciò dobbiamo partire dalle seguenti ipotesi:
+\begin{itemize}
+    \item L'insieme $A_1 = \{ x\in X \hspace{0,3cm} |\hspace{0,3cm} \mu_A(x) = 1 \}$ deve contenere tutti i punti in $X$ la cui trasformazione attraverso la mappatura $\Phi$ appartenga alla sfera di centro $a$ e raggio $R$.
+    
+    \item Il grado di appartenenza $\mu_A(x)$ dipende solo dalla distanza tra $\Phi(x)$ e $a$
+\end{itemize}
+
+Fatte queste ipotesi è possibile definire il problema: trovare la più piccola sfera avente centro $a$ e raggio $R$ che includa la maggior parte delle immagini tramite $\Phi$ degli elementi $x\in X$.
+
+
+
+La formulazione matematica di questo problema determina un problema di ottimizzazione vincolata, la cui funzione obiettivo è:
+\begin{equation*}
+    min R^2 + C\displaystyle\sum_{i=1}^{n}(\xi_i+\tau_i)
+\end{equation*}
+sottoposta ai seguenti vincoli:
+\begin{equation}
+    \mu_i\|\Phi(x_i)-a\|^2\le\mu_iR^2 + \xi_i
+\end{equation}
+\begin{equation}
+    (1-\mu_i)\|\Phi(x_i)-a\|^2 \ge (1-\mu_i)R^2 - \tau_i
+\end{equation}
+\begin{equation}
+    \xi_i \ge 0, \tau_i \ge 0
+\end{equation}
+
+
+dove $\xi$ e $\tau$ sono le variabili di scarto utilizzate nel problema di ottimizzazione. $\xi$ è la variabile slack legata al posizionamento dei punti all'interno della sfera, mentre $\tau$ è riferita al posizionamento dei punti all'esterno della sfera. Infine $C$ è una costante la cui funzione è quella di 'pesare' l'impatto delle variabili di slack.
+
+Possiamo notare che quando $\mu_i = 1$ otteniamo che:
+\begin{equation*}
+    \|\Phi(x_i)-a\|^{2} \le R^2 + \xi_i
+\end{equation*}
+ovvero che la distanza della trasformazione di $x_i$ da $a$ è minore o uguale al raggio della sfera e che il secondo vincolo diventa:
+\begin{equation*}
+    \tau_i \ge 0
+\end{equation*}
+che è già incorporato nel terzo vincolo, e quindi il nostro $x_i$ sarà posizionato all'interno della sfera.
+
+Allo stesso modo, quando $\mu_i = 0$ otteniamo che il vincolo 2 diventa:
+\begin{equation*}
+    \|\Phi(x_i)-a\|^2 \ge R^2 - \tau_i
+\end{equation*}
+ovvero che la distanza della trasformazione di $x_i$ da $a$ è maggiore o uguale al raggio della sfera e il primo vincolo così diventa:
+\begin{equation*}
+    \xi_i \ge 0
+\end{equation*}
+che è già incorporato nel terzo vincolo, e quindi il nostro $x_i$ sarà posizionato all' esterno della sfera.
+
+Utilizzando la formulazione duale di Wolfe, quello che otteniamo è il seguente problema:
+\begin{equation*}
+\begin{split}
+    max \displaystyle\sum_{i=1}^{m}(\alpha_i\mu_i - \beta_i(1-\mu_i))&k(x_i,x_i)\hspace{0,1cm}- \\ &\displaystyle\sum_{i,j=1}^{m}(\alpha_i\mu_i - \beta_i(1-\mu_i))(\alpha_j\mu_j - \beta_j(1-\mu_j))k(x_i,x_j)
+\end{split}
+\end{equation*}
+sottoposto ai vincoli:
+\begin{equation}
+    \displaystyle\sum_{i=1}^{n}(\alpha_i\mu_i - \beta_i(1-\mu_i)) = 1
+\end{equation}
+\begin{equation}
+    0 \le \alpha_i,\beta_i \le C
+\end{equation}
+
+dove $k$ è la funzione kernel associata alla mappatura nello spazio dell' immagine di $\Phi$ (ovvero $k(x_i,x_j) = \Phi(x_i)\cdot\Phi(x_j))$.
+
+Indicando con $^*$ il valore ottimale per una variabile, è possibile dimostrare che:
+\begin{equation*}
+\begin{split}
+    R^{2}(x) = k(x,x) \hspace{0,1cm}- \hspace{0,1cm}&2\displaystyle\sum_{i=1}^{m}(\alpha{i}^{*}\mu_{i} - \beta_{i}^{*}(1-\mu_{i}))k(x,x_i)\hspace{0,1cm} + \\ 
+    &\displaystyle\sum_{i,j=1}^{m}(\alpha_{i}^{*} - \beta_{i}^{*}(1-\mu_{i}))(\alpha_{j}^{*} - \beta_{j}^{*}(1-\mu_{j}))k(x_i,x_j)
+\end{split}
+\end{equation*}
+
+così facendo è possibile calcolare la distanza tra il centro della sfera e l'immagine del punto dato $x$.
+In particolare, tutti i punti $x$ con una membership $\mu_{A}(x) = 1$ soddisfanno $R^2(x) \le R^2_1$ dove $R^2_1 = R^2(x_i)$ per qualunque vettore di supporto.
+
+Apprendere la funzione di membership richiede di trovare il giusto compromesso nella scelta del parametro $C$, così come nei parametri del kernel.
+
+
+
+
+%
+%			CAPITOLO 2: tecnologie e metodologie
+%
+\chapter{Tecnologie e metodologie}
+\label{Capitolo 2}
+
+Nel capitolo precedente ho un algoritmo di ottimizzazione vincolata e ci sono vari modi per risolvere questo problema numerico.
+Parlo di CVXOP, CVXPY, GUROBI.
+
+\section{Gurobi}
+\section{CVXOPT}
+\section{CVXPY}
+\section{TensorFlow con Rilassamento Lagrangiano}
+\subsection{Rilassamento Lagrangiano}
+
+%
+%			CAPITOLO 3: esperimenti fatti
+
+\chapter{Esperimenti}
+\label{Captiolo 3}
+
+Spiegare come sono stati costruiti ed eventuali esperimenti
+Cercare un filo logico tra gli esperimenti, esperimenti miei e perché li ho fatti così.
+\section{Esperimenti a confronto}
+\subsection{CVXPY}
+\subsection{CVXOPT}
+\subsection{TensorFlow}
+\subsubsection{Confronto con esperimenti precedenti}
+
+\chapter{Conclusioni}
+\label{Conclusioni}
+
+\chapter*{Ringraziamenti}
+\label{Ringraziamenti}
+
+%
+%			BIBLIOGRAFIA
+%
+\begin{thebibliography}{00}
+%
+\bibitem{mulearn}
+Dario Malchiodi, Witold Pedrycz. \textit{Learning Membership Functions for Fuzzy Sets through Modified Support Vector Clustering}, F. Masulli, G. Pasi, and R. Ya-ger (Eds.): WILF 2013, LNAI 8256, pp. 52–59, 2013. \copyright Springer International
+Publishing Switzerland 2013
+\end{thebibliography}
+% 
+\end{document}
+
+
+ 
