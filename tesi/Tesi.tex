@@ -33,6 +33,10 @@
 \usepackage{nameref}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\pgfplotsset{width=10cm,compat=1.9}
+
 
 % \captionsetup{width=1\textwidth,font={small, sl},labelfont={bf}}
 
@@ -116,7 +120,46 @@ Per capire meglio questo concetto possiamo fare qualche esempio che rispecchia l
     \item una persona di 180cm è \textit{alta} con un grado di verità 0.7;
 \end{itemize}
 
-
+\begin{figure}
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \resizebox{6cm}{5cm}{
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = left,
+                xlabel = {Temperatura},
+                ylabel = {Grado di appartenenza},
+                xmin=0, xmax=60,
+                ymin=0, ymax=1.2,
+            ]    
+            \end{axis}    
+            \draw[ultra thick,color=blue](0,5.87) -- node[below,yshift = -1cm, xshift = 2mm] {Freddo} ++ (3.5,0) -- (3.5,0) -- (8,0);    
+            \draw[ultra thick,color=red](0,0) -- (3.55,0) -- (3.55,5.87) -- node[below, yshift=-1cm] {Caldo} ++ (4.5,0);
+        \end{tikzpicture}
+        }
+        \caption{Logica Booleana}
+    \end{subfigure}
+    \quad
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \resizebox{6cm}{5cm}{
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = left,
+                xlabel = {Temperatura},
+                ylabel = {Grado di appartenenza},
+                xmin=0, xmax=60,
+                ymin=0, ymax=1.2,
+            ]    
+            \end{axis}    
+            \draw[ultra thick,color=blue](0,5.87) -- node[below,yshift = -1cm, xshift = 2mm] {Freddo} ++ (2,0) -- (5,0) -- (8,0);    
+            \draw[ultra thick,color=red](0,0) -- (2,0) -- (5,5.87) -- node[below, yshift=-1cm] {Caldo} ++ (3,0);
+        \end{tikzpicture}
+        }
+        \caption{Logica Fuzzy}
+    \end{subfigure}
+    \caption{Differenza concettuale tra logica booleana(a) e logica fuzzy(b)}
+\end{figure}
 
 \section{Insiemi Fuzzy}
 Quando $x$ appartiene ad un insieme e non è più valutato in termini di logica classica ma di logica fuzzy otteniamo l'insieme fuzzy. 
