@@ -35,6 +35,7 @@
 \usepackage{subcaption}
 \usepackage{pgfplots}
 \usepackage{tikz}
+\usepgfplotslibrary{fillbetween}
 \pgfplotsset{width=10cm,compat=1.9}
 
 
@@ -121,7 +122,7 @@ Per capire meglio questo concetto possiamo fare qualche esempio che rispecchia l
 \end{itemize}
 
 \begin{figure}
-    \begin{subfigure}[t]{.5\textwidth}
+    \begin{subfigure}[t]{.46\textwidth}
         \centering
         \resizebox{6cm}{5cm}{
         \begin{tikzpicture}
@@ -193,8 +194,6 @@ si definisce l'insieme fuzzy $A$ l'insieme delle coppie:
     A = {(u, \mu_A(u)) \hspace{0,3cm} | \hspace{0,3cm} u\in U}
 \end{equation*}
 
-% GRAFICO DIFFERENZA INSIEMI FUZZY E INSIEMI NORMALI
-
 \subsection*{Operazioni tra insiemi fuzzy}
 La teoria degli insiemi fuzzy è un' estensione della teoria classica, ovvero è una teoria che è inclusa in quella classica, ma allo stesso tempo la allarga. 
 Gli insiemi fuzzy non godono di relazioni di univocità e biunivocità fra gli elementi di insiemi diversi.
@@ -227,7 +226,7 @@ La loro intersezione è indicata con $A \cap B$ e risulta anche essa sottoinsiem
 L' intersezione è matematicamente rappresentabile come :
 
 \begin{equation*}
-    A \cap B = \int_{U} \frac{max(\mu_A(u),\mu_B(u))}{u}
+    A \cap B = \int_{U} \frac{min(\mu_A(u),\mu_B(u))}{u}
 \end{equation*}
 
 \item \subsubsection{Complemento}
@@ -242,7 +241,7 @@ La loro differenza è un insieme fuzzy indicato con $A \setminus B$ e la sua fun
     \mu_{A \setminus B} (u) = min\{\mu_A(u),\mu_{\neg B}(u)\} \hspace{1cm}  u\in U
 \end{equation*}
 
-L' intersezione è matematicamente rappresentabile come :
+La differenza è matematicamente rappresentabile come :
 
 \begin{equation*}
     A \setminus B = \int_{U} \frac{min(\mu_A(u),\mu_{\neg B}(u))}{u}
@@ -250,11 +249,157 @@ L' intersezione è matematicamente rappresentabile come :
 
 \end{itemize}
 
+\begin{figure}[h]
+    \begin{subfigure}[t]{0.47\textwidth}
+        \centering
+        \resizebox{6cm}{5cm}{
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = left,
+                ylabel = {Grado di appartenenza},
+                ymin=0, ymax=1.2,
+                xmin=0, xmax=21,
+                xticklabels={,,},                
+            ]
+            \path[name path=axis] (axis cs:0,0) -- (axis cs:1,0);
+            \path[name path=axis2] (axis cs:0,0) -- (axis cs:21,0);
+
+            \addplot [color = blue, name path=A] coordinates {
+            (0,1)
+            (7,1)
+            (14,0)
+            (21,0)}; 
+            
+            \addplot [color = red,name path=B] coordinates {
+            (0,0)
+            (7,0)
+            (14,1)
+            (17,0.5)
+            (21,0.5)}; 
+            
+            \addplot[shade] fill between[of=A and axis];
+            \addplot[shade] fill between[of=B and axis2];
+
+            \end{axis}
+
+        \end{tikzpicture}
+        }
+        \caption{Unione}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \resizebox{6cm}{5cm}{
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = left,
+                ylabel = {Grado di appartenenza},
+                ymin=0, ymax=1.2,
+                xmin=0, xmax=21,
+                xticklabels={,,},                
+            ]
+            
+            \addplot [color = blue, name path = A] coordinates {
+            (0,1)
+            (7,1)
+            (14,0)
+            (21,0)}; 
+            
+            \addplot [color = red, name path = B] coordinates {
+            (0,0)
+            (7,0)
+            (14,1)
+            (17,0.5)
+            (21,0.5)};
+            
+            \fill[shade] (70.5,0) -- (105,50) -- (140,0);
+            
+
+            \end{axis}           
+
+        \end{tikzpicture}
+        }
+        \caption{Intersezione}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.47\textwidth}
+        \centering
+        \resizebox{6cm}{5cm}{
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = left,
+                ylabel = {Grado di appartenenza},
+                ymin=0, ymax=1.2,
+                xmin=0, xmax=21,
+                xticklabels={,,},                
+            ]
+            
+            \path[name path=axis] (axis cs:0,0) -- (axis cs:21,0);
+
+            \addplot [color = blue] coordinates {
+            (0,1)
+            (7,1)
+            (14,0)
+            (21,0)}; 
+            
+            \addplot [color = red, name path = B] coordinates {
+            (0,0)
+            (7,0)
+            (14,1)
+            (17,1)
+            (21,1)};
+            
+            \addplot[shade] fill between[of=B and axis];
+
+            \end{axis}   
+
+        \end{tikzpicture}
+        }
+        \caption{Complemento}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \resizebox{6cm}{5cm}{
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = left,
+                ylabel = {Grado di appartenenza},
+                ymin=0, ymax=1.2,
+                xmin=0, xmax=21,
+                xticklabels={,,},                
+            ]
+            \path[name path=axis] (axis cs:0,0) -- (axis cs:1,0);
+            \path[name path=axis2] (axis cs:0,0) -- (axis cs:21,0);
+
+            \addplot [color = blue, name path = A] coordinates {
+            (0,1)
+            (7,1)
+            (14,0)
+            (21,0)}; 
+            
+            \addplot [color = red, name path = B] coordinates {
+            (0,0)
+            (7,0)
+            (14,1)
+            (17,0.5)
+            (21,0.5)};
+            
+            \addplot[shade] fill between[of=A and axis];
+            \addplot[white] fill between[of=B and axis2];
+
+            
+            \end{axis}           
+
+        \end{tikzpicture}
+        }
+        \caption{Differenza}
+    \end{subfigure}
+    \caption{Operatori Insiemistici su Insiemi Fuzzy}
+\end{figure}
+
 
 
 % METTERE GRAFICI DELLE OPERAZIONI
 
-
+\newpage
 \section{Machine Learning}
 Il Machine Learning è una branca dell' informatica nella quale in una macchina si predispone l' abilità di apprendere qualcosa dai dati in maniera autonoma.
 
