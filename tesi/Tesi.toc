@@ -1,29 +1,29 @@
 \babel@toc {italian}{}
 \babel@toc {italian}{}
 \contentsline {chapter}{Introduzione}{1}{chapter*.2}%
-\contentsline {chapter}{\numberline {1}Induzione insiemi fuzzy}{2}{chapter.1}%
+\contentsline {chapter}{\numberline {1}Induzione di insiemi fuzzy}{2}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Logica fuzzy}{2}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Insiemi Fuzzy}{3}{section.1.2}%
-\contentsline {subsubsection}{Unione}{4}{section*.5}%
-\contentsline {subsubsection}{Intersezione}{4}{section*.6}%
-\contentsline {subsubsection}{Complemento}{5}{section*.7}%
-\contentsline {subsubsection}{Differenza}{5}{section*.8}%
-\contentsline {section}{\numberline {1.3}Machine Learning}{6}{section.1.3}%
-\contentsline {subsubsection}{k-Nearest Neighbors}{8}{section*.11}%
-\contentsline {subsubsection}{Modelli lineari}{8}{section*.12}%
-\contentsline {subsubsection}{Alberi di decisione}{9}{section*.13}%
-\contentsline {subsubsection}{Support Vector Machine}{9}{section*.14}%
-\contentsline {section}{\numberline {1.4}$\mu $-learn}{11}{section.1.4}%
-\contentsline {chapter}{\numberline {2}Tecnologie e metodologie}{14}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Gurobi}{14}{section.2.1}%
-\contentsline {section}{\numberline {2.2}CVXOPT}{14}{section.2.2}%
-\contentsline {section}{\numberline {2.3}CVXPY}{14}{section.2.3}%
-\contentsline {section}{\numberline {2.4}TensorFlow con Rilassamento Lagrangiano}{14}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Rilassamento Lagrangiano}{14}{subsection.2.4.1}%
-\contentsline {chapter}{\numberline {3}Esperimenti}{15}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Esperimenti a confronto}{15}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}CVXPY}{15}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}CVXOPT}{15}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}TensorFlow}{15}{subsection.3.1.3}%
-\contentsline {subsubsection}{Confronto con esperimenti precedenti}{15}{section*.18}%
-\contentsline {chapter}{\numberline {4}Conclusioni}{16}{chapter.4}%
+\contentsline {subsubsection}{Unione}{5}{section*.6}%
+\contentsline {subsubsection}{Intersezione}{5}{section*.8}%
+\contentsline {subsubsection}{Complemento}{6}{section*.10}%
+\contentsline {section}{\numberline {1.3}Machine Learning}{7}{section.1.3}%
+\contentsline {subsubsection}{k-Nearest Neighbor}{9}{section*.13}%
+\contentsline {subsubsection}{Modelli lineari}{9}{section*.14}%
+\contentsline {subsubsection}{Alberi di decisione}{9}{section*.15}%
+\contentsline {subsubsection}{Support Vector Machine}{10}{section*.16}%
+\contentsline {section}{\numberline {1.4}$\mu $-learn}{12}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Tecnologie e metodologie}{15}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Gurobi}{15}{section.2.1}%
+\contentsline {section}{\numberline {2.2}CVXOPT}{15}{section.2.2}%
+\contentsline {section}{\numberline {2.3}CVXPY}{15}{section.2.3}%
+\contentsline {section}{\numberline {2.4}TensorFlow con Rilassamento Lagrangiano}{15}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Rilassamento Lagrangiano}{15}{subsection.2.4.1}%
+\contentsline {chapter}{\numberline {3}Esperimenti}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Esperimenti a confronto}{16}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}CVXPY}{16}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}CVXOPT}{16}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}TensorFlow}{16}{subsection.3.1.3}%
+\contentsline {subsubsection}{Confronto con esperimenti precedenti}{16}{section*.20}%
+\contentsline {chapter}{\numberline {4}Conclusioni}{17}{chapter.4}%
+\contentsline {chapter}{Bibliografia}{19}{chapter*.22}%
