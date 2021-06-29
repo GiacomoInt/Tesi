@@ -519,6 +519,12 @@ Utilizzando un numero basso di parametri si rischia di ottenere modelli poco sig
 %indicazione fonte
 
 Bisogna trovare lo \textit{Sweet spot} \cite{machine_learning_oreilly}, ovvero il punto che rappresenta il miglior compromesso tra precisione nella predizione e complessità del modello in caso di dati mai visti.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.35]{images/sweet_spot.png}
+    \label{fig:sweet_spot}
+    \caption{Compromesso tra precisione nella predizione e complessità del modello \cite{figure_copyright}}
+\end{figure}
 
 
 \bigskip
@@ -526,8 +532,18 @@ I paragrafi che seguono descrivono nello specifico alcuni algoritmi di apprendim
 
 \subsubsection{k-Nearest Neighbor}
 
-Il \textit{k-nearest neighbor} è un algoritmo utilizzato sia in problemi di classificazione sia in problemi di regressione. 
+Il \textit{k-Nearest Neighbor} è un algoritmo utilizzato sia in problemi di classificazione sia in problemi di regressione. 
 Questo algoritmo si basa sugli attributi degli oggetti vicini a quello che vogliamo classificare, utilizzando un'opportuna distanza.
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.2]{images/knearest_3_vicini.png}
+    \label{fig:knearest_3_vicini}
+    \caption{Classificazione tramite k-Nearest Neighbour di 3 elementi. Le stelle rosse rappresentano una classificazione rispetto alla classe 1 (dei triangoli)mentre le stelle blu rappresentano una classificazione rispetto alla classe 0 (dei cerchi) \cite{figure_copyright}.}
+\end{figure}
+
+
 Viene utilizzato un \textit{k} fissato, che indica il numero di vicini da prendere in considerazione per fare la predizione.
 La scelta di \textit{k} dipende dalle caratteristiche dei dati. Generalmente all'aumentare di \textit{k} si riduce il rumore che compromette la classificazione, ma il criterio di scelta per la classe diventa più labile.
 Questo algoritmo sceglie la classe che occorre maggiormente nei \textit{k} vicini. Infatti nel caso della classificazione binaria è meglio scegliere un \textit{k} dispari per escludere casi di indecisione e quindi poter sempre definire la classe del nuovo dato.
@@ -536,6 +552,7 @@ Nel caso di regressione il risultato sarà pari alla media dei valori target dei
 
 % come funziona l'algoritmo ? 
 % cercare figura che mostri differenza di K
+\newpage
 
 \subsubsection{Modelli lineari}
 I modelli lineari cercano di effettuare predizioni utilizzando una funzione lineare basata sull'insieme delle caratteristiche dell'elemento da analizzare.
@@ -581,6 +598,13 @@ Per risolvere questo problema esistono due strategie:
     \item limitare a priori la profondità dell'albero, 
     \item eliminare i nodi che contengono informazioni poco significative.
 \end{itemize}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.3]{images/decisione_tree.png}
+    \label{fig:decision_tree}
+    \caption{Esempio di albero di decisione per la classificazione di un animale. \cite{figure_copyright}}
+\end{figure}
 
 \subsubsection{Support Vector Machine}
 Le \textit{Support Vector Machine} sono dei modelli di apprendimento utilizzati sia per la regressione che la classificazione.
@@ -650,7 +674,7 @@ Il problema di apprendere $\mu_A$ può essere suddiviso in due parti:
 
 La formulazione matematica di questo problema determina un problema di ottimizzazione vincolata, la cui funzione obiettivo è:
 \begin{equation*}
-    min R^2 + C\displaystyle\sum_{i=1}^{n}(\xi_i+\tau_i)
+    \min R^2 + C\displaystyle\sum_{i=1}^{n}(\xi_i+\tau_i)
     \label{eq:Probela_di_partenza}
 \end{equation*}
 sottoposta ai seguenti vincoli:
@@ -691,17 +715,20 @@ ovvero che la distanza della trasformazione di $x_i$ da $a$ è maggiore o uguale
 che è già incorporato nel vincolo \ref{eq:vincolo_3}, e quindi il nostro $x_i$ sarà posizionato all'esterno della sfera.
 
 Utilizzando la formulazione duale di Wolfe, quello che otteniamo è il seguente problema:
-\begin{equation*}
+\begin{equation}
 \begin{split}
-    max \displaystyle\sum_{i=1}^{m}(\alpha_i\mu_i - \beta_i(1-\mu_i))&k(x_i,x_i)\hspace{0,1cm}- \\ &\displaystyle\sum_{i,j=1}^{m}(\alpha_i\mu_i - \beta_i(1-\mu_i))(\alpha_j\mu_j - \beta_j(1-\mu_j))k(x_i,x_j)
+    \max \displaystyle\sum_{i=1}^{m}(\alpha_i\mu_i - \beta_i(1-\mu_i))&k(x_i,x_i)\hspace{0,1cm}- \\ &\displaystyle\sum_{i,j=1}^{m}(\alpha_i\mu_i - \beta_i(1-\mu_i))(\alpha_j\mu_j - \beta_j(1-\mu_j))k(x_i,x_j)
 \end{split}
-\end{equation*}
+\label{eq:problema_finale}
+\end{equation}
 sottoposto ai vincoli:
 \begin{equation}
     \displaystyle\sum_{i=1}^{n}(\alpha_i\mu_i - \beta_i(1-\mu_i)) = 1
+    \label{eq:v1_problema_finale}
 \end{equation}
 \begin{equation}
     0 \le \alpha_i,\beta_i \le C
+    \label{eq:v2_problema_finale}
 \end{equation}
 
 dove $k$ è la funzione kernel associata alla mappatura nello spazio dell'immagine di $\Phi$ (ovvero $k(x_i,x_j) = \Phi(x_i)\cdot\Phi(x_j))$.
@@ -725,13 +752,44 @@ Apprendere la funzione di membership richiede di trovare il giusto compromesso n
 %
 %			CAPITOLO 2: tecnologie e metodologie
 %
+
 \chapter{Tecnologie e metodologie}
 \label{Capitolo 2}
+Nel capitolo precendete abbiamo descritto un problema di ottimizzazione vincolata. In questo capitolo vedremo com'è possibile costruirne un'implementazione per la risoluzione.
 
-Nel capitolo precedente ho un algoritmo di ottimizzazione vincolata e ci sono vari modi per risolvere questo problema numerico.
-Parlo di CVXOP, CVXPY, GUROBI.
+\bigskip
+
+\noindent Ponendo $\chi_i = (\alpha_i\mu_i - \beta_i(1-\mu_i))$, il problema \ref{eq:problema_finale} può essere riscritto come:
+\begin{equation}
+    \max \displaystyle\sum_{i=1}^{n}\chi_ik(x_ix_i)\displaystyle\sum_{i,j=1}^{n}\chi_i\chi_j k(x_i,x_j)
+\label{eq:problema_finale_2}
+\end{equation}
+
+\noindent mentre i vincoli \ref{eq:v1_problema_finale} \ref{eq:v2_problema_finale} diventano:
+
+\begin{equation}
+    \displaystyle\sum_{i=1}^{n}\chi_i = 1
+    \label{eq:v1_problema_finale_2}
+\end{equation}
+\begin{equation}
+    -C(1-\mu_i) \le \chi_i \le C\mu_i
+    \label{eq:v2_problema_finale_2}
+\end{equation}
+
+\noindent Come possiamo vedere, grazie a questa manipolazione matematica, quello che otteniamo è un problema di ottimizzazione quadratica vincolato.
+Nell'ambito della risoluzione di questo tipo di problema in Python ci sono a disposizione diversi software che permettono di modellare e risolvere il problema.
+
+In particolare la risoluzione di questo problema viene implementata per la parte di ottimizzazione dell'algoritmo \textit{$\mu$-learn} \cite{mulearn_documentation}. Il modulo \textit{optimization} contiente le diverse implementazioni del processo di ottimizzazione dell'induzione dell'insieme fuzzy. In questo modulo è implementata una \textit{Strategy} \cite{strategy_pattern} dove la classe \textit{Solver} è l'interfaccia base che implementa il metodo \textit{solve}, il quale delega il processo di ottimizzazione al metodo astratto \textit{solve\_problem}
+
+\bigskip
+
+\noindent Nei paragrafi successivi vediamo nello specifico come sono stati implementati i solver.
 
 \section{Gurobi}
+Gurobi \cite{gurobi} è un software commerciale, disponibile con licenza accademica, utilizzato per la risoluzione di problemi di ottimizzazione. 
+Il solver, già disponibile tra gli ottimizzatori della libreria \textit{$\mu$-learn} \cite{mulearn_documentation} 
+
+Cos'è ? Licenza ? Come costruire il problema ? Codice ? 
 \section{CVXOPT}
 \section{CVXPY}
 \section{TensorFlow con Rilassamento Lagrangiano}
@@ -764,14 +822,6 @@ Cercare un filo logico tra gli esperimenti, esperimenti miei e perché li ho fat
 \bibliographystyle{IEEEtran}
 \bibliography{biblio}
 \addcontentsline{toc}{chapter}{Bibliografia}
-
-% \begin{thebibliography}{00}
-% %
-% \bibitem{mulearn}
-% Dario Malchiodi, Witold Pedrycz. \textit{Learning Membership Functions for Fuzzy Sets through Modified Support Vector Clustering}, F. Masulli, G. Pasi, and R. Ya-ger (Eds.): WILF 2013, LNAI 8256, pp. 52–59, 2013. \copyright Springer International
-% Publishing Switzerland 2013
-% \end{thebibliography}
-% % 
 
 \end{document}
 
