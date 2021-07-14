@@ -37,6 +37,7 @@
 \usepackage{subcaption}
 \usepackage{pgfplots}
 \usepackage{tikz}
+\usepackage{minted}
 \usepgfplotslibrary{fillbetween}
 \pgfplotsset{width=10cm,compat=1.9}
 
@@ -109,7 +110,7 @@ La logica fuzzy \cite{logica_fuzzy} è un'estensione della logica booleana.
 Nella logica booleana i predicati logici che vengono valutati possono assumere solo i valori \textit{vero} o \textit{falso}, denotati con 1 e 0.
 
 La logica fuzzy, a differenza della logica booleana, è in grado di trattare contesti ambigui e non esattamente definiti.
-Nella logica fuzzy i predicati logici possono assumere valori compresi nell'intervallo $[0,1]$, dove gli estremi corrispondono rispettivamente a \textit{vero} e \textit{falso}.
+Nella logica fuzzy i predicati logici possono assumere valori compresi nell'intervallo $[0,1]$, dove gli estremi corrispondono rispettivamente a \textit{falso} e \textit{vero}.
 Il valore assunto è chiamato \textit{valore di appartenenza} o \textit{grado di verità}, e indica quanto è vera una proprietà, permettendo a un predicato di essere parzialmente vero o parzialmente falso, e non necessariamente completamente vero o completamente falso.
 
 \bigskip
@@ -170,7 +171,7 @@ Per capire meglio questo concetto possiamo fare qualche esempio che rispecchia l
 \newpage
 
 \section{Insiemi Fuzzy}
-Quando il predicato ``\textit{l'elemento $x$ appartiene all'insieme $A$}'' non è  più valutato in termini di logica classica ma di logica fuzzy otteniamo l'insieme fuzzy. 
+Quando il predicato ``\textit{l'elemento $x$ appartiene all'insieme $A$}'' non è  più valutato in termini di logica classica ma di logica fuzzy si dice che $A$ è un insieme fuzzy. 
 Formalmente il grado di verità è determinato da un' opportuna \textit{funzione di appartenenza} `$\mu_A$'. Quindi volendo valutare un generico elemento $x$ di un universo del contesto $U$ avremo:
 \begin{equation*}
     \mu_A(x) = \mu
@@ -185,7 +186,7 @@ l’elemento non è per niente incluso nell’ insieme (questi due valori corris
 
 \bigskip
 
-Consideriamo per esempio lo spazio $U$ come l' universo delle persone e un insieme $A$ che include tutte le persone giovani. Per ognuno di questi elementi in $U$:
+Consideriamo per esempio l'universo $U$ di tutte le persone e un insieme $A$ che include tutte le persone giovani. Per ognuno di questi elementi in $U$:
 \begin{itemize}
     \item ottantenne;
     \item ventenne;
@@ -205,10 +206,10 @@ Dato un universo $U$ si definisce un insieme fuzzy $A$ tramite la funzione di ap
 
 \subsection*{Operazioni tra insiemi fuzzy}
 La teoria degli insiemi fuzzy è un'estensione della teoria classica degli insiemi, ovvero è una teoria che è inclusa in quella classica, ma allo stesso tempo la allarga.
-\`E possibile estendere algi insiemi fuzzy gli operatori insiemistici classici: unione, intersezione e complemento. Esistono vari modi di definire questi operatori per gli insiemi fuzzy. Uno di questi è definirli attraverso le funzioni di appartenenza dell'insieme fuzzy che si ottiene come risultato applicando le operazioni stesse.
+\`E possibile estendere agli insiemi fuzzy gli operatori insiemistici classici: unione, intersezione e complemento. Esistono vari modi di definire questi operatori per gli insiemi fuzzy. Uno di questi è definirli attraverso le funzioni di appartenenza dell'insieme fuzzy che si ottiene come risultato applicando le operazioni stesse.
 
 \bigskip
-Definiamo due insiemi fuzzy, $A$ e $B$ (ad esempio come in Figura \ref{fig:Insiemi Fuzzy}) di un universo $U$, allora varranno le seguenti definizioni:
+Definiamo due insiemi fuzzy, $A$ e $B$ (ad esempio come in Figura \ref{fig:Insiemi Fuzzy}) di un universo $U$, allora varranno le definizioni descritte di seguito:
 
 \begin{figure}[h]
     \begin{subfigure}[t]{0.47\textwidth}
@@ -262,12 +263,12 @@ Definiamo due insiemi fuzzy, $A$ e $B$ (ad esempio come in Figura \ref{fig:Insie
         }
         \caption{Insieme $B$}
     \end{subfigure}
-    \caption{Insiemi Fuzzy}
+    \caption{Grafico delle funzioni di appartenenza degli insiemi fuzzy utlizzati per esemplificare le principali operazioni tra insiemi fuzzy.}
     \label{fig:Insiemi Fuzzy}
 \end{figure}
 
 \subsubsection{Unione}
-L'unione $A \cup B$ di due insiemi fuzzy $A$ e $B$ risulta anche essa un sottoinsieme fuzzy di $U$, con una funzione di appartenenza pari a:
+L'unione $A \cup B$ di due insiemi fuzzy $A$ e $B$ risulta anche essa un insieme fuzzy di $U$, con una funzione di appartenenza, mostrata in Figura \ref{fig:Unione_Insiemi_Fuzzy}, pari a:
 \begin{equation*}
     \mu_{A\cup B} (u) = \max\{\mu_A(u),\mu_B(u)\} \hspace{1cm}  u\in U
 \end{equation*}
@@ -309,13 +310,13 @@ L'unione $A \cup B$ di due insiemi fuzzy $A$ e $B$ risulta anche essa un sottoin
 
     \end{tikzpicture}
     }
-    \caption{Unione tra insiemi fuzzy. In viola viene rappresentata l'unione degli insiemi $A$ e $B$ mostrati in Figura \ref{fig:Insiemi Fuzzy}}
+    \caption{Unione tra insiemi fuzzy. In viola viene rappresentata la funzione di apparteneza dell'unione degli insiemi $A$ e $B$ mostrati in Figura \ref{fig:Insiemi Fuzzy}}
     \label{fig:Unione_Insiemi_Fuzzy}   
 
 \end{figure}
 
 \subsubsection{Intersezione}
-L'intersezione $A \cap B$ di due insiemi fuzzy $A$ e $B$ risulta anche essa un sottoinsieme fuzzy di $U$, con una funzione di appartenenza pari a:
+L'intersezione $A \cap B$ di due insiemi fuzzy $A$ e $B$ risulta anche essa un insieme fuzzy di $U$, con una funzione di appartenenza, mostrata in Figura \ref{fig:Intersezione_insiemi_fuzzy}, pari a:
 \begin{equation*}
     \mu_{A \cap B} (u) = \min\{\mu_A(u),\mu_B(u)\} \hspace{1cm}  u\in U
 \end{equation*}
@@ -356,12 +357,13 @@ L'intersezione $A \cap B$ di due insiemi fuzzy $A$ e $B$ risulta anche essa un s
 
     \end{tikzpicture}
     }
-    \caption{Intersezione tra insiemi fuzzy. In viola viene rappresentata l'intersezione degli insiemi $A$ e $B$ mostrati in Figura \ref{fig:Insiemi Fuzzy}}   
+    \caption{Intersezione tra insiemi fuzzy. In viola viene rappresentata la funzione di appartenenza dell'intersezione degli insiemi $A$ e $B$ mostrati in Figura \ref{fig:Insiemi Fuzzy}}
+    \label{fig:Intersezione_insiemi_fuzzy}   
 
 \end{figure}
 
 \subsubsection{Complemento}
-Il complemento è un insieme fuzzy indicato con $\neg A$ e con funzione di appartenenza:
+Il complemento di un insieme fuzzy $A$ è a sua volta un insieme fuzzy indicato con $\neg A$ e con funzione di appartenenza, mostrata in Figura \ref{fig:Complemento_insieme_fuzzy}, pari a:
 \begin{equation*}
     \mu_{\neg A}(u) = 1 - \mu_A(u) \hspace{1cm}  u\in U
 \end{equation*}
@@ -395,67 +397,17 @@ Il complemento è un insieme fuzzy indicato con $\neg A$ e con funzione di appar
 
     \end{tikzpicture}
     }
-    \caption{Complemento di un insieme fuzzy. In viola viene rappresentato il complemento dell'insieme $A$ mostrato in Figura \ref{fig:Insiemi Fuzzy}}   
+    \caption{Complemento di un insieme fuzzy. In viola viene rappresentato la funzione di appartenenza del complemento dell'insieme $A$ mostrato in Figura \ref{fig:Insiemi Fuzzy}} 
+    \label{fig:Complemento_insieme_fuzzy}  
 
 \end{figure}
 
-% \subsubsection{Differenza}
-% La differenza $A \setminus B$ di due insiemi fuzzy $A$ e $B$ risulta anche essa un sottoinsieme fuzzy di $U$, con una funzione di appartenenza pari a:
-% \begin{equation*}
-%     \mu_{A \setminus B} (u) = \min\{\mu_A(u),\mu_{\neg B}(u)\} \hspace{1cm}  u\in U
-% \end{equation*}
 
-% \begin{figure}[ht]
-%     \centering
-%     \resizebox{6.16cm}{4.4cm}{
-%     \begin{tikzpicture}
-%         \begin{axis}[
-%             axis lines = left,
-%             ylabel = {Grado di appartenenza},
-%             xlabel = {$U$},
-%             ymin=0, ymax=1.2,
-%             xmin=0, xmax=21,
-%             xticklabels={,,},                
-%         ]
-%         \addplot [color = blue] coordinates {
-%         (0,1)
-%         (7,1)
-%         (14,0)
-%         (21,0)}; 
-        
-%         \addplot [color = red] coordinates {
-%         (0,1)
-%         (7,0)
-%         (14,1)
-%         (17,0.5)
-%         (21,0.5)}; 
-
-%         \addplot [color = violet, ultra thick] coordinates {
-%             (0,1)
-%             (7,0)
-%             (10.5,0.5)
-%             (10.5,0)
-%             (21,0)
-%         };
-%         \end{axis}
-
-%     \end{tikzpicture}
-%     }
-%     \caption{Differenza di insiemi fuzzy. In viola viene rappresentata la differenza tra l'insieme $A$ e l'insieme $B$ mostrati in figura \ref{fig:Insiemi Fuzzy}}   
-
-% \end{figure}
-
-\newpage
-%Riferimento a libro
 \section{Machine Learning}
 Il Machine Learning \cite{machine_learning_oreilly} è una branca dell'informatica nella quale in una macchina si predispone l'abilità di apprendere qualcosa dai dati in maniera autonoma.
 Il Machine Learning permette ai computer di compiere attività imparando dall'esperienza. \newline
 Gli algoritmi di Machine Learning migliorano le loro prestazioni in modo adattivo mano a mano che gli esempi da cui apprendere aumentano.
 
-% Sistemare fatto di 'apprendere'
-
-% Il Machine Learning si riferisce al processo tramite cui i computer sviluppano il riconoscimento dei modelli, ovvero la capacità di apprendere continuamente ed effettuare previsioni utilizzando i dati per poi apportare modifiche in autonomia, senza essere programmati specificatamente per farlo. Il Machine Learning automatizza in modo efficiente il processo di costruzione di modelli analitici e consente alle macchine di adattarsi a nuovi scenari in modo autonomo.
-%
 \bigskip
 Gli algoritmi di Machine Learning differiscono tra loro a seconda  dell'approccio utilizzato per risolvere il problema 
 
@@ -511,14 +463,18 @@ Quello che vogliamo è trovare un modello che si posizioni tra l'\textit{overfit
 
 Normalmente un modello è caratterizzato da un certo numero di parametri che devono essere opportunamente dimensionati durante l'apprendimento.
 Il numero di questi parametri è un aspetto chiave da considerare.
-
-Con un modello troppo semplice si rischia di utilizzare dati poco significativi, con un troppo complesso rischiamo invece di utilizzare troppe variabili e non concentrarci su quelle davvero significative.
-
 Utilizzando un numero basso di parametri si rischia di ottenere modelli poco significativi, mentre utilizzandone troppi rischiamo di non concentrarci sui parametri davvero significativi nonché ricadere nel problema dell'overfitting.
 
 %indicazione fonte
 
-Bisogna trovare lo \textit{Sweet spot} \cite{machine_learning_oreilly}, ovvero il punto che rappresenta il miglior compromesso tra precisione nella predizione e complessità del modello in caso di dati mai visti.
+Bisogna trovare lo \textit{Sweet spot} \cite{machine_learning_oreilly}, ovvero il punto che rappresenta il miglior compromesso tra precisione nella predizione e complessità del modello in caso di dati mai visti, come mostrato in Figura \ref{fig:sweet_spot}.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.35]{images/sweet_spot.png}
+    \caption{Compromesso tra precisione nella predizione e complessità del modello \cite{figure_copyright}.}
+    \label{fig:sweet_spot}
+
+\end{figure}
 
 
 \bigskip
@@ -526,8 +482,18 @@ I paragrafi che seguono descrivono nello specifico alcuni algoritmi di apprendim
 
 \subsubsection{k-Nearest Neighbor}
 
-Il \textit{k-nearest neighbor} è un algoritmo utilizzato sia in problemi di classificazione sia in problemi di regressione. 
+Il \textit{k-Nearest Neighbor} è un algoritmo utilizzato sia in problemi di classificazione sia in problemi di regressione. 
 Questo algoritmo si basa sugli attributi degli oggetti vicini a quello che vogliamo classificare, utilizzando un'opportuna distanza.
+
+
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[scale = 0.2]{images/knearest_3_vicini.png}
+%     \label{fig:knearest_3_vicini}
+%     \caption{Classificazione tramite k-Nearest Neighbour di 3 elementi. Le stelle rosse rappresentano una classificazione rispetto alla classe 1 (dei triangoli)mentre le stelle blu rappresentano una classificazione rispetto alla classe 0 (dei cerchi) \cite{figure_copyright}.}
+% \end{figure}
+
+
 Viene utilizzato un \textit{k} fissato, che indica il numero di vicini da prendere in considerazione per fare la predizione.
 La scelta di \textit{k} dipende dalle caratteristiche dei dati. Generalmente all'aumentare di \textit{k} si riduce il rumore che compromette la classificazione, ma il criterio di scelta per la classe diventa più labile.
 Questo algoritmo sceglie la classe che occorre maggiormente nei \textit{k} vicini. Infatti nel caso della classificazione binaria è meglio scegliere un \textit{k} dispari per escludere casi di indecisione e quindi poter sempre definire la classe del nuovo dato.
@@ -536,6 +502,7 @@ Nel caso di regressione il risultato sarà pari alla media dei valori target dei
 
 % come funziona l'algoritmo ? 
 % cercare figura che mostri differenza di K
+\newpage
 
 \subsubsection{Modelli lineari}
 I modelli lineari cercano di effettuare predizioni utilizzando una funzione lineare basata sull'insieme delle caratteristiche dell'elemento da analizzare.
@@ -548,12 +515,12 @@ Nel caso della regressione, la funzione è definita come segue:
 
 \noindent dove \textit{n} è il numero di \textit{caratteristiche}, $x_i$ sono le \textit{caratteristiche}, $w_i$ i pesi da attribuire a esse, e $b$ un termine noto.
 
-Quindi il valore $y$ ottenuto applicando la funzione lineare alle caratteristiche di un particolare caso, rappresenta la predzione per l'etichetta corrispondente.
+Il valore $y$ ottenuto applicando la funzione lineare alle caratteristiche di un particolare caso rappresenta la predzione per l'etichetta corrispondente.
 
 \bigskip
 
 I modelli lineari si possono applicare anche al contesto della classificazione, introducendo degli intervalli sui valori di $y$ per definire a quale classe appartiene il singolo caso. 
-Per la classificazione binaria, immaginando di avere due classi, $C_1$ e $C_0$, potremmo avere una formula che associa l'oggetto alla classe $C_0$ se :
+Per la classificazione binaria, immaginando di avere due classi, $C_1$ e $C_0$, potremmo avere una formula che associa l'oggetto alla classe $C_0$ se
 
 \begin{equation*}
     y = w_0x_0 + w_1x_1 + \dots + w_nx_n + b > 0
@@ -564,11 +531,7 @@ Per la classificazione binaria, immaginando di avere due classi, $C_1$ e $C_0$, 
 
 \subsubsection{Alberi di decisione}
 
-Un albero di decisione (\textit{Decision Learning Tree}) è un modello predittivo utilizzato sia per la classificazione che per la regressione, la cui logica si basa su una struttura ad albero. In quest'ultimo ogni nodo che compare rappresenta una variabile mentre ogni foglia è il risultato finale, ovvero la classe o l'etichetta che volevamo predire per l'oggetto di partenza.
-
-% Un albero di decisione (\textit{Decision Learning Tree}) è un modello predittivo, dove ogni nodo interno rappresenta una variabile, un arco verso un nodo figlio rappresenta un possibile valore per quella proprietà e una foglia il valore predetto per la variabile obiettivo a partire dai valori delle altre proprietà, che nell' albero è rappresentato dal cammino dal nodo radice al nodo foglia.
-
-
+Un albero di decisione (\textit{Decision Tree}) è un modello predittivo utilizzato sia per la classificazione che per la regressione, la cui logica si basa su una struttura ad albero. In quest'ultimo ogni nodo che compare rappresenta una variabile mentre ogni foglia è il risultato finale, ovvero la classe o l'etichetta che predetta per l'oggetto di partenza.
 Nei nodi troviamo delle domande la cui risposta è di tipo binario (vero o falso) mentre le foglie rappresentano le classi che vogliamo predire.
 
 I problemi di \textit{overfitting} e \textit{underfitting} sono problemi ricorrenti che si presentano anche nel caso degli alberi di decisione. Infatti se viene costruito un albero troppo dettagliato, e quindi con un elevato livello di profondità, il modello tende ad adattarsi in maniera eccessiva ai dati usati in fase di allenamento generando un problema di \textit{overfitting}.
@@ -582,12 +545,18 @@ Per risolvere questo problema esistono due strategie:
     \item eliminare i nodi che contengono informazioni poco significative.
 \end{itemize}
 
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[scale = 0.3]{images/decisione_tree.png}
+%     \label{fig:decision_tree}
+%     \caption{Esempio di albero di decisione per la classificazione di un animale. \cite{figure_copyright}}
+% \end{figure}
+
 \subsubsection{Support Vector Machine}
 Le \textit{Support Vector Machine} sono dei modelli di apprendimento utilizzati sia per la regressione che la classificazione.
 
 Una \textit{Support Vector Machine} individua un iperpiano o un insieme di iperpiani per separare i punti in uno spazio e quindi dividerli in diversi gruppi.
-
-Mentre il problema originale può essere definito in uno spazio di dimensioni finite, spesso succede che le classi da distinguere non siano linearmente separabili in quello spazio. Per risolvere questo problema si ricorre alle funzioni \textit{kernel} che sono in grado di mappare dei vettori dallo spazio originale ad uno spazio a dimensionalità più elevata, in cui le immagini risultano separabili.
+Spesso succede che le classi da distinguere non siano linearmente separabili nello spazio in cui è definito il problema originale. Per risolvere questo problema si ricorre alle funzioni \textit{kernel} che sono in grado di mappare dei vettori dallo spazio originale ad uno spazio a dimensionalità più elevata, in cui le immagini risultano separabili.
 
 
 \subsection*{Approccio Non Supervisionato}
@@ -601,24 +570,24 @@ Al contrario dell'apprendimento supervisionato, durante l'apprendimento vengono 
 
 La principale tecnica in questa categoria è il \textit{clustering}, ovvero una tecnica in grado di suddividere in gruppi distinti  gli oggetti presi in considerazione.
 
-Un esempio di utilizzo ricade nell'ambito della sicurezza informatica. Gli attacchi successivamente rilevati sono probabilmente solo la punta dell'iceberg. Utilizzando tecniche di clustering è possibile individuare e bloccare attacchi ancora sconosciuti.
+Un esempio di utilizzo ricade nell'ambito della sicurezza informatica. Gli attacchi effettivamente rilevati sono probabilmente solo la punta dell'iceberg. Utilizzando tecniche di clustering è possibile individuare e bloccare attacchi ancora sconosciuti.
 
-Il Machine Learning non supervisionato potrebbe utilizzare informazioni dei clienti sugli utilizzi abituali dei servizi di una banca. Se un malintenzionato provasse a effettuare delle operazioni tramite il nostro conto bancario dall'altra parte del mondo a un orario differente da quello abituale, il calcolatore tramite tecniche di clustering, è in grado di riconoscere le operazioni abituali e mandare un messaggio di allarme se individua casi anomali.
+Il Machine Learning non supervisionato potrebbe utilizzare informazioni dei clienti sugli utilizzi abituali dei servizi di una banca. Se un malintenzionato provasse a effettuare delle operazioni tramite il nostro conto bancario dall'altra parte del mondo a un orario differente da quello abituale, l'uso di tecniche di clustering permette di riconoscere le operazioni abituali e mandare un messaggio di allarme se vengono individuati casi anomali.
 
 \subsection*{Approccio Semi-Supervisionato}
-A metà strada tra l'apprendimento supervisionato e quello non supervisionato c'è l'apprendimento semi-supervisionato \cite{supervisedlearning}.
+A metà strada tra l'apprendimento supervisionato e quello non supervisionato c'è l'apprendimento Semi-Supervisionato \cite{supervisedlearning}.
 
-Questo approccio consiste nel combinare le due tecniche e fornire un risultato basandosi su un input eterogeneo costituito da dati etichettati e dati non etichettati.
-Questo perché i dati etichettati a volte possono essere difficili, costosi e dispendiosi in termini di tempo e di denaro da recuperare, perché spesso i dati vengono etichettati manualmente da utenti specializzati. Allo stesso tempo i dati non etichettati possono essere relativamente facili da raccogliere, ma ci sono pochi modi di utilizzarli. 
+Questo approccio consiste nel combinare le due tecniche descritte nei paragrafi precedenti e fornire un risultato basandosi su un input eterogeneo costituito da dati etichettati e dati non etichettati.
+Questo perché i dati etichettati a volte possono essere difficili da reperire, costosi e dispendiosi in termini di tempo e di denaro da recuperare, perché spesso i dati vengono etichettati manualmente da utenti specializzati. Allo stesso tempo i dati non etichettati possono essere relativamente facili da raccogliere, ma ci sono pochi modi di utilizzarli. 
 %% Importanza dati non etichettati
 L'approccio semi-supervisionato risolve questi problemi utilizzando una grande quantità di dati non etichettati, insieme a una porzione di dati etichettati, per costruire classificatori migliori. 
 
 Ma com'è possibile, avendo a confronto l'apprendimento supervisionato che utilizza solo dati etichettati, avere classificatori migliori tenendo in considerazione i dati non etichettati?
-Utilizzando una metafora matematica \cite{supervisedlearning}, potremmo dire che la conoscenza di $p(x)$ che acquisiamo attraverso i dati non etichettati, è un'informazione utile per la predizione di $p(y|x)$. Se non fosse questo il caso, allora non avremo alcun vantaggio rispetto l'apprendimento supervisionato.
+Utilizzando una metafora matematica \cite{supervisedlearning}, potremmo dire che la conoscenza di $p(x)$ che acquisiamo attraverso i dati non etichettati è un'informazione utile per la predizione di $p(y|x)$. Se non fosse questo il caso, allora non avremo alcun vantaggio rispetto l'apprendimento supervisionato.
 
 \subsection*{Apprendimento con rinforzo}
 %%
-Il quarto e ultimo approccio, chiamato approccio con rinforzo \cite{Reinforcement_learning}, ha come finalità quella di costruire degli agenti autonomi che hanno il compito di scegliere le azioni da compiere per conseguire determinati scopi attraverso lo studio e l'interazione con il sistema circostante.
+Il quarto e ultimo approccio, chiamato \textit{Approccio con rinforzo} \cite{Reinforcement_learning}, ha come finalità quella di costruire degli agenti autonomi che hanno il compito di scegliere le azioni da compiere per conseguire determinati scopi attraverso lo studio e l'interazione con il sistema circostante.
 In sostanza, utilizzando questo approccio, non siamo noi che istruiamo la macchina, bensì questa decide le azioni da compiere a seconda dello stato attuale del sistema, e così facendo ne determina quello futuro.
 %%
 
@@ -627,16 +596,16 @@ Quando la macchina prende una decisione otterrà successivamente una “ricompen
 % Link tra insiemi fuzzy e machine learning.
 
 \section{\texorpdfstring{$\mu$}{mu}-learn}
-Nel capitolo precedente abbiamo visto le diverse tecniche utilizzate nel Machine Learning. L’algoritmo che andremo a descrivere, denominato \textit{$\mu$-learn} \cite{mulearn}, si basa sull’ induzione di insiemi fuzzy e ricade nell’approccio supervisionato, ovvero quella tecnica che necessita di dati preventivamente valutati per effettuare predizioni. In questo caso la predizione è il grado di appartenenza.
+Nel capitolo precedente abbiamo visto alcune tecniche utilizzate nel Machine Learning. L’algoritmo che andremo a descrivere, denominato \textit{$\mu$-learn} e descritto nel dettaglio in \cite{mulearn}, si basa sull’ induzione di insiemi fuzzy e ricade nell’approccio supervisionato, ovvero quella tecnica che necessita di dati preventivamente valutati per effettuare predizioni. In questo caso la predizione è il grado di appartenenza.
 \bigskip
 
-Supponiamo di avere un campione {$x_1,\dots,x_m$} in un dominio $X$, ed un insieme di gradi di appartenenza {$\mu_1,\dots,\mu_m$} associati a un generico insieme fuzzy $A$. \newline
+Supponiamo di avere un campione {$x_1,\dots,x_m$} in un dominio $U$, e un insieme di gradi di appartenenza {$\mu_1,\dots,\mu_m$} associati a un generico insieme fuzzy $A$. \newline
 Il problema di apprendere $\mu_A$ può essere suddiviso in due parti:
 \begin{itemize}
     \item determinare la forma di A;
-    \item dedurre i parametri della funzione di membership $\mu_A$
+    \item dedurre i parametri della funzione di membership $\mu_A$.
 \end{itemize}
-
+%%Spiegare cos'è mappatura Phi e cosa è la sfera
 \noindent Per fare ciò dobbiamo partire dalle seguenti ipotesi:
 \begin{itemize}
     \item L'insieme $A_1 = \{ x\in X \hspace{0,3cm} |\hspace{0,3cm} \mu_A(x) = 1 \}$ deve contenere tutti i punti in $X$ la cui trasformazione attraverso la mappatura $\Phi$ appartenga alla sfera di centro $a$ e raggio $R$.
@@ -650,89 +619,178 @@ Il problema di apprendere $\mu_A$ può essere suddiviso in due parti:
 
 La formulazione matematica di questo problema determina un problema di ottimizzazione vincolata, la cui funzione obiettivo è:
 \begin{equation*}
-    min R^2 + C\displaystyle\sum_{i=1}^{n}(\xi_i+\tau_i)
+    \min R^2 + C\displaystyle\sum_{i=1}^{n}(\xi_i+\tau_i)
     \label{eq:Probela_di_partenza}
 \end{equation*}
 sottoposta ai seguenti vincoli:
 \begin{equation}
     \mu_i\|\Phi(x_i)-a\|^2\le\mu_iR^2 + \xi_i
     \label{eq:vincolo_1}
-\end{equation}
+\end{equation},
 \begin{equation}
     (1-\mu_i)\|\Phi(x_i)-a\|^2 \ge (1-\mu_i)R^2 - \tau_i
     \label{eq:vincolo_2}
-\end{equation}
+\end{equation},
 \begin{equation}
     \xi_i \ge 0, \tau_i \ge 0
     \label{eq:vincolo_3}
-\end{equation}
+\end{equation},
 
 
-dove $\xi$ e $\tau$ sono le variabili di scarto utilizzate nel problema di ottimizzazione. $\xi$ è la variabile slack legata al posizionamento dei punti all'interno della sfera, mentre $\tau$ è riferita al posizionamento dei punti all'esterno della sfera. Infine $C$ è una costante la cui funzione è quella di `pesare' l'impatto delle variabili di slack.
+\noindent dove $\xi$ e $\tau$ sono le variabili di scarto utilizzate nel problema di ottimizzazione. $\xi$ è la variabile slack legata al posizionamento dei punti all'interno della sfera, mentre $\tau$ è riferita al posizionamento dei punti all'esterno della sfera. Infine $C$ è una costante la cui funzione è quella di `pesare' l'impatto delle variabili di slack.
 
-Possiamo notare che quando $\mu_i = 1$ otteniamo che il vincolo \ref{eq:vincolo_1} diventa:
+Possiamo notare che quando $\mu_i = 1$ otteniamo che il vincolo (\ref{eq:vincolo_1}) diventa:
 \begin{equation*}
     \|\Phi(x_i)-a\|^{2} \le R^2 + \xi_i
-\end{equation*}
-ovvero che la distanza della trasformazione di $x_i$ da $a$ è minore o uguale al raggio della sfera e che il vincolo \ref{eq:vincolo_2} diventa:
+\end{equation*},
+ovvero che la distanza della trasformazione di $x_i$ da $a$ è minore o uguale al raggio della sfera e che il vincolo (\ref{eq:vincolo_2}) diventa:
 \begin{equation*}
     \tau_i \ge 0
-\end{equation*}
-che è già incorporato nel vincolo \ref{eq:vincolo_3}, e quindi il nostro $x_i$ sarà posizionato all'interno della sfera.
+\end{equation*},
+che è già incorporato nel vincolo (\ref{eq:vincolo_3}), e quindi il nostro $x_i$ sarà posizionato all'interno della sfera.
 
-Allo stesso modo, quando $\mu_i = 0$ otteniamo che il vincolo \ref{eq:vincolo_2} diventa:
+Allo stesso modo, quando $\mu_i = 0$ otteniamo che il vincolo (\ref{eq:vincolo_2}) diventa:
 \begin{equation*}
     \|\Phi(x_i)-a\|^2 \ge R^2 - \tau_i
-\end{equation*}
-ovvero che la distanza della trasformazione di $x_i$ da $a$ è maggiore o uguale al raggio della sfera e il vincolo \ref{eq:vincolo_1} così diventa:
+\end{equation*},
+ovvero che la distanza della trasformazione di $x_i$ da $a$ è maggiore o uguale al raggio della sfera e il vincolo (\ref{eq:vincolo_1}) diventa:
 \begin{equation*}
     \xi_i \ge 0
-\end{equation*}
-che è già incorporato nel vincolo \ref{eq:vincolo_3}, e quindi il nostro $x_i$ sarà posizionato all'esterno della sfera.
+\end{equation*},
+che è già incorporato nel vincolo (\ref{eq:vincolo_3}), e quindi il nostro $x_i$ sarà posizionato all'esterno della sfera.
 
 Utilizzando la formulazione duale di Wolfe, quello che otteniamo è il seguente problema:
-\begin{equation*}
+\begin{equation}
 \begin{split}
-    max \displaystyle\sum_{i=1}^{m}(\alpha_i\mu_i - \beta_i(1-\mu_i))&k(x_i,x_i)\hspace{0,1cm}- \\ &\displaystyle\sum_{i,j=1}^{m}(\alpha_i\mu_i - \beta_i(1-\mu_i))(\alpha_j\mu_j - \beta_j(1-\mu_j))k(x_i,x_j)
+    \max \displaystyle\sum_{i=1}^{m}(\alpha_i\mu_i - \beta_i(1-\mu_i))&k(x_i,x_i)\hspace{0,1cm}- \\ &\displaystyle\sum_{i,j=1}^{m}(\alpha_i\mu_i - \beta_i(1-\mu_i))(\alpha_j\mu_j - \beta_j(1-\mu_j))k(x_i,x_j)
 \end{split}
-\end{equation*}
+\label{eq:problema_finale}
+\end{equation}
 sottoposto ai vincoli:
 \begin{equation}
     \displaystyle\sum_{i=1}^{n}(\alpha_i\mu_i - \beta_i(1-\mu_i)) = 1
-\end{equation}
+    \label{eq:v1_problema_finale}
+\end{equation},
 \begin{equation}
     0 \le \alpha_i,\beta_i \le C
-\end{equation}
+    \label{eq:v2_problema_finale}
+\end{equation},
 
-dove $k$ è la funzione kernel associata alla mappatura nello spazio dell'immagine di $\Phi$ (ovvero $k(x_i,x_j) = \Phi(x_i)\cdot\Phi(x_j))$.
+\noindent dove $k$ è la funzione kernel associata alla mappatura nello spazio dell'immagine di $\Phi$ (ovvero $k(x_i,x_j) = \Phi(x_i)\cdot\Phi(x_j))$.
 
-Indicando con $^*$ il valore ottimale per una variabile, è possibile dimostrare che:
+Indicando con $^*$ il valore ottimale per una variabile, è possibile dimostrare che per ogni $x$ nell'universo vale la seguente proprietà:
 \begin{equation*}
 \begin{split}
     R^{2}(x) = k(x,x) \hspace{0,1cm}- \hspace{0,1cm}&2\displaystyle\sum_{i=1}^{m}(\alpha{i}^{*}\mu_{i} - \beta_{i}^{*}(1-\mu_{i}))k(x,x_i)\hspace{0,1cm} + \\ 
     &\displaystyle\sum_{i,j=1}^{m}(\alpha_{i}^{*} - \beta_{i}^{*}(1-\mu_{i}))(\alpha_{j}^{*} - \beta_{j}^{*}(1-\mu_{j}))k(x_i,x_j)
 \end{split}
-\end{equation*}
+\end{equation*}.
 
-così facendo è possibile calcolare la distanza tra il centro della sfera e l'immagine del punto dato $x$.
+\noindent Così facendo è possibile calcolare la distanza tra il centro della sfera e l'immagine del punto dato $x$.
 In particolare, tutti i punti $x$ con una membership $\mu_{A}(x) = 1$ soddisfanno $R^2(x) \le R^2_1$ dove $R^2_1 = R^2(x_i)$ per qualunque vettore di supporto.
-
+%SPIEGARE COS'E' VETTORE DI SUPPORTO
 Apprendere la funzione di membership richiede di trovare il giusto compromesso nella scelta del parametro $C$, così come nei parametri del kernel.
 
+%ESEMPI DI KERNEL E I VARI PARAMETRI
 
 
 
 %
 %			CAPITOLO 2: tecnologie e metodologie
 %
+
 \chapter{Tecnologie e metodologie}
 \label{Capitolo 2}
+Nel capitolo precendete abbiamo descritto un problema di ottimizzazione vincolata. In questo capitolo vedremo com'è possibile costruirne un'implementazione per la risoluzione.
 
-Nel capitolo precedente ho un algoritmo di ottimizzazione vincolata e ci sono vari modi per risolvere questo problema numerico.
-Parlo di CVXOP, CVXPY, GUROBI.
+\bigskip
+
+\noindent Ponendo $\chi_i = (\alpha_i\mu_i - \beta_i(1-\mu_i))$, il problema \ref{eq:problema_finale} può essere riscritto come:
+\begin{equation}
+    \max \displaystyle\sum_{i=1}^{n}\chi_ik(x_ix_i)\displaystyle\sum_{i,j=1}^{n}\chi_i\chi_j k(x_i,x_j)
+\label{eq:problema_finale_2}
+\end{equation}
+
+\noindent mentre i vincoli (\ref{eq:v1_problema_finale}) (\ref{eq:v2_problema_finale}) diventano:
+
+\begin{equation}
+    \displaystyle\sum_{i=1}^{n}\chi_i = 1
+    \label{eq:v1_problema_finale_2}
+\end{equation}
+\begin{equation}
+    -C(1-\mu_i) \le \chi_i \le C\mu_i
+    \label{eq:v2_problema_finale_2}
+\end{equation}
+
+\noindent Come possiamo vedere, grazie a questa manipolazione matematica, quello che otteniamo è un problema di ottimizzazione quadratica vincolato.
+Nell'ambito della risoluzione di questo tipo di problema in Python ci sono a disposizione diversi software che permettono di modellare e risolvere il problema.
+
+In particolare la risoluzione di questo problema viene implementata per la parte di ottimizzazione dell'algoritmo \textit{$\mu$-learn} \cite{mulearn_documentation}. Il modulo \textit{optimization} contiente le diverse implementazioni del processo di ottimizzazione dell'induzione dell'insieme fuzzy. In questo modulo è implementata una \textit{Strategy} \cite{strategy_pattern} dove la classe \textit{Solver} è l'interfaccia base che implementa il metodo \textit{solve}, il quale delega il processo di ottimizzazione al metodo astratto \textit{solve\_problem}, che viene implementato concretamente nelle diverse classi risolutrici.
+
+I parametri necessari per implementare il metodo \textit{solve} sono i seguenti: 
+\begin{itemize}
+    \item \textbf{xs}: gli oggetti del training set;
+    \item \textbf{mus}: i valori di membership per gli oggetti del training set;
+    \item \textbf{c}: la costante che pesa l'impatto delle variabili di slack sul problema;
+    \item \textbf{k}: la funzione kernel da utilizzare, scelta tra quelle implementate nel modulo \textit{kernel} della libreria.
+\end{itemize}
+
+\bigskip
+
+\noindent Nei paragrafi successivi vediamo nello specifico come sono stati implementati i diversi solver.
 
 \section{Gurobi}
+Gurobi \cite{gurobi} è un software commerciale, disponibile con licenza accademica, utilizzato per la risoluzione di problemi di ottimizzazione. 
+Il solver, già disponibile tra gli ottimizzatori della libreria \textit{$\mu$-learn} \cite{mulearn_documentation}.
+Di seguito i punti salienti dell'implementazione del metodo \textit{solve\_problem} con Gurobi.
+
+\bigskip
+
+Innanzi tutto Gurobi richiede di creare un oggetto \textit{Model} per modellare opportunamente il problema. A questo vengono aggiunte le variabili $\chi$ che vogliamo ottimizzare, con i rispettivi limiti superiori e inferiori. Infine viene specificato si tratti di un'espressione quadratica.
+
+\begin{minted}{python}
+def solve_problem(self, xs, mus, c, k):
+    
+    m = len(xs)
+
+    with Env(empty=True) as env:
+        env.start()
+        with Model('mulearn', env=env) as model:
+            for i in range(m):
+                model.addVar(name=f'chi_{i}',
+                                 lb=-c * (1 - mus[i]),
+                                 ub=c * mus[i],
+                                 vtype=GRB.CONTINUOUS)
+            model.update()
+            chis = model.getVars()
+            obj = QuadExpr()
+\end{minted}
+
+Successivamente vengono aggiunti i coefficienti delle variabili
+
+\begin{minted}[escapeinside=!!,linenos]{python}
+    
+                    for i, j in it.product(range(m), range(m)):
+                    obj.add(chis[i] * chis[j], k.compute(xs[i], xs[j]))
+
+                for i in range(m):
+                    obj.add(-1 * chis[i] * k.compute(xs[i], xs[i]))
+
+                model.setObjective(obj, GRB.MINIMIZE)
+
+                constEqual = LinExpr()
+                constEqual.add(sum(chis), 1.0)
+
+                model.addConstr(constEqual, GRB.EQUAL, 1)
+
+                model.optimize()
+
+            return [ch.x for ch in chis]
+% \end{minted}
+
+
 \section{CVXOPT}
+% Ciao \cite{CVXOPT}.
 \section{CVXPY}
 \section{TensorFlow con Rilassamento Lagrangiano}
 \subsection{Rilassamento Lagrangiano}
@@ -764,14 +822,6 @@ Cercare un filo logico tra gli esperimenti, esperimenti miei e perché li ho fat
 \bibliographystyle{IEEEtran}
 \bibliography{biblio}
 \addcontentsline{toc}{chapter}{Bibliografia}
-
-% \begin{thebibliography}{00}
-% %
-% \bibitem{mulearn}
-% Dario Malchiodi, Witold Pedrycz. \textit{Learning Membership Functions for Fuzzy Sets through Modified Support Vector Clustering}, F. Masulli, G. Pasi, and R. Ya-ger (Eds.): WILF 2013, LNAI 8256, pp. 52–59, 2013. \copyright Springer International
-% Publishing Switzerland 2013
-% \end{thebibliography}
-% % 
 
 \end{document}
 

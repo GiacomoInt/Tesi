@@ -39,6 +39,13 @@ J.~F. Trevor~Hastie, Robert~Tibshirani, \emph{The Elements of Statistical
 A.~C. Müller and S.~Guido, ``From introduction to machine learning with
   python,'' Copyright © 2017, used with permission.
 
+\bibitem{distance_metrics_knn}
+\BIBentryALTinterwordspacing
+S.~A. Gokte, ``Most popular distance metrics used in knn and when to use
+  them,'' 2021. [Online]. Available:
+  \url{https://www.kdnuggets.com/2020/11/most-popular-distance-metrics-knn.html}
+\BIBentrySTDinterwordspacing
+
 \bibitem{supervisedlearning}
 \BIBentryALTinterwordspacing
 O.~Chapelle, B.~Sch{\"{o}}lkopf, and A.~Zien, Eds., \emph{Semi-Supervised
@@ -73,12 +80,6 @@ D.~Malchiodi, ``Mulearn documentation,'' 2020. [Online]. Available:
 \BIBentryALTinterwordspacing
 Refactoring.Guru, ``Design pattern strategy,'' 2014-2021. [Online]. Available:
   \url{https://refactoring.guru/design-patterns/strategy}
-\BIBentrySTDinterwordspacing
-
-\bibitem{gurobi}
-\BIBentryALTinterwordspacing
-L.~Gurobi~Optimization, ``Gurobi optimizer reference manual,'' 2021. [Online].
-  Available: \url{https://www.gurobi.com}
 \BIBentrySTDinterwordspacing
 
 \end{thebibliography}
