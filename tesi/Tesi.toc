@@ -10,9 +10,9 @@
 \contentsline {section}{\numberline {1.3}Machine Learning}{6}{section.1.3}%
 \contentsline {subsubsection}{k-Nearest Neighbor}{9}{section*.14}%
 \contentsline {subsubsection}{Modelli lineari}{11}{section*.18}%
-\contentsline {subsubsection}{Alberi di decisione}{11}{section*.19}%
-\contentsline {subsubsection}{Support Vector Machine}{12}{section*.20}%
-\contentsline {section}{\numberline {1.4}$\mu $-learn}{13}{section.1.4}%
+\contentsline {subsubsection}{Alberi di decisione}{12}{section*.20}%
+\contentsline {subsubsection}{Support Vector Machine}{12}{section*.21}%
+\contentsline {section}{\numberline {1.4}$\mu $-learn}{14}{section.1.4}%
 \contentsline {chapter}{\numberline {2}Tecnologie e metodologie}{17}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Gurobi}{18}{section.2.1}%
 \contentsline {section}{\numberline {2.2}CVXOPT}{18}{section.2.2}%
@@ -24,6 +24,6 @@
 \contentsline {subsection}{\numberline {3.1.1}CVXPY}{19}{subsection.3.1.1}%
 \contentsline {subsection}{\numberline {3.1.2}CVXOPT}{19}{subsection.3.1.2}%
 \contentsline {subsection}{\numberline {3.1.3}TensorFlow}{19}{subsection.3.1.3}%
-\contentsline {subsubsection}{Confronto con esperimenti precedenti}{19}{section*.24}%
+\contentsline {subsubsection}{Confronto con esperimenti precedenti}{19}{section*.25}%
 \contentsline {chapter}{\numberline {4}Conclusioni}{20}{chapter.4}%
-\contentsline {chapter}{Bibliografia}{23}{chapter*.26}%
+\contentsline {chapter}{Bibliografia}{23}{chapter*.27}%

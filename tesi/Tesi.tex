@@ -529,7 +529,16 @@ Nel caso della regressione, la funzione è definita come segue:
 
 Il valore $y$ ottenuto applicando la funzione lineare alle caratteristiche di un particolare caso rappresenta la predzione per l'etichetta corrispondente.
 
-\bigskip
+Riprendendo l'esempio precedente, supponiamo di voler quantificare il numero di giorni necessari per guarire un paziente malato. Per semplicità supponiamo di avere come unica caratteristica l'età del paziente. In Figura \ref{fig:linear_regression} è rappresentato il dataset dei pazienti. \`E possibile tracciare una retta denominata \textit{retta di regressione} che aprossima tutti i punti nel dataset.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.7]{images/regressione_lineare.png}
+    \caption{Regressione lineare. Nell'asse delle ascisse indichiamo l'età dei pazienti, mentre in quello delle ordinate indichiamo i giorni necessari per la guarigione. I punti in blu rappresentano i pazienti nel dataset, mentre la retta rossa rappresenta la retta di regressione che approssima meglio l'andamento di tutti i punti.}
+    \label{fig:linear_regression}
+
+\end{figure}
+
 
 I modelli lineari si possono applicare anche al contesto della classificazione, introducendo degli intervalli sui valori di $y$ per definire a quale classe appartiene il singolo caso. 
 Per la classificazione binaria, immaginando di avere due classi, $C_1$ e $C_0$, potremmo avere una formula che associa l'oggetto alla classe $C_0$ se
