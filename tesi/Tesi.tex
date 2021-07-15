@@ -501,15 +501,15 @@ Questo algoritmo sceglie la classe che occorre maggiormente nei \textit{k} vicin
 \begin{figure}[ht]
     \centering
     \includegraphics[scale = 0.2]{images/knearest_differenza_vicini.png}
-    \caption{Risultati di un classificatore k-NN, per diversi valori del parametro k su un medesimo dataset. I cerchi e i triangoli indicano le osservazioni del dataset appartenenti a due classi, mentre le aree blu e rosse indicano gli esiti della classificazione \cite{figure_copyright}.}
+    \caption{Risultati di un classificatore k-Nearest Neighbor, per diversi valori del parametro \textit{k} su un medesimo dataset. I cerchi e i triangoli indicano le osservazioni del dataset appartenenti a due classi, mentre le aree blu e rosse indicano gli esiti della classificazione \cite{figure_copyright}.}
     \label{fig:differenza_vicini}
 \end{figure}
 
 Nel caso di regressione il risultato sarà pari alla media dei valori target dei \textit{k} più vicini. Immaginiamo di avere un dataset con due caratteristiche per ogni oggetto: \textit{Target}, il valore che vogliamo predire, e \textit{Feature}, il valore su cui vogliamo basare il modello. Prendendo un \textit{k} pari a 3 otteniamo, come mostrato in Figura \ref{fig:knearest_regression}, che il nuovo elemento da predire avrà come valore \textit{Target} la media dei 3 elementi più vicini sull'asse delle \textit{Feature}.
 
-\begin{figure}[ht]
+\begin{figure}[h]
     \centering
-    \includegraphics[scale = 0.2]{images/knearese_regression_3k.png}
+    \includegraphics[scale = 0.19]{images/knearese_regression_3k.png}
     \caption{Risultato di un regressore k-Nearest Neighbor con \textit{k} pari a 3. I cerchi rappresentano gli oggetti del dataset, le stelle verdi indicano il nuovo elemento da predire mentre le stelle blu rappresentano gli esiti delle predizioni \cite{figure_copyright}.}
     \label{fig:knearest_regression}
 \end{figure}
@@ -531,7 +531,7 @@ Il valore $y$ ottenuto applicando la funzione lineare alle caratteristiche di un
 
 Riprendendo l'esempio precedente, supponiamo di voler quantificare il numero di giorni necessari per guarire un paziente malato. Per semplicità supponiamo di avere come unica caratteristica l'età del paziente. In Figura \ref{fig:linear_regression} è rappresentato il dataset dei pazienti. \`E possibile tracciare una retta denominata \textit{retta di regressione} che aprossima tutti i punti nel dataset.
 
-\begin{figure}[ht]
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.7]{images/regressione_lineare.png}
     \caption{Regressione lineare. Nell'asse delle ascisse indichiamo l'età dei pazienti, mentre in quello delle ordinate indichiamo i giorni necessari per la guarigione. I punti in blu rappresentano i pazienti nel dataset, mentre la retta rossa rappresenta la retta di regressione che approssima meglio l'andamento di tutti i punti.}
@@ -554,6 +554,17 @@ Per la classificazione binaria, immaginando di avere due classi, $C_1$ e $C_0$, 
 
 Un albero di decisione (\textit{Decision Tree}) è un modello predittivo utilizzato sia per la classificazione che per la regressione, la cui logica si basa su una struttura ad albero. In quest'ultimo ogni nodo che compare rappresenta una variabile mentre ogni foglia è il risultato finale, ovvero la classe o l'etichetta che predetta per l'oggetto di partenza.
 Nei nodi troviamo delle domande la cui risposta è di tipo binario (vero o falso) mentre le foglie rappresentano le classi che vogliamo predire.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.35]{images/decisione_tree.png}
+    \caption{Esempio di albero di decisione per la classificazione di un animale \cite{figure_copyright}.}
+    \label{fig:decision_tree}
+
+\end{figure}
+
+Supponiamo di voler distinguere un animale tra: falco, pinguino, delfino e orso. Nell'esempio in Figura \ref{fig:decision_tree} l'algoritmo parte dalla domanda ``Ha le piume?''. In questo modo abbiamo definito il primo nodo dell'albero. Sapendo che, in questo caso, i test previsti restituiscono un output binario, da questo primo nodo si diramano due sotto-alberi rapprensentati dalle categorie ``Ha le piume'' e ``Non ha le piume''. Mediante un'ulteriore domanda si possono distinguere gli animali. Per esempio seguendo la domanda ``Può volare?'', se la risposta è sì, si sta parlando del falco, ovvero l'unico animale tra i quattro che ha le piume e che può volare, altrimenti si tratta del pinguino. Seguendo questa logica è posssibile arrivare a fare delle predizioni. 
+Questo è un esempio molto semplificato. Nella realtà i dati che vengono analizzati hanno spesso valori di tipo continuo, con test come ``\textit{x} è minore di \textit{k}?'', dove \textit{x} è la caratteristica considerata e \textit{k} una costante.
 
 I problemi di \textit{overfitting} e \textit{underfitting} sono problemi ricorrenti che si presentano anche nel caso degli alberi di decisione. Infatti se viene costruito un albero troppo dettagliato, e quindi con un elevato livello di profondità, il modello tende ad adattarsi in maniera eccessiva ai dati usati in fase di allenamento generando un problema di \textit{overfitting}.
 Aumentando la profondità dell'albero, infatti, l'errore su un insieme di dati non incluso in quello di allenamento cresce.
@@ -631,7 +642,7 @@ Il problema di apprendere $\mu_A$ può essere suddiviso in due parti:
 \begin{itemize}
     \item L'insieme $A_1 = \{ x\in X \hspace{0,3cm} |\hspace{0,3cm} \mu_A(x) = 1 \}$ deve contenere tutti i punti in $X$ la cui trasformazione attraverso la mappatura $\Phi$ appartenga alla sfera di centro $a$ e raggio $R$.
     
-    \item Il grado di appartenenza $\mu_A(x)$ dipende solo dalla distanza tra $\Phi(x)$ e $a$
+    \item Il grado di appartenenza $\mu_A(x)$ dipende solo dalla distanza tra $\Phi(x)$ e $a$.
 \end{itemize}
 
 \noindent Fatte queste ipotesi è possibile definire il problema: trovare la più piccola sfera avente centro $a$ e raggio $R$ che includa la maggior parte delle immagini mappate tramite $\Phi$ degli elementi $x\in X$.
@@ -645,39 +656,39 @@ La formulazione matematica di questo problema determina un problema di ottimizza
 \end{equation*}
 sottoposta ai seguenti vincoli:
 \begin{equation}
-    \mu_i\|\Phi(x_i)-a\|^2\le\mu_iR^2 + \xi_i
+    \mu_i\|\Phi(x_i)-a\|^2\le\mu_iR^2 + \xi_i,
     \label{eq:vincolo_1}
-\end{equation},
+\end{equation}
 \begin{equation}
-    (1-\mu_i)\|\Phi(x_i)-a\|^2 \ge (1-\mu_i)R^2 - \tau_i
+    (1-\mu_i)\|\Phi(x_i)-a\|^2 \ge (1-\mu_i)R^2 - \tau_i,
     \label{eq:vincolo_2}
-\end{equation},
+\end{equation}
 \begin{equation}
-    \xi_i \ge 0, \tau_i \ge 0
+    \xi_i \ge 0, \tau_i \ge 0,
     \label{eq:vincolo_3}
-\end{equation},
+\end{equation}
 
 
 \noindent dove $\xi$ e $\tau$ sono le variabili di scarto utilizzate nel problema di ottimizzazione. $\xi$ è la variabile slack legata al posizionamento dei punti all'interno della sfera, mentre $\tau$ è riferita al posizionamento dei punti all'esterno della sfera. Infine $C$ è una costante la cui funzione è quella di `pesare' l'impatto delle variabili di slack.
 
 Possiamo notare che quando $\mu_i = 1$ otteniamo che il vincolo (\ref{eq:vincolo_1}) diventa:
 \begin{equation*}
-    \|\Phi(x_i)-a\|^{2} \le R^2 + \xi_i
-\end{equation*},
+    \|\Phi(x_i)-a\|^{2} \le R^2 + \xi_i,
+\end{equation*}
 ovvero che la distanza della trasformazione di $x_i$ da $a$ è minore o uguale al raggio della sfera e che il vincolo (\ref{eq:vincolo_2}) diventa:
 \begin{equation*}
-    \tau_i \ge 0
-\end{equation*},
+    \tau_i \ge 0,
+\end{equation*}
 che è già incorporato nel vincolo (\ref{eq:vincolo_3}), e quindi il nostro $x_i$ sarà posizionato all'interno della sfera.
 
 Allo stesso modo, quando $\mu_i = 0$ otteniamo che il vincolo (\ref{eq:vincolo_2}) diventa:
 \begin{equation*}
-    \|\Phi(x_i)-a\|^2 \ge R^2 - \tau_i
-\end{equation*},
+    \|\Phi(x_i)-a\|^2 \ge R^2 - \tau_i,
+\end{equation*}
 ovvero che la distanza della trasformazione di $x_i$ da $a$ è maggiore o uguale al raggio della sfera e il vincolo (\ref{eq:vincolo_1}) diventa:
 \begin{equation*}
-    \xi_i \ge 0
-\end{equation*},
+    \xi_i \ge 0,
+\end{equation*}
 che è già incorporato nel vincolo (\ref{eq:vincolo_3}), e quindi il nostro $x_i$ sarà posizionato all'esterno della sfera.
 
 Utilizzando la formulazione duale di Wolfe, quello che otteniamo è il seguente problema:
@@ -689,13 +700,13 @@ Utilizzando la formulazione duale di Wolfe, quello che otteniamo è il seguente 
 \end{equation}
 sottoposto ai vincoli:
 \begin{equation}
-    \displaystyle\sum_{i=1}^{n}(\alpha_i\mu_i - \beta_i(1-\mu_i)) = 1
+    \displaystyle\sum_{i=1}^{n}(\alpha_i\mu_i - \beta_i(1-\mu_i)) = 1,
     \label{eq:v1_problema_finale}
-\end{equation},
+\end{equation}
 \begin{equation}
-    0 \le \alpha_i,\beta_i \le C
+    0 \le \alpha_i,\beta_i \le C,
     \label{eq:v2_problema_finale}
-\end{equation},
+\end{equation}
 
 \noindent dove $k$ è la funzione kernel associata alla mappatura nello spazio dell'immagine di $\Phi$ (ovvero $k(x_i,x_j) = \Phi(x_i)\cdot\Phi(x_j))$.
 
@@ -703,9 +714,9 @@ Indicando con $^*$ il valore ottimale per una variabile, è possibile dimostrare
 \begin{equation*}
 \begin{split}
     R^{2}(x) = k(x,x) \hspace{0,1cm}- \hspace{0,1cm}&2\displaystyle\sum_{i=1}^{m}(\alpha{i}^{*}\mu_{i} - \beta_{i}^{*}(1-\mu_{i}))k(x,x_i)\hspace{0,1cm} + \\ 
-    &\displaystyle\sum_{i,j=1}^{m}(\alpha_{i}^{*} - \beta_{i}^{*}(1-\mu_{i}))(\alpha_{j}^{*} - \beta_{j}^{*}(1-\mu_{j}))k(x_i,x_j)
+    &\displaystyle\sum_{i,j=1}^{m}(\alpha_{i}^{*} - \beta_{i}^{*}(1-\mu_{i}))(\alpha_{j}^{*} - \beta_{j}^{*}(1-\mu_{j}))k(x_i,x_j).
 \end{split}
-\end{equation*}.
+\end{equation*}
 
 \noindent Così facendo è possibile calcolare la distanza tra il centro della sfera e l'immagine del punto dato $x$.
 In particolare, tutti i punti $x$ con una membership $\mu_{A}(x) = 1$ soddisfanno $R^2(x) \le R^2_1$ dove $R^2_1 = R^2(x_i)$ per qualunque vettore di supporto.
