@@ -46,6 +46,13 @@ S.~A. Gokte, ``Most popular distance metrics used in knn and when to use
   \url{https://www.kdnuggets.com/2020/11/most-popular-distance-metrics-knn.html}
 \BIBentrySTDinterwordspacing
 
+\bibitem{SVM}
+\BIBentryALTinterwordspacing
+R.~Gandhi, ``Support vector machine — introduction to machine learning
+  algorithms,'' 2018. [Online]. Available:
+  \url{https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47}
+\BIBentrySTDinterwordspacing
+
 \bibitem{supervisedlearning}
 \BIBentryALTinterwordspacing
 O.~Chapelle, B.~Sch{\"{o}}lkopf, and A.~Zien, Eds., \emph{Semi-Supervised

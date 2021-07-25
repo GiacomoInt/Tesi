@@ -483,26 +483,38 @@ I paragrafi che seguono descrivono nello specifico alcuni algoritmi di apprendim
 \subsubsection{k-Nearest Neighbor}
 
 Il \textit{k-Nearest Neighbor} è un algoritmo utilizzato sia in problemi di classificazione sia in problemi di regressione. 
-Questo algoritmo si basa sugli attributi degli oggetti vicini a quello che vogliamo classificare, utilizzando un'opportuna distanza.
+Questo algoritmo si basa sugli attributi degli oggetti vicini a quello che vogliamo classificare, utilizzando un'opportuna distanza. Viene utilizzato un \textit{k} fissato, che indica il numero di vicini da prendere in considerazione per fare la predizione.
+
+Supponiamo di avere due  caratteristiche, che chiameremo $C_{1}$ e $C_{2}$, le quali descriveranno, insieme alla classe, ogni oggetto del nostro dataset. Nel caso di classificazione tramite k-Nearest Neighbor in Figura \ref{fig:knearest_3_vicini} è mostrato come un elemento ancora non etichettato venga classificato in base al tipo predominante dei suoi vicini.
 
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[scale = 0.2]{images/knearest_3_vicini.png}
-%     \label{fig:knearest_3_vicini}
-%     \caption{Classificazione tramite k-Nearest Neighbour di 3 elementi. Le stelle rosse rappresentano una classificazione rispetto alla classe 1 (dei triangoli)mentre le stelle blu rappresentano una classificazione rispetto alla classe 0 (dei cerchi) \cite{figure_copyright}.}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.2]{images/knearest_3_vicini.png}
+    \caption{Classificazione tramite k-Nearest Neighbor di 3 elementi. Le stelle rosse rappresentano una classificazione rispetto alla classe 1 (dei triangoli)mentre le stelle blu rappresentano una classificazione rispetto alla classe 0 (dei cerchi) \cite{figure_copyright}.}
+    \label{fig:knearest_3_vicini}
+\end{figure}
 
-
-Viene utilizzato un \textit{k} fissato, che indica il numero di vicini da prendere in considerazione per fare la predizione.
 La scelta di \textit{k} dipende dalle caratteristiche dei dati. Generalmente all'aumentare di \textit{k} si riduce il rumore che compromette la classificazione, ma il criterio di scelta per la classe diventa più labile.
-Questo algoritmo sceglie la classe che occorre maggiormente nei \textit{k} vicini. Infatti nel caso della classificazione binaria è meglio scegliere un \textit{k} dispari per escludere casi di indecisione e quindi poter sempre definire la classe del nuovo dato.
+Questo algoritmo sceglie la classe che occorre maggiormente nei \textit{k} vicini. Infatti nel caso della classificazione binaria è meglio scegliere un \textit{k} dispari per escludere casi di indecisione e quindi poter sempre definire la classe del nuovo dato. In Figura \ref{fig:differenza_vicini} viene mostrato come influisce la scelta di differenti parametri \textit{k} su uno stesso campione.
 
-Nel caso di regressione il risultato sarà pari alla media dei valori target dei \textit{k} più vicini.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.2]{images/knearest_differenza_vicini.png}
+    \caption{Risultati di un classificatore k-Nearest Neighbor, per diversi valori del parametro \textit{k} su un medesimo dataset. I cerchi e i triangoli indicano le osservazioni del dataset appartenenti a due classi, mentre le aree blu e rosse indicano gli esiti della classificazione \cite{figure_copyright}.}
+    \label{fig:differenza_vicini}
+\end{figure}
 
-% come funziona l'algoritmo ? 
-% cercare figura che mostri differenza di K
-\newpage
+Nel caso di regressione il risultato sarà pari alla media dei valori target dei \textit{k} più vicini. Immaginiamo di avere un dataset con due caratteristiche per ogni oggetto: \textit{Target}, il valore che vogliamo predire, e \textit{Feature}, il valore su cui vogliamo basare il modello. Prendendo un \textit{k} pari a 3 otteniamo, come mostrato in Figura \ref{fig:knearest_regression}, che il nuovo elemento da predire avrà come valore \textit{Target} la media dei 3 elementi più vicini sull'asse delle \textit{Feature}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.19]{images/knearese_regression_3k.png}
+    \caption{Risultato di un regressore k-Nearest Neighbor con \textit{k} pari a 3. I cerchi rappresentano gli oggetti del dataset, le stelle verdi indicano il nuovo elemento da predire mentre le stelle blu rappresentano gli esiti delle predizioni \cite{figure_copyright}.}
+    \label{fig:knearest_regression}
+\end{figure}
+
+Un'altra scelta importante da considerare quando utilizziamo questo algoritmo è come calcolare la distanza dei vicini, ovvero secondo quale criterio scegliere i vicini. Finora abbiamo considerato una distanza euclidea, ma a seconda del contesto trattato è opportuno scegliere una metrica adatta \cite{distance_metrics_knn}. 
 
 \subsubsection{Modelli lineari}
 I modelli lineari cercano di effettuare predizioni utilizzando una funzione lineare basata sull'insieme delle caratteristiche dell'elemento da analizzare.
@@ -517,7 +529,16 @@ Nel caso della regressione, la funzione è definita come segue:
 
 Il valore $y$ ottenuto applicando la funzione lineare alle caratteristiche di un particolare caso rappresenta la predzione per l'etichetta corrispondente.
 
-\bigskip
+Riprendendo l'esempio precedente, supponiamo di voler quantificare il numero di giorni necessari per guarire un paziente malato. Per semplicità supponiamo di avere come unica caratteristica l'età del paziente. In Figura \ref{fig:linear_regression} è rappresentato il dataset dei pazienti. \`E possibile tracciare una retta denominata \textit{retta di regressione} che aprossima tutti i punti nel dataset.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.7]{images/regressione_lineare.png}
+    \caption{Regressione lineare. Nell'asse delle ascisse indichiamo l'età dei pazienti, mentre in quello delle ordinate indichiamo i giorni necessari per la guarigione. I punti in blu rappresentano i pazienti nel dataset, mentre la retta rossa rappresenta la retta di regressione che approssima meglio l'andamento di tutti i punti.}
+    \label{fig:linear_regression}
+
+\end{figure}
+
 
 I modelli lineari si possono applicare anche al contesto della classificazione, introducendo degli intervalli sui valori di $y$ per definire a quale classe appartiene il singolo caso. 
 Per la classificazione binaria, immaginando di avere due classi, $C_1$ e $C_0$, potremmo avere una formula che associa l'oggetto alla classe $C_0$ se
@@ -533,6 +554,17 @@ Per la classificazione binaria, immaginando di avere due classi, $C_1$ e $C_0$, 
 
 Un albero di decisione (\textit{Decision Tree}) è un modello predittivo utilizzato sia per la classificazione che per la regressione, la cui logica si basa su una struttura ad albero. In quest'ultimo ogni nodo che compare rappresenta una variabile mentre ogni foglia è il risultato finale, ovvero la classe o l'etichetta che predetta per l'oggetto di partenza.
 Nei nodi troviamo delle domande la cui risposta è di tipo binario (vero o falso) mentre le foglie rappresentano le classi che vogliamo predire.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.35]{images/decisione_tree.png}
+    \caption{Esempio di albero di decisione per la classificazione di un animale \cite{figure_copyright}.}
+    \label{fig:decision_tree}
+
+\end{figure}
+
+Supponiamo di voler distinguere un animale tra: falco, pinguino, delfino e orso. Nell'esempio in Figura \ref{fig:decision_tree} l'algoritmo parte dalla domanda ``Ha le piume?''. In questo modo abbiamo definito il primo nodo dell'albero. Sapendo che, in questo caso, i test previsti restituiscono un output binario, da questo primo nodo si diramano due sotto-alberi rapprensentati dalle categorie ``Ha le piume'' e ``Non ha le piume''. Mediante un'ulteriore domanda si possono distinguere gli animali. Per esempio seguendo la domanda ``Può volare?'', se la risposta è sì, si sta parlando del falco, ovvero l'unico animale tra i quattro che ha le piume e che può volare, altrimenti si tratta del pinguino. Seguendo questa logica è posssibile arrivare a fare delle predizioni. 
+Questo è un esempio molto semplificato. Nella realtà i dati che vengono analizzati hanno spesso valori di tipo continuo, con test come ``\textit{x} è minore di \textit{k}?'', dove \textit{x} è la caratteristica considerata e \textit{k} una costante.
 
 I problemi di \textit{overfitting} e \textit{underfitting} sono problemi ricorrenti che si presentano anche nel caso degli alberi di decisione. Infatti se viene costruito un albero troppo dettagliato, e quindi con un elevato livello di profondità, il modello tende ad adattarsi in maniera eccessiva ai dati usati in fase di allenamento generando un problema di \textit{overfitting}.
 Aumentando la profondità dell'albero, infatti, l'errore su un insieme di dati non incluso in quello di allenamento cresce.
@@ -555,9 +587,29 @@ Per risolvere questo problema esistono due strategie:
 \subsubsection{Support Vector Machine}
 Le \textit{Support Vector Machine} sono dei modelli di apprendimento utilizzati sia per la regressione che la classificazione.
 
-Una \textit{Support Vector Machine} individua un iperpiano o un insieme di iperpiani per separare i punti in uno spazio e quindi dividerli in diversi gruppi.
+Una \textit{Support Vector Machine} \cite{SVM} individua un iperpiano o un insieme di iperpiani per separare i punti in uno spazio e quindi dividerli in diversi gruppi.
+
+Supponiamo di avere un dataset con oggetti appartenenti a due calssi, come in Figura \ref{fig:svm}, e di voler trovare un iperpiano che divide le due classi. Come possiamo vedere nella Figura \ref{fig:iperpiani_svm} ci sono molti possibili iperpiani che dividono le due classi. Il nostro obiettivo è quello di trovare il piano che ha il margine massimo, ovvero quel piano che massimizza la distanza da entrambe le classi. I punti del dataset più vicini all'iperpiano e che influenzano la sua posizione vengono chiamati \textit{vettori di supporto} (Support Vector, da qui il nome dell'algoritmo)
+\begin{figure}[ht]
+    \begin{subfigure}{0.47\textwidth}
+        \centering
+        \includegraphics[scale=0.5]{images/iperpiani_svm.png}
+        \caption{Iperpiani}
+        \label{fig:iperpiani_svm}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[scale=0.5]{images/iperpiano_ottimale_svm.png}
+        \caption{Iperpiano ideale}
+        \label{fig:iperpiano_ideale}
+    \end{subfigure}
+    \caption{Funzionamento SVM}
+    \label{fig:svm}
+\end{figure}
+
 Spesso succede che le classi da distinguere non siano linearmente separabili nello spazio in cui è definito il problema originale. Per risolvere questo problema si ricorre alle funzioni \textit{kernel} che sono in grado di mappare dei vettori dallo spazio originale ad uno spazio a dimensionalità più elevata, in cui le immagini risultano separabili.
 
+I Vettori di Supporto (\textit{Support Vector}) sono i punti dati più vicini all'iperpiano.Tali punti dipendono dal set di dati che si sta analizzando e se vengono rimossi o modificati alterano la posizione dell’iperpiano divisorio. Per questo motivo, possono essere considerati gli elementi critici di un set di dati.
 
 \subsection*{Approccio Non Supervisionato}
 Con \textit{Approccio Non Supervisionato} \cite{unsupervised_learning} ci riferiamo a una tecnica di apprendimento automatico che consiste nel fornire in input una serie di dati non etichettati ma che verranno raggruppati sulla base di caratteristiche comuni  per cercare di effettuare delle previsioni su input futuri.
@@ -575,11 +627,10 @@ Un esempio di utilizzo ricade nell'ambito della sicurezza informatica. Gli attac
 Il Machine Learning non supervisionato potrebbe utilizzare informazioni dei clienti sugli utilizzi abituali dei servizi di una banca. Se un malintenzionato provasse a effettuare delle operazioni tramite il nostro conto bancario dall'altra parte del mondo a un orario differente da quello abituale, l'uso di tecniche di clustering permette di riconoscere le operazioni abituali e mandare un messaggio di allarme se vengono individuati casi anomali.
 
 \subsection*{Approccio Semi-Supervisionato}
-A metà strada tra l'apprendimento supervisionato e quello non supervisionato c'è l'apprendimento Semi-Supervisionato \cite{supervisedlearning}.
+A metà strada tra l'apprendimento supervisionato e quello non supervisionato c'è l'apprendimento \textit{Semi-Supervisionato} \cite{supervisedlearning}.
 
 Questo approccio consiste nel combinare le due tecniche descritte nei paragrafi precedenti e fornire un risultato basandosi su un input eterogeneo costituito da dati etichettati e dati non etichettati.
 Questo perché i dati etichettati a volte possono essere difficili da reperire, costosi e dispendiosi in termini di tempo e di denaro da recuperare, perché spesso i dati vengono etichettati manualmente da utenti specializzati. Allo stesso tempo i dati non etichettati possono essere relativamente facili da raccogliere, ma ci sono pochi modi di utilizzarli. 
-%% Importanza dati non etichettati
 L'approccio semi-supervisionato risolve questi problemi utilizzando una grande quantità di dati non etichettati, insieme a una porzione di dati etichettati, per costruire classificatori migliori. 
 
 Ma com'è possibile, avendo a confronto l'apprendimento supervisionato che utilizza solo dati etichettati, avere classificatori migliori tenendo in considerazione i dati non etichettati?
@@ -610,7 +661,7 @@ Il problema di apprendere $\mu_A$ può essere suddiviso in due parti:
 \begin{itemize}
     \item L'insieme $A_1 = \{ x\in X \hspace{0,3cm} |\hspace{0,3cm} \mu_A(x) = 1 \}$ deve contenere tutti i punti in $X$ la cui trasformazione attraverso la mappatura $\Phi$ appartenga alla sfera di centro $a$ e raggio $R$.
     
-    \item Il grado di appartenenza $\mu_A(x)$ dipende solo dalla distanza tra $\Phi(x)$ e $a$
+    \item Il grado di appartenenza $\mu_A(x)$ dipende solo dalla distanza tra $\Phi(x)$ e $a$.
 \end{itemize}
 
 \noindent Fatte queste ipotesi è possibile definire il problema: trovare la più piccola sfera avente centro $a$ e raggio $R$ che includa la maggior parte delle immagini mappate tramite $\Phi$ degli elementi $x\in X$.
@@ -624,39 +675,39 @@ La formulazione matematica di questo problema determina un problema di ottimizza
 \end{equation*}
 sottoposta ai seguenti vincoli:
 \begin{equation}
-    \mu_i\|\Phi(x_i)-a\|^2\le\mu_iR^2 + \xi_i
+    \mu_i\|\Phi(x_i)-a\|^2\le\mu_iR^2 + \xi_i,
     \label{eq:vincolo_1}
-\end{equation},
+\end{equation}
 \begin{equation}
-    (1-\mu_i)\|\Phi(x_i)-a\|^2 \ge (1-\mu_i)R^2 - \tau_i
+    (1-\mu_i)\|\Phi(x_i)-a\|^2 \ge (1-\mu_i)R^2 - \tau_i,
     \label{eq:vincolo_2}
-\end{equation},
+\end{equation}
 \begin{equation}
-    \xi_i \ge 0, \tau_i \ge 0
+    \xi_i \ge 0, \tau_i \ge 0,
     \label{eq:vincolo_3}
-\end{equation},
+\end{equation}
 
 
 \noindent dove $\xi$ e $\tau$ sono le variabili di scarto utilizzate nel problema di ottimizzazione. $\xi$ è la variabile slack legata al posizionamento dei punti all'interno della sfera, mentre $\tau$ è riferita al posizionamento dei punti all'esterno della sfera. Infine $C$ è una costante la cui funzione è quella di `pesare' l'impatto delle variabili di slack.
 
 Possiamo notare che quando $\mu_i = 1$ otteniamo che il vincolo (\ref{eq:vincolo_1}) diventa:
 \begin{equation*}
-    \|\Phi(x_i)-a\|^{2} \le R^2 + \xi_i
-\end{equation*},
+    \|\Phi(x_i)-a\|^{2} \le R^2 + \xi_i,
+\end{equation*}
 ovvero che la distanza della trasformazione di $x_i$ da $a$ è minore o uguale al raggio della sfera e che il vincolo (\ref{eq:vincolo_2}) diventa:
 \begin{equation*}
-    \tau_i \ge 0
-\end{equation*},
+    \tau_i \ge 0,
+\end{equation*}
 che è già incorporato nel vincolo (\ref{eq:vincolo_3}), e quindi il nostro $x_i$ sarà posizionato all'interno della sfera.
 
 Allo stesso modo, quando $\mu_i = 0$ otteniamo che il vincolo (\ref{eq:vincolo_2}) diventa:
 \begin{equation*}
-    \|\Phi(x_i)-a\|^2 \ge R^2 - \tau_i
-\end{equation*},
+    \|\Phi(x_i)-a\|^2 \ge R^2 - \tau_i,
+\end{equation*}
 ovvero che la distanza della trasformazione di $x_i$ da $a$ è maggiore o uguale al raggio della sfera e il vincolo (\ref{eq:vincolo_1}) diventa:
 \begin{equation*}
-    \xi_i \ge 0
-\end{equation*},
+    \xi_i \ge 0,
+\end{equation*}
 che è già incorporato nel vincolo (\ref{eq:vincolo_3}), e quindi il nostro $x_i$ sarà posizionato all'esterno della sfera.
 
 Utilizzando la formulazione duale di Wolfe, quello che otteniamo è il seguente problema:
@@ -668,13 +719,13 @@ Utilizzando la formulazione duale di Wolfe, quello che otteniamo è il seguente 
 \end{equation}
 sottoposto ai vincoli:
 \begin{equation}
-    \displaystyle\sum_{i=1}^{n}(\alpha_i\mu_i - \beta_i(1-\mu_i)) = 1
+    \displaystyle\sum_{i=1}^{n}(\alpha_i\mu_i - \beta_i(1-\mu_i)) = 1,
     \label{eq:v1_problema_finale}
-\end{equation},
+\end{equation}
 \begin{equation}
-    0 \le \alpha_i,\beta_i \le C
+    0 \le \alpha_i,\beta_i \le C,
     \label{eq:v2_problema_finale}
-\end{equation},
+\end{equation}
 
 \noindent dove $k$ è la funzione kernel associata alla mappatura nello spazio dell'immagine di $\Phi$ (ovvero $k(x_i,x_j) = \Phi(x_i)\cdot\Phi(x_j))$.
 
@@ -682,9 +733,9 @@ Indicando con $^*$ il valore ottimale per una variabile, è possibile dimostrare
 \begin{equation*}
 \begin{split}
     R^{2}(x) = k(x,x) \hspace{0,1cm}- \hspace{0,1cm}&2\displaystyle\sum_{i=1}^{m}(\alpha{i}^{*}\mu_{i} - \beta_{i}^{*}(1-\mu_{i}))k(x,x_i)\hspace{0,1cm} + \\ 
-    &\displaystyle\sum_{i,j=1}^{m}(\alpha_{i}^{*} - \beta_{i}^{*}(1-\mu_{i}))(\alpha_{j}^{*} - \beta_{j}^{*}(1-\mu_{j}))k(x_i,x_j)
+    &\displaystyle\sum_{i,j=1}^{m}(\alpha_{i}^{*} - \beta_{i}^{*}(1-\mu_{i}))(\alpha_{j}^{*} - \beta_{j}^{*}(1-\mu_{j}))k(x_i,x_j).
 \end{split}
-\end{equation*}.
+\end{equation*}
 
 \noindent Così facendo è possibile calcolare la distanza tra il centro della sfera e l'immagine del punto dato $x$.
 In particolare, tutti i punti $x$ con una membership $\mu_{A}(x) = 1$ soddisfanno $R^2(x) \le R^2_1$ dove $R^2_1 = R^2(x_i)$ per qualunque vettore di supporto.
@@ -740,53 +791,53 @@ I parametri necessari per implementare il metodo \textit{solve} sono i seguenti:
 \noindent Nei paragrafi successivi vediamo nello specifico come sono stati implementati i diversi solver.
 
 \section{Gurobi}
-Gurobi \cite{gurobi} è un software commerciale, disponibile con licenza accademica, utilizzato per la risoluzione di problemi di ottimizzazione. 
-Il solver, già disponibile tra gli ottimizzatori della libreria \textit{$\mu$-learn} \cite{mulearn_documentation}.
-Di seguito i punti salienti dell'implementazione del metodo \textit{solve\_problem} con Gurobi.
+% Gurobi \cite{gurobi} è un software commerciale, disponibile con licenza accademica, utilizzato per la risoluzione di problemi di ottimizzazione. 
+% Il solver, già disponibile tra gli ottimizzatori della libreria \textit{$\mu$-learn} \cite{mulearn_documentation}.
+% Di seguito i punti salienti dell'implementazione del metodo \textit{solve\_problem} con Gurobi.
 
-\bigskip
+% \bigskip
 
-Innanzi tutto Gurobi richiede di creare un oggetto \textit{Model} per modellare opportunamente il problema. A questo vengono aggiunte le variabili $\chi$ che vogliamo ottimizzare, con i rispettivi limiti superiori e inferiori. Infine viene specificato si tratti di un'espressione quadratica.
+% Innanzi tutto Gurobi richiede di creare un oggetto \textit{Model} per modellare opportunamente il problema. A questo vengono aggiunte le variabili $\chi$ che vogliamo ottimizzare, con i rispettivi limiti superiori e inferiori. Infine viene specificato si tratti di un'espressione quadratica.
 
-\begin{minted}{python}
-def solve_problem(self, xs, mus, c, k):
+% \begin{minted}{python}
+% def solve_problem(self, xs, mus, c, k):
     
-    m = len(xs)
+%     m = len(xs)
 
-    with Env(empty=True) as env:
-        env.start()
-        with Model('mulearn', env=env) as model:
-            for i in range(m):
-                model.addVar(name=f'chi_{i}',
-                                 lb=-c * (1 - mus[i]),
-                                 ub=c * mus[i],
-                                 vtype=GRB.CONTINUOUS)
-            model.update()
-            chis = model.getVars()
-            obj = QuadExpr()
-\end{minted}
-
-Successivamente vengono aggiunti i coefficienti delle variabili
-
-\begin{minted}[escapeinside=!!,linenos]{python}
-    
-                    for i, j in it.product(range(m), range(m)):
-                    obj.add(chis[i] * chis[j], k.compute(xs[i], xs[j]))
-
-                for i in range(m):
-                    obj.add(-1 * chis[i] * k.compute(xs[i], xs[i]))
-
-                model.setObjective(obj, GRB.MINIMIZE)
-
-                constEqual = LinExpr()
-                constEqual.add(sum(chis), 1.0)
-
-                model.addConstr(constEqual, GRB.EQUAL, 1)
-
-                model.optimize()
-
-            return [ch.x for ch in chis]
+%     with Env(empty=True) as env:
+%         env.start()
+%         with Model('mulearn', env=env) as model:
+%             for i in range(m):
+%                 model.addVar(name=f'chi_{i}',
+%                                  lb=-c * (1 - mus[i]),
+%                                  ub=c * mus[i],
+%                                  vtype=GRB.CONTINUOUS)
+%             model.update()
+%             chis = model.getVars()
+%             obj = QuadExpr()
 % \end{minted}
+
+% Successivamente vengono aggiunti i coefficienti delle variabili
+
+% \begin{minted}[escapeinside=!!,linenos]{python}
+    
+%                     for i, j in it.product(range(m), range(m)):
+%                     obj.add(chis[i] * chis[j], k.compute(xs[i], xs[j]))
+
+%                 for i in range(m):
+%                     obj.add(-1 * chis[i] * k.compute(xs[i], xs[i]))
+
+%                 model.setObjective(obj, GRB.MINIMIZE)
+
+%                 constEqual = LinExpr()
+%                 constEqual.add(sum(chis), 1.0)
+
+%                 model.addConstr(constEqual, GRB.EQUAL, 1)
+
+%                 model.optimize()
+
+%             return [ch.x for ch in chis]
+% % \end{minted}
 
 
 \section{CVXOPT}

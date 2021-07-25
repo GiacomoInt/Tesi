@@ -1,0 +1,103 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class} \PYG{n+nc}{GurobiSolver}\PYG{p}{(}\PYG{n}{Solver}\PYG{p}{):}
+
+    \PYG{p}{[}\PYG{o}{...}\PYG{p}{]}
+
+    \PYG{k}{def} \PYG{n+nf}{solve\PYGZus{}problem}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{xs}\PYG{p}{,} \PYG{n}{mus}\PYG{p}{,} \PYG{n}{c}\PYG{p}{,} \PYG{n}{k}\PYG{p}{):}
+        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Optimize via gurobi.}
+
+\PYG{l+s+sd}{        Build and solve the constrained optimization problem at the basis}
+\PYG{l+s+sd}{        of the fuzzy learning procedure using the gurobi API.}
+
+\PYG{l+s+sd}{        :param xs: objects in training set.}
+\PYG{l+s+sd}{        :type xs: iterable}
+\PYG{l+s+sd}{        :param mus: membership values for the objects in `xs`.}
+\PYG{l+s+sd}{        :type mus: iterable}
+\PYG{l+s+sd}{        :param c: constant managing the trade\PYGZhy{}off in joint radius/error}
+\PYG{l+s+sd}{          optimization.}
+\PYG{l+s+sd}{        :type c: float}
+\PYG{l+s+sd}{        :param k: kernel function to be used.}
+\PYG{l+s+sd}{        :type k: :class:`mulearn.kernel.Kernel`}
+\PYG{l+s+sd}{        :raises: ValueError if optimization fails or if gurobi is not installed}
+\PYG{l+s+sd}{        :returns: list \PYGZhy{}\PYGZhy{} optimal values for the independent variables of the}
+\PYG{l+s+sd}{          problem.}
+\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+        \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{gurobi\PYGZus{}ok}\PYG{p}{:}
+            \PYG{k}{raise} \PYG{n+ne}{ValueError}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}gurobi not available\PYGZsq{}}\PYG{p}{)}
+
+        \PYG{n}{m} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{xs}\PYG{p}{)}
+
+        \PYG{k}{with} \PYG{n}{Env}\PYG{p}{(}\PYG{n}{empty}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)} \PYG{k}{as} \PYG{n}{env}\PYG{p}{:}
+            \PYG{n}{env}\PYG{o}{.}\PYG{n}{setParam}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}OutputFlag\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}
+            \PYG{n}{env}\PYG{o}{.}\PYG{n}{start}\PYG{p}{()}
+            \PYG{k}{with} \PYG{n}{Model}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}mulearn\PYGZsq{}}\PYG{p}{,} \PYG{n}{env}\PYG{o}{=}\PYG{n}{env}\PYG{p}{)} \PYG{k}{as} \PYG{n}{model}\PYG{p}{:}
+                \PYG{n}{model}\PYG{o}{.}\PYG{n}{setParam}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}OutputFlag\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}
+                \PYG{n}{model}\PYG{o}{.}\PYG{n}{setParam}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}TimeLimit\PYGZsq{}}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{time\PYGZus{}limit}\PYG{p}{)}
+
+                \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{m}\PYG{p}{):}
+                    \PYG{k}{if} \PYG{n}{c} \PYG{o}{\PYGZlt{}} \PYG{n}{np}\PYG{o}{.}\PYG{n}{inf}\PYG{p}{:}
+                        \PYG{n}{model}\PYG{o}{.}\PYG{n}{addVar}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s+sa}{f}\PYG{l+s+s1}{\PYGZsq{}chi\PYGZus{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{i}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+                                     \PYG{n}{lb}\PYG{o}{=\PYGZhy{}}\PYG{n}{c} \PYG{o}{*} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZhy{}} \PYG{n}{mus}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]),} \PYG{n}{ub}\PYG{o}{=}\PYG{n}{c} \PYG{o}{*} \PYG{n}{mus}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],}
+                                     \PYG{n}{vtype}\PYG{o}{=}\PYG{n}{GRB}\PYG{o}{.}\PYG{n}{CONTINUOUS}\PYG{p}{)}
+                    \PYG{k}{else}\PYG{p}{:}
+                        \PYG{n}{model}\PYG{o}{.}\PYG{n}{addVar}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s+sa}{f}\PYG{l+s+s1}{\PYGZsq{}chi\PYGZus{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{i}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{vtype}\PYG{o}{=}\PYG{n}{GRB}\PYG{o}{.}\PYG{n}{CONTINUOUS}\PYG{p}{)}
+
+                \PYG{n}{model}\PYG{o}{.}\PYG{n}{update}\PYG{p}{()}
+                \PYG{n}{chis} \PYG{o}{=} \PYG{n}{model}\PYG{o}{.}\PYG{n}{getVars}\PYG{p}{()}
+
+                \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{initial\PYGZus{}values} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{k+kc}{None}\PYG{p}{:}
+                    \PYG{k}{for} \PYG{n}{c}\PYG{p}{,} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{zip}\PYG{p}{(}\PYG{n}{chis}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{initial\PYGZus{}values}\PYG{p}{):}
+                        \PYG{n}{c}\PYG{o}{.}\PYG{n}{start} \PYG{o}{=} \PYG{n}{i}
+
+                \PYG{n}{obj} \PYG{o}{=} \PYG{n}{QuadExpr}\PYG{p}{()}
+
+                \PYG{k}{for} \PYG{n}{i}\PYG{p}{,} \PYG{n}{j} \PYG{o+ow}{in} \PYG{n}{it}\PYG{o}{.}\PYG{n}{product}\PYG{p}{(}\PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{m}\PYG{p}{),} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{m}\PYG{p}{)):}
+                    \PYG{n}{obj}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{chis}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{*} \PYG{n}{chis}\PYG{p}{[}\PYG{n}{j}\PYG{p}{],} \PYG{n}{k}\PYG{o}{.}\PYG{n}{compute}\PYG{p}{(}\PYG{n}{xs}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n}{xs}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]))}
+
+                \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{m}\PYG{p}{):}
+                    \PYG{n}{obj}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1} \PYG{o}{*} \PYG{n}{chis}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{*} \PYG{n}{k}\PYG{o}{.}\PYG{n}{compute}\PYG{p}{(}\PYG{n}{xs}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n}{xs}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]))}
+
+                \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{adjustment} \PYG{o+ow}{and} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{adjustment} \PYG{o}{!=} \PYG{l+s+s1}{\PYGZsq{}auto\PYGZsq{}}\PYG{p}{:}
+                    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{m}\PYG{p}{):}
+                        \PYG{n}{obj}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{adjustment} \PYG{o}{*} \PYG{n}{chis}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{*} \PYG{n}{chis}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])}
+
+                \PYG{n}{model}\PYG{o}{.}\PYG{n}{setObjective}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{GRB}\PYG{o}{.}\PYG{n}{MINIMIZE}\PYG{p}{)}
+
+                \PYG{n}{constEqual} \PYG{o}{=} \PYG{n}{LinExpr}\PYG{p}{()}
+                \PYG{n}{constEqual}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n+nb}{sum}\PYG{p}{(}\PYG{n}{chis}\PYG{p}{),} \PYG{l+m+mf}{1.0}\PYG{p}{)}
+
+                \PYG{n}{model}\PYG{o}{.}\PYG{n}{addConstr}\PYG{p}{(}\PYG{n}{constEqual}\PYG{p}{,} \PYG{n}{GRB}\PYG{o}{.}\PYG{n}{EQUAL}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}
+
+                \PYG{k}{try}\PYG{p}{:}
+                    \PYG{n}{model}\PYG{o}{.}\PYG{n}{optimize}\PYG{p}{()}
+                \PYG{k}{except} \PYG{n}{GurobiError} \PYG{k}{as} \PYG{n}{e}\PYG{p}{:}
+                    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{e}\PYG{o}{.}\PYG{n}{message}\PYG{p}{)}
+                    \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{adjustment} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}auto\PYGZsq{}}\PYG{p}{:}
+                        \PYG{n}{s} \PYG{o}{=} \PYG{n}{e}\PYG{o}{.}\PYG{n}{message}
+                        \PYG{n}{a} \PYG{o}{=} \PYG{n+nb}{float}\PYG{p}{(}\PYG{n}{s}\PYG{p}{[}\PYG{n}{s}\PYG{o}{.}\PYG{n}{find}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{} of \PYGZsq{}}\PYG{p}{)} \PYG{o}{+} \PYG{l+m+mi}{4}\PYG{p}{:}\PYG{n}{s}\PYG{o}{.}\PYG{n}{find}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{} would\PYGZsq{}}\PYG{p}{)])}
+                        \PYG{n}{logger}\PYG{o}{.}\PYG{n}{warning}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}non\PYGZhy{}diagonal Gram matrix, \PYGZsq{}}
+                                       \PYG{l+s+sa}{f}\PYG{l+s+s1}{\PYGZsq{}retrying with adjustment }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{a}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+                        \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{m}\PYG{p}{):}
+                            \PYG{n}{obj}\PYG{o}{.}\PYG{n}{add}\PYG{p}{(}\PYG{n}{a} \PYG{o}{*} \PYG{n}{chis}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{*} \PYG{n}{chis}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])}
+                        \PYG{n}{model}\PYG{o}{.}\PYG{n}{setObjective}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{GRB}\PYG{o}{.}\PYG{n}{MINIMIZE}\PYG{p}{)}
+
+                        \PYG{n}{model}\PYG{o}{.}\PYG{n}{optimize}\PYG{p}{()}
+                    \PYG{k}{else}\PYG{p}{:}
+                        \PYG{k}{raise} \PYG{n}{e}
+
+                \PYG{k}{if} \PYG{n}{model}\PYG{o}{.}\PYG{n}{Status} \PYG{o}{!=} \PYG{n}{GRB}\PYG{o}{.}\PYG{n}{OPTIMAL}\PYG{p}{:}
+                    \PYG{k}{raise} \PYG{n+ne}{ValueError}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}optimal solution not found!\PYGZsq{}}\PYG{p}{)}
+
+                \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}Objective value GUROBI: }\PYG{l+s+si}{\PYGZob{}}\PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{model}\PYG{o}{.}\PYG{n}{getObjective}\PYG{p}{()}\PYG{o}{.}\PYG{n}{getValue}\PYG{p}{())}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+
+                \PYG{k}{return} \PYG{p}{[}\PYG{n}{ch}\PYG{o}{.}\PYG{n}{x} \PYG{k}{for} \PYG{n}{ch} \PYG{o+ow}{in} \PYG{n}{chis}\PYG{p}{]}
+
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}repr\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{n}{obj\PYGZus{}repr} \PYG{o}{=} \PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}GurobiSolver(\PYGZdq{}}
+
+        \PYG{k}{for} \PYG{n}{a} \PYG{o+ow}{in} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}time\PYGZus{}limit\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}adjustment\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}initial\PYGZus{}values\PYGZsq{}}\PYG{p}{):}
+            \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}getattribute\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{a}\PYG{p}{)} \PYG{o}{!=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{default\PYGZus{}values}\PYG{p}{[}\PYG{n}{a}\PYG{p}{]:}
+                \PYG{n}{obj\PYGZus{}repr} \PYG{o}{+=} \PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}, }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{a}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{=}\PYG{l+s+si}{\PYGZob{}}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{default\PYGZus{}values}\PYG{p}{[}\PYG{n}{a}\PYG{p}{]}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}
+        \PYG{k}{return} \PYG{n}{obj\PYGZus{}repr} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{})\PYGZdq{}}
+\end{Verbatim}
