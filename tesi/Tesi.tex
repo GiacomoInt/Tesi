@@ -100,7 +100,7 @@
 \addcontentsline{toc}{chapter}{Introduzione}
 \label{Introduzione}
 %
-Insiemi fuzzy e come è strutturata la tesi
+Come è strutturata la tesi.
 % 
 
 %			CAPITOLO 1: descrizione problema da affrontare
@@ -173,7 +173,7 @@ Per capire meglio questo concetto possiamo fare qualche esempio che rispecchia l
 \newpage
 
 \section{Insiemi Fuzzy}
-Quando il predicato ``\textit{l'elemento $x$ appartiene all'insieme $A$}'' non è  più valutato in termini di logica classica ma di logica fuzzy si dice che $A$ è un insieme fuzzy. 
+Quando il predicato ``\textit{l'elemento $x$ appartiene all'insieme $A$}'' non è  più valutato in termini di logica classica ma di logica fuzzy si dice che $A$ è un \textit{insieme fuzzy}. 
 Formalmente il grado di verità è determinato da un' opportuna \textit{funzione di appartenenza} `$\mu_A$'. Quindi volendo valutare un generico elemento $x$ di un universo del contesto $U$ avremo:
 \begin{equation*}
     \mu_A(x) = \mu
@@ -182,7 +182,7 @@ Formalmente il grado di verità è determinato da un' opportuna \textit{funzione
 %Nota che quando parli della funzione di appartenenza non va bene dire che x è un  predicato, perché si tratta di un generico elemento di un universo del discorso U
 \noindent 
 %La $x$ rappresenta i predicati da valutare ed appartenenti a un insieme di predicati $U$. 
-Dove la $\mu$ rappresenta il valore di appartenenza dell'elemento all'insieme fuzzy $A$ considerato ed è un valore reale compreso tra 0 e 1. 
+dove la $\mu$ rappresenta il valore di appartenenza dell'elemento all'insieme fuzzy $A$ considerato ed è un valore reale compreso tra 0 e 1. 
 Per $\mu_A(x)$ pari a 1 l’elemento è certamente incluso nell’ insieme, per $\mu_A(x)$ pari a 0
 l’elemento non è per niente incluso nell’ insieme (questi due valori corrispondono alla teoria classica degli insiemi), mentre per tutti i valori compresi tra 0 e 1 l’appartenenza può essere più o meno forte.
 
@@ -452,7 +452,7 @@ In questi contesti si parla di classificazione, perché dato un oggetto voglio a
 Fornendo come input a un classificatore questo insieme di dati con le rispettive etichette appena definite, il calcolatore, tramite un algoritmo supervisionato, sarà in grado di fornire delle predizioni sulla possibile etichetta da attribuire a ogni nuova diagnosi.
 Però è necessario che vi siano molti dati da analizzare, perché quando questo non succede la capacità di predizione del sistema che si ottiene è spesso di bassa qualità.
 
-In questo esempio abbiamo utilizzato solamente le classi `in salute' e `malato', ma ad esempio se volessimo quantificare l'aspettativa di vita non è più possibile ricorrere ai classificatori. Nasce quindi la necessità di passare da un'etichetta discreta a una continua, pertanto si utilizzano i \textit{regressori} che costituiscono un modello per predire valori continui.
+In questo esempio abbiamo utilizzato solamente le classi `in salute' e `malato', ma se volessimo quantificare l'aspettativa di vita non è più possibile ricorrere ai classificatori. Nasce quindi la necessità di passare da un'etichetta discreta a una continua, pertanto si utilizzano i \textit{regressori} che costituiscono un modello per predire valori continui.
 Ad esempio, potremmo voler quantificare, data una specifica diagnosi, il tempo di guarigione per un paziente malato che per definizione si definisce su una scala numerica (ad esempio il numero di giorni).
 
 Per riuscire a eseguire una predizione su dati nuovi, mai visti prima, con precisione accettabile, dobbiamo assicurarci che non si verificano due condizioni note come il sovra-adattamento (\textit{overfitting}) e il sotto-adattamento (\textit{underfitting}).
@@ -659,9 +659,9 @@ Il problema di apprendere $\mu_A$ può essere suddiviso in due parti:
 \noindent Per fare ciò dobbiamo partire dalle seguenti ipotesi:
 \begin{itemize}
     \item  Definiamo il \textit{core} di $A$ come l'insieme di tutti gli elementi dell'universo in corrispondenza dei quali il grado di appartenenza di $A$ è uguale a 1:
-    \begin{equation}
-        A_1 = \{ x\in U \hspace{0,3cm} |\hspace{0,3cm} \mu_A(x) = 1 \}
-    \end{equation}
+    \begin{equation*}
+        A_C = \{ x\in U \hspace{0,3cm} |\hspace{0,3cm} \mu_A(x) = 1 \}
+    \end{equation*}
     \noindent Il core di $A$ si può approssimare come l'insieme degli elementi di $U$ le cui immagini mappate tramite una funzione $\Phi: U \to V$ sono incluse in un'ipersfera di centro $a$ e raggio $R$.
 
     \item Il grado di appartenenza $\mu_A(x)$ dipende solo dalla distanza tra $\Phi(x)$ e $a$.
@@ -764,7 +764,32 @@ Di famiglie di funzioni di kernel ne esistono diversi tipi:
     \begin{equation*}
         k(x,y) = \exp{\bigg(-\frac{\|x-y\|^{2}}{2\sigma^{2}}\bigg)}
     \end{equation*}
-    \noindent dove $\sigma$ è la deviazione standard del kernel. Dato che questo è il kernel utilizzato durante gli esperimenti di questo studio, $\sigma$ diventa un parametro chiave da considerare. Questo permette di modificare la forma della funzione di appartenenza. Prendendo l'esemprio in Figura \ref{fig:parametro_sigma} e una funzione kernel, vediamo come la scelta del parametro $\sigma$ modifichi la forma della funzione di appartenenza.
+    \noindent dove $\sigma$ è la deviazione standard del kernel. Dato che questo è il kernel utilizzato durante gli esperimenti di questo studio, $\sigma$ diventa un parametro chiave da considerare. Questo permette di modificare la forma della funzione di appartenenza. Prendendo l'esemprio in Figura \ref{fig:parametro_sigma} e una funzione kernel, vediamo come la scelta del parametro $\sigma$ modifichi la forma della funzione di appartenenza. La funzione tratteggiata rappresenta una funzione di apparteneza fissata, doe sull'asse delle ascisse ci sono i valori di $x$, colorati in funzione del valore associato a questa funzione. La curva blu invece rappresenta la funzione di appartenenza appresa a partire dai punti.
+
+    \begin{figure}[h]
+        \begin{subfigure}[t]{0.32\textwidth}
+           \centering
+           \includegraphics[scale=0.18]{images/parametro_sigma_1.png}
+           \caption{$\sigma = 0.075 $}
+           \label{fig:sigma_1}
+    
+        \end{subfigure}
+        \begin{subfigure}[t]{0.32\textwidth}
+            \centering
+            \includegraphics[scale=0.18]{images/parametro_sigma_2.png} 
+            \caption{$\sigma = 0.12 $}
+            \label{fig:sigma_2}
+    
+        \end{subfigure}
+        \begin{subfigure}[t]{0.32\textwidth}
+            \centering
+            \includegraphics[scale=0.18]{images/parametro_sigma_3.png}
+            \caption{$\sigma = 2 $}
+            \label{fig:sigma_3}
+        \end{subfigure}
+        \caption{Nelle figure possiamo vedere come al variare del parametro $\sigma$ la forma della funzione di appartenenza cambi. In particolare all'aumentare di $\sigma$ notiamo come la forma della funzione sia più smussata.}
+        \label{fig:parametro_sigma}
+    \end{figure}
 
     \item  \textbf{Kernel Iperbolico}. Utlizzato principalmente per le reti neurali, è definito come:
     \begin{equation*}
@@ -773,34 +798,33 @@ Di famiglie di funzioni di kernel ne esistono diversi tipi:
     \noindent dove $\alpha$ e $\beta$ sono rispettivamente il fattore di scala e l'offset.
 \end{itemize}
 
+
+\noindent Un secondo parametro da considerare è la constante $C$ che compare nella funzione obiettivo \ref{eq:Problema_di_partenza}. Questa ha lo scopo di definire il costo dell'errore nella classificazione degli elementi durante la costruzione dell'ipersfera. Più $C$ è grande, più sarà elevato il costo dell'errore nel posizionamento delle immagini dei punti dentro o fuori l'ipersfera. Viceversa, più $C$ è piccola , più il costo dell'errore diminuisce. In Figura \ref{fig:parametro_C} vediamo come un determinato valore di $C$ ci permette di avere un errore quasi nullo (possiamo notare come nel grafico (\subref{fig:C_1}) la funzione di appartenenza appresa a partire dai punti si sovrappone quasi perfettamente con la funzione di apparteneza fissata), e all'aumentare di $C$ la funzione tende a diventare binaria.
+
 \begin{figure}[h]
     \begin{subfigure}[t]{0.32\textwidth}
        \centering
-       \includegraphics[scale=0.18]{images/parametro_sigma_1.png}
-       \caption{$\sigma = 0.075 $}
-       \label{fig:sigma_1}
+       \includegraphics[scale=0.18]{images/parametro_C_1.png}
+       \caption{$C = 0.0421 $}
+       \label{fig:C_1}
 
     \end{subfigure}
     \begin{subfigure}[t]{0.32\textwidth}
         \centering
-        \includegraphics[scale=0.18]{images/parametro_sigma_2.png} 
-        \caption{$\sigma = 0.12 $}
-        \label{fig:sigma_2}
+        \includegraphics[scale=0.18]{images/parametro_C_2.png} 
+        \caption{$C = 0.08 $}
+        \label{fig:C_2}
 
     \end{subfigure}
     \begin{subfigure}[t]{0.32\textwidth}
         \centering
-        \includegraphics[scale=0.18]{images/parametro_sigma_3.png}
-        \caption{$\sigma = 2 $}
-        \label{fig:sigma_3}
+        \includegraphics[scale=0.18]{images/parametro_C_3.png}
+        \caption{$C = 0.15 $}
+        \label{fig:C_3}
     \end{subfigure}
-    \caption{Nelle figure possiamo vedere come al variare del parametro $\sigma$ la forma della funzione di appartenenza cambi. In particolare all'aumentare di $\sigma$ notiamo come la forma della funzione sia più smussata.}
-    \label{fig:parametro_sigma}
+    \caption{Nelle figure è mostrato come all'aumentare di $C$ la funzione di appartenenza appresa tenda ad aumentare la sua larghezza, avvicinandosi sempre di più ad una funzione di appartenenza binaria.}
+    \label{fig:parametro_C}
 \end{figure}
-
-Un secondo parametro da considerare è la constante $C$ che compare nella funzione obiettivo \ref{eq:Problema_di_partenza}.
-
-
 
 
 
@@ -820,7 +844,7 @@ Nel capitolo precendete abbiamo descritto un problema di ottimizzazione vincolat
 
 \noindent Ponendo $\chi_i = (\alpha_i\mu_i - \beta_i(1-\mu_i))$, il problema \ref{eq:problema_finale} può essere riscritto come:
 \begin{equation}
-    \max \displaystyle\sum_{i=1}^{n}\chi_ik(x_ix_i)\displaystyle\sum_{i,j=1}^{n}\chi_i\chi_j k(x_i,x_j)
+    \max \displaystyle\sum_{i=1}^{n}\chi_ik(x_ix_i) -\displaystyle\sum_{i,j=1}^{n}\chi_i\chi_j k(x_i,x_j)
 \label{eq:problema_finale_2}
 \end{equation}
 
@@ -924,6 +948,7 @@ Cercare un filo logico tra gli esperimenti, esperimenti miei e perché li ho fat
 
 \chapter{Conclusioni}
 \label{Conclusioni}
+Conclusioni e sviluppi futuri.
 
 \chapter*{Ringraziamenti}
 \label{Ringraziamenti}
