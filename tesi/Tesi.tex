@@ -174,7 +174,7 @@ Per capire meglio questo concetto possiamo fare qualche esempio che rispecchia l
 
 \section{Insiemi Fuzzy}
 Quando il predicato ``\textit{l'elemento $x$ appartiene all'insieme $A$}'' non è  più valutato in termini di logica classica ma di logica fuzzy si dice che $A$ è un \textit{insieme fuzzy}. 
-Formalmente il grado di verità è determinato da un' opportuna \textit{funzione di appartenenza} `$\mu_A$'. Quindi volendo valutare un generico elemento $x$ di un universo del contesto $U$ avremo:
+Formalmente il grado di verità è determinato da un'opportuna \textit{funzione di appartenenza} `$\mu_A$'. Quindi volendo valutare un generico elemento $x$ di un universo del contesto $U$ avremo:
 \begin{equation*}
     \mu_A(x) = \mu
 \end{equation*}
@@ -530,7 +530,7 @@ Nel caso della regressione, la funzione è definita come segue:
 \noindent dove \textit{n} è il numero di caratteristiche, $x_i$ sono le caratteristiche, $w_i$ i pesi da attribuire a esse, e $b$ un termine noto.
 Il valore $y$ ottenuto applicando la funzione lineare alle caratteristiche di un particolare caso rappresenta la predzione per l'etichetta corrispondente.
 
-Riprendendo l'esempio precedente, supponiamo di voler quantificare il numero di giorni necessari per guarire un paziente malato. Per semplicità supponiamo di avere come unica caratteristica l'età del paziente. In Figura \ref{fig:linear_regression} è rappresentato il dataset dei pazienti. \`E possibile tracciare una retta denominata \textit{retta di regressione} che aprossima tutti i punti nel dataset.
+Riprendendo l'esempio precedente, supponiamo di voler quantificare il numero di giorni necessari per guarire un paziente malato. Per semplicità supponiamo di avere come unica caratteristica l'età del paziente. In Figura \ref{fig:linear_regression} è rappresentato il dataset dei pazienti. \`E possibile tracciare una retta denominata \textit{retta di regressione} che approssima tutti i punti nel dataset.
 
 \begin{figure}[h]
     \centering
@@ -644,7 +644,8 @@ In sostanza, utilizzando questo approccio, non siamo noi che istruiamo la macchi
 Quando la macchina prende una decisione otterrà successivamente una “ricompensa”, sotto forma di punteggio, che sarà alto se la decisione presa è giusta o basso altrimenti. Così l'agente cercherà di fare sempre meglio per arrivare a ottenere il punteggio più alto possibile, prendendo decisioni corrette.
 
 % Link tra insiemi fuzzy e machine learning.
-
+\chapter{Tecnologie e metodologie}
+\label{Capitolo 2}
 \section{\texorpdfstring{$\mu$}{mu}-learn}
 Nel capitolo precedente abbiamo visto alcune tecniche utilizzate nel Machine Learning. L’algoritmo che andremo a descrivere, denominato \textit{$\mu$-learn} e descritto nel dettaglio in \cite{mulearn}, si basa sull’ induzione di insiemi fuzzy e ricade nell’approccio supervisionato, ovvero quella tecnica che necessita di dati preventivamente valutati per effettuare predizioni. In questo caso la predizione è il grado di appartenenza.
 \bigskip
@@ -756,15 +757,15 @@ Di famiglie di funzioni di kernel ne esistono diversi tipi:
 
     \item  \textbf{Kernel Polinomiale}. Viene utilizzato per gestire problemi di suddivisione non lineare ed è definito come segue:
     \begin{equation*}
-        k(x,y) = (x \cdot y + c)^{d}
+        k(x,y) = (x \cdot y + c)^{d},
     \end{equation*}
     \noindent dove $c$ è  una costante e $d$ indica il grado del polinomio.
 
     \item \textbf{Kernel Gaussiano}. Utilizzato per scopi più generici, è rappresentato da:
     \begin{equation*}
-        k(x,y) = \exp{\bigg(-\frac{\|x-y\|^{2}}{2\sigma^{2}}\bigg)}
+        k(x,y) = \exp{\bigg(-\frac{\|x-y\|^{2}}{2\sigma^{2}}\bigg)},
     \end{equation*}
-    \noindent dove $\sigma$ è la deviazione standard del kernel. Dato che questo è il kernel utilizzato durante gli esperimenti di questo studio, $\sigma$ diventa un parametro chiave da considerare. Questo permette di modificare la forma della funzione di appartenenza. Prendendo l'esemprio in Figura \ref{fig:parametro_sigma} e una funzione kernel, vediamo come la scelta del parametro $\sigma$ modifichi la forma della funzione di appartenenza. La funzione tratteggiata rappresenta una funzione di apparteneza fissata, doe sull'asse delle ascisse ci sono i valori di $x$, colorati in funzione del valore associato a questa funzione. La curva blu invece rappresenta la funzione di appartenenza appresa a partire dai punti.
+    \noindent dove $\sigma$ è la deviazione standard del kernel. Dato che questo è il kernel utilizzato durante gli esperimenti di questo studio, $\sigma$ diventa un parametro chiave da considerare. Questo permette di modificare la forma della funzione di appartenenza. Prendendo l'esemprio in Figura \ref{fig:parametro_sigma} e una funzione kernel, vediamo come la scelta del parametro $\sigma$ modifichi la forma della funzione di appartenenza. La funzione tratteggiata rappresenta una funzione di apparteneza fissata, dove sull'asse delle ascisse ci sono i valori di $x$, colorati in funzione del valore associato a questa funzione. La curva blu invece rappresenta la funzione di appartenenza appresa a partire dai punti.
 
     \begin{figure}[h]
         \begin{subfigure}[t]{0.32\textwidth}
@@ -793,7 +794,7 @@ Di famiglie di funzioni di kernel ne esistono diversi tipi:
 
     \item  \textbf{Kernel Iperbolico}. Utlizzato principalmente per le reti neurali, è definito come:
     \begin{equation*}
-        k(x,y) = \tanh (\alpha x\cdot y + \beta)
+        k(x,y) = \tanh (\alpha x\cdot y + \beta),
     \end{equation*}
     \noindent dove $\alpha$ e $\beta$ sono rispettivamente il fattore di scala e l'offset.
 \end{itemize}
@@ -826,8 +827,6 @@ Di famiglie di funzioni di kernel ne esistono diversi tipi:
     \label{fig:parametro_C}
 \end{figure}
 
-
-
 %ESEMPI DI KERNEL E I VARI PARAMETRI
 
 
@@ -835,46 +834,45 @@ Di famiglie di funzioni di kernel ne esistono diversi tipi:
 %
 %			CAPITOLO 2: tecnologie e metodologie
 %
+\section{Descrizione problema}
+% Nel capitolo precendete abbiamo descritto un problema di ottimizzazione vincolata. In questo capitolo vedremo com'è possibile costruirne un'implementazione per la risoluzione.
 
-\chapter{Tecnologie e metodologie}
-\label{Capitolo 2}
-Nel capitolo precendete abbiamo descritto un problema di ottimizzazione vincolata. In questo capitolo vedremo com'è possibile costruirne un'implementazione per la risoluzione.
+% \bigskip
 
-\bigskip
+% \noindent Ponendo $\chi_i = (\alpha_i\mu_i - \beta_i(1-\mu_i))$, il problema \ref{eq:problema_finale} può essere riscritto come:
+% \begin{equation}
+%     \max \displaystyle\sum_{i=1}^{n}\chi_ik(x_ix_i) -\displaystyle\sum_{i,j=1}^{n}\chi_i\chi_j k(x_i,x_j)
+% \label{eq:problema_finale_2}
+% \end{equation}
 
-\noindent Ponendo $\chi_i = (\alpha_i\mu_i - \beta_i(1-\mu_i))$, il problema \ref{eq:problema_finale} può essere riscritto come:
-\begin{equation}
-    \max \displaystyle\sum_{i=1}^{n}\chi_ik(x_ix_i) -\displaystyle\sum_{i,j=1}^{n}\chi_i\chi_j k(x_i,x_j)
-\label{eq:problema_finale_2}
-\end{equation}
+% \noindent mentre i vincoli (\ref{eq:v1_problema_finale}) (\ref{eq:v2_problema_finale}) diventano:
 
-\noindent mentre i vincoli (\ref{eq:v1_problema_finale}) (\ref{eq:v2_problema_finale}) diventano:
+% \begin{equation}
+%     \displaystyle\sum_{i=1}^{n}\chi_i = 1
+%     \label{eq:v1_problema_finale_2}
+% \end{equation}
+% \begin{equation}
+%     -C(1-\mu_i) \le \chi_i \le C\mu_i
+%     \label{eq:v2_problema_finale_2}
+% \end{equation}
 
-\begin{equation}
-    \displaystyle\sum_{i=1}^{n}\chi_i = 1
-    \label{eq:v1_problema_finale_2}
-\end{equation}
-\begin{equation}
-    -C(1-\mu_i) \le \chi_i \le C\mu_i
-    \label{eq:v2_problema_finale_2}
-\end{equation}
+% \noindent Come possiamo vedere, grazie a questa manipolazione matematica, quello che otteniamo è un problema di ottimizzazione quadratica vincolato.
+% Nell'ambito della risoluzione di questo tipo di problema in Python ci sono a disposizione diversi software che permettono di modellare e risolvere il problema.
 
-\noindent Come possiamo vedere, grazie a questa manipolazione matematica, quello che otteniamo è un problema di ottimizzazione quadratica vincolato.
-Nell'ambito della risoluzione di questo tipo di problema in Python ci sono a disposizione diversi software che permettono di modellare e risolvere il problema.
+% In particolare la risoluzione di questo problema viene implementata per la parte di ottimizzazione dell'algoritmo \textit{$\mu$-learn} \cite{mulearn_documentation}. Il modulo \textit{optimization} contiente le diverse implementazioni del processo di ottimizzazione dell'induzione dell'insieme fuzzy. In questo modulo è implementata una \textit{Strategy} \cite{strategy_pattern} dove la classe \textit{Solver} è l'interfaccia base che implementa il metodo \textit{solve}, il quale delega il processo di ottimizzazione al metodo astratto \textit{solve\_problem}, che viene implementato concretamente nelle diverse classi risolutrici.
 
-In particolare la risoluzione di questo problema viene implementata per la parte di ottimizzazione dell'algoritmo \textit{$\mu$-learn} \cite{mulearn_documentation}. Il modulo \textit{optimization} contiente le diverse implementazioni del processo di ottimizzazione dell'induzione dell'insieme fuzzy. In questo modulo è implementata una \textit{Strategy} \cite{strategy_pattern} dove la classe \textit{Solver} è l'interfaccia base che implementa il metodo \textit{solve}, il quale delega il processo di ottimizzazione al metodo astratto \textit{solve\_problem}, che viene implementato concretamente nelle diverse classi risolutrici.
+% I parametri necessari per implementare il metodo \textit{solve} sono i seguenti: 
+% \begin{itemize}
+%     \item \textbf{xs}: gli oggetti del training set;
+%     \item \textbf{mus}: i valori di membership per gli oggetti del training set;
+%     \item \textbf{c}: la costante che pesa l'impatto delle variabili di slack sul problema;
+%     \item \textbf{k}: la funzione kernel da utilizzare, scelta tra quelle implementate nel modulo \textit{kernel} della libreria.
+% \end{itemize}
 
-I parametri necessari per implementare il metodo \textit{solve} sono i seguenti: 
-\begin{itemize}
-    \item \textbf{xs}: gli oggetti del training set;
-    \item \textbf{mus}: i valori di membership per gli oggetti del training set;
-    \item \textbf{c}: la costante che pesa l'impatto delle variabili di slack sul problema;
-    \item \textbf{k}: la funzione kernel da utilizzare, scelta tra quelle implementate nel modulo \textit{kernel} della libreria.
-\end{itemize}
+% \bigskip
 
-\bigskip
+% \noindent Nei paragrafi successivi vediamo nello specifico come sono stati implementati i diversi solver.
 
-\noindent Nei paragrafi successivi vediamo nello specifico come sono stati implementati i diversi solver.
 
 \section{Gurobi}
 % Gurobi \cite{gurobi} è un software commerciale, disponibile con licenza accademica, utilizzato per la risoluzione di problemi di ottimizzazione. 
