@@ -118,7 +118,7 @@ Il valore assunto è chiamato \textit{valore di appartenenza} o \textit{grado di
 
 \bigskip
 
-Per capire meglio questo concetto possiamo fare qualche esempio che rispecchia la vita reale, dove molte cose non vengono valutate in maniera netta e non sempre è tutto o niente; si potrebbe per esempio dire che:
+Per capire meglio questo concetto possiamo fare qualche esempio che rispecchia la vita reale, dove molte cose non vengono valutate in maniera netta e non sempre sono tutto o niente; si potrebbe per esempio dire che:
 
 
 \begin{itemize}
@@ -473,7 +473,7 @@ Bisogna trovare lo \textit{Sweet spot} \cite{machine_learning_oreilly}, ovvero i
 \begin{figure}[ht]
     \centering
     \includegraphics[scale = 0.35]{images/sweet_spot.png}
-    \caption{Compromesso tra precisione nella predizione e complessità del modello \cite{figure_copyright}. Nell'asse delle ascisse è rappresentata la complessità del modello, mentre nell'asse delle ordinate la precisione della predizione dei dati. La curva blu rappresenta la predizione sul training set, che tende ad essere più precisa più il modello è complesso. La curva verde rappresenta la predizione su nuovi set di dati, che come possiamo vedere tende a essere meno precisa quando il modello è troppo complesso e si adatta in maniera eccessiva al training set.}
+    \caption{Compromesso tra precisione nella predizione e complessità del modello \cite{figure_copyright}. Nell'asse delle ascisse è rappresentata la complessità del modello, mentre nell'asse delle ordinate la precisione nella predizione dei dati. La curva blu rappresenta la predizione sul training set, che tende ad essere più precisa più il modello è complesso. La curva verde rappresenta la predizione su nuovi set di dati, che come possiamo vedere tende a essere meno precisa quando il modello è troppo complesso e si adatta in maniera eccessiva al training set.}
     \label{fig:sweet_spot}
 
 \end{figure}
@@ -733,7 +733,7 @@ sottoposto ai vincoli:
 Indicando con $^*$ il valore ottimale per una variabile, è possibile dimostrare che per ogni $x$ nel corrispondente dominio vale la seguente proprietà:
 \begin{equation*}
 \begin{split}
-    R^{2}(x) = k(x,x) \hspace{0,1cm}- \hspace{0,1cm}&2\displaystyle\sum_{i=1}^{m}(\alpha{i}^{*}\mu_{i} - \beta_{i}^{*}(1-\mu_{i}))k(x,x_i)\hspace{0,1cm} + \\ 
+    R^{2}(x) = k(x,x) \hspace{0,1cm}- \hspace{0,1cm}&2\displaystyle\sum_{i=1}^{m}(\alpha_{i}^{*}\mu_{i} - \beta_{i}^{*}(1-\mu_{i}))k(x,x_i)\hspace{0,1cm} + \\ 
     &\displaystyle\sum_{i,j=1}^{m}(\alpha_{i}^{*} - \beta_{i}^{*}(1-\mu_{i}))(\alpha_{j}^{*} - \beta_{j}^{*}(1-\mu_{j}))k(x_i,x_j).
 \end{split}
 \end{equation*}
