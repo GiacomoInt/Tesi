@@ -186,7 +186,7 @@ Formalmente il grado di verità è determinato da un'opportuna \textit{funzione 
 \noindent 
 %La $x$ rappresenta i predicati da valutare ed appartenenti a un insieme di predicati $U$. 
 dove la $\mu$ rappresenta il valore di appartenenza dell'elemento all'insieme fuzzy $A$ considerato ed è un valore reale compreso tra 0 e 1. 
-Per $\mu_A(x)$ pari a 1 l’elemento è certamente incluso nell’ insieme, per $\mu_A(x)$ pari a 0
+Per $\mu_A(x)$ pari a 1 l’elemento è certamente incluso nell’insieme, per $\mu_A(x)$ pari a 0
 l’elemento non è per niente incluso nell’ insieme (questi due valori corrispondono alla teoria classica degli insiemi), mentre per tutti i valori compresi tra 0 e 1 l’appartenenza può essere più o meno forte.
 
 \bigskip
@@ -270,7 +270,7 @@ Definiamo due insiemi fuzzy, $A$ e $B$ (ad esempio come in Figura \ref{fig:Insie
         }
         \caption{Insieme $B$}
     \end{subfigure}
-    \caption{Grafico delle funzioni di appartenenza degli insiemi fuzzy utlizzati per esemplificare le principali operazioni tra insiemi fuzzy.}
+    \caption{Grafico delle funzioni di appartenenza degli insiemi fuzzy utilizzati per esemplificare le principali operazioni tra insiemi fuzzy.}
     \label{fig:Insiemi Fuzzy}
 \end{figure}
 
@@ -317,7 +317,7 @@ L'unione $A \cup B$ di due insiemi fuzzy $A$ e $B$ risulta essere anch'essa un i
 
     \end{tikzpicture}
     }
-    \caption{Unione tra insiemi fuzzy. In viola viene rappresentata la funzione di apparteneza dell'unione degli insiemi $A$ e $B$ mostrati in Figura \ref{fig:Insiemi Fuzzy}.}
+    \caption{Unione tra insiemi fuzzy. In viola viene rappresentata la funzione di appartenenza dell'unione degli insiemi $A$ e $B$ mostrati in Figura \ref{fig:Insiemi Fuzzy}.}
     \label{fig:Unione_Insiemi_Fuzzy}   
 
 \end{figure}
@@ -473,7 +473,7 @@ Bisogna trovare lo \textit{Sweet spot} \cite{machine_learning_oreilly}, ovvero i
 \begin{figure}[ht]
     \centering
     \includegraphics[scale = 0.35]{images/sweet_spot.png}
-    \caption{Compromesso tra precisione nella predizione e complessità del modello \cite{figure_copyright}. Nell'asse delle ascisse è rappresentata la complessità del modello, mentre nell'asse delle ordinate la precisione nella predizione dei dati. La curva blu rappresenta la predizione sul training set, che tende ad essere più precisa più il modello è complesso. La curva verde rappresenta la predizione su nuovi set di dati, che come possiamo vedere tende a essere meno precisa quando il modello è troppo complesso e si adatta in maniera eccessiva al training set.}
+    \caption{Compromesso tra precisione nella predizione e complessità del modello \cite{figure_copyright}. Nell'asse delle ascisse è rappresentata la complessità del modello, mentre nell'asse delle ordinate la precisione nella predizione dei dati. La curva blu rappresenta la predizione sul training set, che tende a essere più precisa più il modello è complesso. La curva verde rappresenta la predizione su nuovi set di dati, che come possiamo vedere tende a essere meno precisa quando il modello è troppo complesso e si adatta in maniera eccessiva al training set.}
     \label{fig:sweet_spot}
 
 \end{figure}
@@ -528,7 +528,7 @@ Nel caso della regressione, la funzione è definita come segue:
 \end{equation*}
 
 \noindent dove \textit{n} è il numero di caratteristiche, $x_i$ sono le caratteristiche, $w_i$ i pesi da attribuire a esse, e $b$ un termine noto.
-Il valore $y$ ottenuto applicando la funzione lineare alle caratteristiche di un particolare caso rappresenta la predzione per l'etichetta corrispondente.
+Il valore $y$ ottenuto applicando la funzione lineare alle caratteristiche di un particolare caso rappresenta la predizione per l'etichetta corrispondente.
 
 Riprendendo l'esempio precedente, supponiamo di voler quantificare il numero di giorni necessari per guarire un paziente malato. Per semplicità supponiamo di avere come unica caratteristica l'età del paziente. In Figura \ref{fig:linear_regression} è rappresentato il dataset dei pazienti. \`E possibile tracciare una retta denominata \textit{retta di regressione} che approssima tutti i punti nel dataset.
 
@@ -564,7 +564,7 @@ I controlli sulle variabili sono spesso di tipo binario.
 
 \end{figure}
 
-Ad esempio supponiamo di voler distinguere un animale tra: falco, pinguino, delfino e orso. Nell'esempio in Figura \ref{fig:decision_tree} l'algoritmo parte dalla domanda ``Ha le piume?''. In questo modo abbiamo definito il primo nodo dell'albero. Sapendo che, in questo caso, i test previsti restituiscono un output binario, da questo primo nodo si diramano due sotto-alberi rapprensentati dalle categorie ``Ha le piume'' e ``Non ha le piume''. Mediante un'ulteriore domanda si possono distinguere gli animali. Per esempio seguendo la domanda ``Può volare?'', se la risposta è sì, si sta parlando del falco, ovvero l'unico animale tra i quattro che ha le piume e che può volare, altrimenti si tratta del pinguino. Seguendo questa logica è posssibile arrivare a fare delle predizioni. 
+Ad esempio supponiamo di voler distinguere un animale tra: falco, pinguino, delfino e orso. Nell'esempio in Figura \ref{fig:decision_tree} l'algoritmo parte dalla domanda ``Ha le piume?''. In questo modo abbiamo definito il primo nodo dell'albero. Sapendo che, in questo caso, i test previsti restituiscono un output binario, da questo primo nodo si diramano due sotto-alberi rappresentati dalle categorie ``Ha le piume'' e ``Non ha le piume''. Mediante un'ulteriore domanda si possono distinguere gli animali. Per esempio seguendo la domanda ``Può volare?'', se la risposta è sì, si sta parlando del falco, ovvero l'unico animale tra i quattro che ha le piume e che può volare, altrimenti si tratta del pinguino. Seguendo questa logica è possibile arrivare a fare delle predizioni. 
 L'esempio è chiaramente fittizio. Nella realtà i dati che vengono analizzati hanno spesso valori di tipo continuo, con test come ``\textit{x} è minore di \textit{k}?'', dove \textit{x} è la caratteristica considerata e \textit{k} una costante.
 
 I problemi di \textit{overfitting} e \textit{underfitting} sono problemi ricorrenti che si presentano anche nel caso degli alberi di decisione. Infatti se viene costruito un albero troppo dettagliato, e quindi con un elevato livello di profondità, il modello tende ad adattarsi in maniera eccessiva ai dati usati in fase di allenamento generando un problema di \textit{overfitting}.
@@ -608,7 +608,7 @@ Supponiamo di avere un dataset con oggetti appartenenti a due classi, come in Fi
     \label{fig:svm}
 \end{figure}
 
-Spesso succede che le classi da distinguere non siano linearmente separabili nello spazio in cui è definito il problema originale. Per risolvere questo problema si ricorre alle funzioni \textit{kernel} che sono in grado di mappare dei vettori dallo spazio originale ad uno spazio a dimensionalità più elevata, in cui le immagini risultano linearmente separabili.
+Spesso succede che le classi da distinguere non siano linearmente separabili nello spazio in cui è definito il problema originale. Per risolvere questo problema si ricorre alle funzioni \textit{kernel} che sono in grado di mappare dei vettori dallo spazio originale a uno spazio a dimensionalità più elevata, in cui le immagini risultano linearmente separabili.
 
 \subsection*{Approccio Non Supervisionato}
 Con \textit{Approccio Non Supervisionato} \cite{unsupervised_learning} ci riferiamo a una tecnica di apprendimento automatico che consiste nel fornire in input una serie di dati non etichettati ma che verranno raggruppati sulla base di caratteristiche comuni  per cercare di effettuare delle previsioni su input futuri.
@@ -644,7 +644,7 @@ Quando la macchina prende una decisione otterrà successivamente una “ricompen
 \chapter{Tecnologie e metodologie}
 \label{Capitolo 2}
 \section{\texorpdfstring{$\mu$}{mu}-learn}
-Nel capitolo precedente abbiamo visto alcune tecniche utilizzate nel Machine Learning. L’algoritmo che andremo a descrivere, denominato \textit{$\mu$-learn} e descritto nel dettaglio in \cite{mulearn}, si basa sull’ induzione di insiemi fuzzy e ricade nell’approccio supervisionato, ovvero quella tecnica che necessita di dati preventivamente valutati per effettuare predizioni. In questo caso la predizione è il grado di appartenenza.
+Nel capitolo precedente abbiamo visto alcune tecniche utilizzate nel Machine Learning. L’algoritmo che andremo a descrivere, denominato \textit{$\mu$-learn} e descritto nel dettaglio in \cite{mulearn}, si basa sull’ induzione di insiemi fuzzy e ricade nell’approccio supervisionato, ovvero quella tecnica che necessita di dati preventivamente valutati per effettuare predizioni. In questo caso la predizione è il grado di appartenenza a un insieme fuzzy.
 \bigskip
 
 Supponiamo di avere un campione $X = \{x_1,\dots,x_m\}$, e un insieme di gradi di appartenenza $ M = \{\mu_1,\dots,\mu_m\}$ associati a un generico insieme fuzzy $A$. L'obiettivo di \textit{$\mu$-learn} consiste nel determinare un'approssimazione di $A$ partendo dai valori contenuti in $X$ e $M$.
@@ -654,11 +654,11 @@ Il problema di apprendere $\mu_A$ può essere suddiviso in due parti:
     \item indurre i parametri della funzione di membership $\mu_A$.
 \end{itemize}
 
-\noindent Per fare ciò dobbiamo partire dalle seguenti ipotesi:
+\noindent Per fare ciò dobbiamo partire dalle seguenti ipotesi.
 \begin{itemize}
-    \item  Definiamo il \textit{core} di $A$ come l'insieme di tutti gli elementi dell'universo in corrispondenza dei quali il grado di appartenenza di $A$ è uguale a 1:
+    \item  Definiamo il \textit{core} di $A$ come l'insieme di tutti gli elementi dell'universo $U$ in corrispondenza dei quali il grado di appartenenza di $A$ è uguale a 1:
     \begin{equation*}
-        A_C = \{ x\in U \hspace{0,3cm} |\hspace{0,3cm} \mu_A(x) = 1 \}
+        A_C = \{ x\in U \hspace{0,3cm} |\hspace{0,3cm} \mu_A(x) = 1 \}.
     \end{equation*}
     \noindent Il core di $A$ si può approssimare come l'insieme degli elementi di $U$ le cui immagini mappate tramite una funzione $\Phi: U \to V$ sono incluse in un'ipersfera di centro $a$ e raggio $R$.
 
@@ -709,7 +709,7 @@ ovvero che la distanza della trasformazione di $x_i$ da $a$ è maggiore o uguale
 \begin{equation*}
     \xi_i \ge 0,
 \end{equation*}
-che è già incorporato nel vincolo (\ref{eq:vincolo_3}), e quindi il nostro $x_i$ sarà posizionato all'esterno della sfera.
+che è già incorporato nel vincolo (\ref{eq:vincolo_3}), e quindi il nostro $x_i$ sarà possibilmente posizionato all'esterno della sfera.
 
 Utilizzando la formulazione duale di Wolfe, quello che otteniamo è il seguente problema:
 \begin{equation}
@@ -730,7 +730,7 @@ sottoposto ai vincoli:
 
 \noindent dove $k$ è la funzione kernel associata alla mappatura nello spazio dell'immagine di $\Phi$ (ovvero $k(x_i,x_j) = \Phi(x_i)\cdot\Phi(x_j))$.
 
-Indicando con $^*$ il valore ottimale per una variabile, è possibile dimostrare che per ogni $x$ nel corrispondente dominio vale la seguente proprietà:
+Indicando con $^*$ il valore ottimale per una variabile, è possibile dimostrare che per ogni $x \in U$ vale la seguente proprietà:
 \begin{equation*}
 \begin{split}
     R^{2}(x) = k(x,x) \hspace{0,1cm}- \hspace{0,1cm}&2\displaystyle\sum_{i=1}^{m}(\alpha_{i}^{*}\mu_{i} - \beta_{i}^{*}(1-\mu_{i}))k(x,x_i)\hspace{0,1cm} + \\ 
@@ -742,9 +742,11 @@ Indicando con $^*$ il valore ottimale per una variabile, è possibile dimostrare
 In particolare, la maggior parte dei punti $x$ con un valore di membership $\mu_{A}(x) > \frac{1}{2}$ soddisfanno $R^2(x) \le R^2_1$ dove $R^2_1 = R^2(x_i)$ per qualunque vettore di supporto.
 Apprendere la funzione di membership richiede di trovare il giusto compromesso nella scelta del parametro $C$, così come nei parametri del kernel.
 
-\subsection*{Configurazione degli Iperparametri}
-Nel contensto del Machine Learning si parla spesso di iperparametri. Si definiscono iperparametri quei parametri utilizzati per aver un certo tipo di controllo sul processo di apprendimento. In altre parole, tutti i dati forniti dall'utente che influiscono sul design del modello sono considerati iperparametri. Un primo parametro da considerare è quello della scelta della funzione di kernel.
-Esistono diversi tipi di funzioni di kernel.
+\subsection*{Configurazione degli iperparametri}
+Nel contesto del Machine Learning si parla spesso di iperparametri. Si definiscono iperparametri quei parametri utilizzati per aver un certo tipo di controllo sul processo di apprendimento. 
+% In altre parole, tutti i dati forniti dall'utente che influiscono sul design del modello sono considerati iperparametri. 
+Un primo parametro da considerare è quello della scelta della funzione di kernel.
+Esistono diversi tipi di funzioni di kernel: quelli principalmente utilizzati sono elencati di seguito.
 
 \begin{itemize}
     \item \textbf{Kernel Lineare}. \`E uno dei più semplici e consiste nel prodotto scalare di due vettori:
@@ -752,7 +754,7 @@ Esistono diversi tipi di funzioni di kernel.
         k(x,y) = x \cdot y.
     \end{equation*}
 
-    \item  \textbf{Kernel Polinomiale}. Viene utilizzato per gestire problemi di suddivisione non lineare ed è definito come segue:
+    \item  \textbf{Kernel Polinomiale}. Viene utilizzato per gestire problemi non lineari ed è definito come segue:
     \begin{equation*}
         k(x,y) = (x \cdot y + c)^{d},
     \end{equation*}
@@ -762,7 +764,7 @@ Esistono diversi tipi di funzioni di kernel.
     \begin{equation*}
         k(x,y) = \exp{\bigg(-\frac{\|x-y\|^{2}}{2\sigma^{2}}\bigg)},
     \end{equation*}
-    \noindent dove $\sigma$ è la deviazione standard del kernel. Dato che questo è il kernel utilizzato durante gli esperimenti descritti nel Capitolo \ref{Captiolo 3}, $\sigma$ diventa un parametro chiave da considerare. Prendendo l'esemprio in Figura \ref{fig:parametro_sigma} e una funzione kernel, vediamo come la scelta del parametro $\sigma$ modifichi la forma della funzione di appartenenza. La funzione tratteggiata rappresenta una funzione di apparteneza fissata, dove sull'asse delle ascisse ci sono i valori di $x$, colorati in funzione del valore associato a questa funzione. La curva blu invece rappresenta la funzione di appartenenza appresa a partire dai punti.
+    \noindent dove $\sigma$ è la deviazione standard del kernel. Dato che questo è il kernel utilizzato durante gli esperimenti descritti nel Capitolo \ref{Captiolo 3}, $\sigma$ diventa un parametro chiave da considerare. Prendendo l'esempio in Figura \ref{fig:parametro_sigma} e una funzione kernel, vediamo come la scelta del parametro $\sigma$ modifichi la forma della funzione di appartenenza. La funzione tratteggiata rappresenta una funzione di appartenenza fissata, dove sull'asse delle ascisse ci sono i valori di $x$, colorati in funzione del valore associato a questa funzione. La curva blu invece rappresenta la funzione di appartenenza appresa a partire dai punti.
 
     \begin{figure}[h]
         \begin{subfigure}[t]{0.32\textwidth}
@@ -797,7 +799,7 @@ Esistono diversi tipi di funzioni di kernel.
 \end{itemize}
 
 
-\noindent Un secondo parametro da considerare è la constante $C$ che compare nella funzione obiettivo (\ref{eq:Problema_di_partenza}). Questa ha lo scopo di definire il costo dell'errore nella classificazione degli elementi durante la costruzione dell'ipersfera. Più $C$ è grande, più sarà elevato il costo dell'errore nel posizionamento delle immagini dei punti dentro o fuori l'ipersfera. Viceversa, più $C$ è piccola , più il costo dell'errore diminuisce. In Figura \ref{fig:parametro_C} vediamo come un determinato valore di $C$ ci permette di avere un errore quasi nullo (possiamo notare come nel grafico 14(\subref{fig:C_1}) la funzione di appartenenza appresa a partire dai punti si sovrappone quasi perfettamente con la funzione di apparteneza fissata), e all'aumentare di $C$ la funzione tende a diventare binaria.
+\noindent Un secondo parametro da considerare è la constante $C$ che compare nella funzione obiettivo (\ref{eq:Problema_di_partenza}). Questa ha lo scopo di definire il costo dell'errore nella classificazione degli elementi durante la costruzione dell'ipersfera. Più $C$ è grande, più sarà elevato il costo dell'errore nel posizionamento delle immagini dei punti dentro o fuori l'ipersfera. Viceversa, più $C$ è piccola, più il costo dell'errore diminuisce. In Figura \ref{fig:parametro_C} vediamo come un determinato valore di $C$ ci permette di avere un errore quasi nullo (possiamo notare come nel grafico della Figura 14(\subref{fig:C_1}) la funzione di appartenenza appresa a partire dai punti si sovrappone quasi perfettamente con la funzione di appartenenza fissata), e all'aumentare di $C$ la funzione tende a diventare binaria.
 
 \begin{figure}[h]
     \begin{subfigure}[t]{0.32\textwidth}
@@ -820,24 +822,24 @@ Esistono diversi tipi di funzioni di kernel.
         \caption{$C = 0.15 $}
         \label{fig:C_3}
     \end{subfigure}
-    \caption{Nelle figure è mostrato come all'aumentare di $C$ la funzione di appartenenza appresa tenda ad aumentare la sua larghezza, avvicinandosi sempre di più ad una funzione di appartenenza binaria.}
+    \caption{Nelle figure è mostrato come all'aumentare di $C$ la funzione di appartenenza appresa tenda ad aumentare la dimensione del \textit{core} dell'insieme, avvicinandosi sempre di più a una funzione di appartenenza binaria.}
     \label{fig:parametro_C}
 \end{figure}
 
 %ESEMPI DI KERNEL E I VARI PARAMETRI
 
 \section{Descrizione del problema}
-Nel paragrafo precendete abbiamo descritto un problema di ottimizzazione vincolata. In questo paragrafo vedremo com'è possibile costruirne un'implementazione per la risoluzione.
+Abbiamo appena descritto un problema di ottimizzazione vincolata. In questo paragrafo vedremo com'è possibile riformularlo in modo che risulti più facile risolverlo utilizzando delle librerie esistenti.
 
 \bigskip
 
-\noindent Ponendo $\chi_i = (\alpha_i\mu_i - \beta_i(1-\mu_i))$, il problema \ref{eq:problema_finale} può essere riscritto come:
+\noindent Ponendo $\chi_i = (\alpha_i\mu_i - \beta_i(1-\mu_i))$, il problema (\ref{eq:problema_finale}) può essere riscritto come:
 \begin{equation}
     \max \displaystyle\sum_{i=1}^{n}\chi_ik(x_ix_i) -\displaystyle\sum_{i,j=1}^{n}\chi_i\chi_j k(x_i,x_j),
 \label{eq:problema_finale_2}
 \end{equation}
 
-\noindent mentre i vincoli (\ref{eq:v1_problema_finale}) (\ref{eq:v2_problema_finale}) diventano:
+\noindent mentre i vincoli (\ref{eq:v1_problema_finale} -- \ref{eq:v2_problema_finale}) diventano:
 
 \begin{equation}
     \displaystyle\sum_{i=1}^{n}\chi_i = 1,
@@ -848,15 +850,15 @@ Nel paragrafo precendete abbiamo descritto un problema di ottimizzazione vincola
     \label{eq:v2_problema_finale_2}
 \end{equation}
 
-\noindent Come possiamo vedere, grazie a questa manipolazione matematica, quello che otteniamo è un problema di ottimizzazione convessa quadratico vincolato.
-Nell'ambito della risoluzione di questo tipo di problema in Python ci sono a disposizione diversi software che permettono di modellare e risolvere il problema.
+\noindent Come possiamo vedere, grazie a questa manipolazione matematica, quello che otteniamo è un problema di ottimizzazione convesso quadratico vincolato.
+In Python ci sono a disposizione diversi software che permettono di modellare e risolvere il problema.
 
-In particolare la risoluzione di questo problema viene implementata nella parte di ottimizzazione dell'algoritmo \textit{$\mu$-learn} \cite{mulearn_documentation}. Il modulo \textit{optimization} contiente l'implementazione di uno \textit{Strategy pattern} \cite{strategy_pattern}. Come mostrato nel diagramma UML in Figura \ref{fig:diagramma_uml}, la classe \textit{Solver} è l'interfaccia astratta che implementa il metodo \textit{solve}, il quale delega il processo di ottimizzazione al metodo astratto \textit{solve\_problem}, che viene implementato concretamente nelle diverse classi risolutrici.
+In particolare la risoluzione di questo problema viene implementata nella parte di ottimizzazione dell'algoritmo \textit{$\mu$-learn} \cite{mulearn_documentation}. Il modulo \textit{optimization} contiene l'implementazione di uno \textit{Strategy pattern} \cite{strategy_pattern}. Come mostrato nel diagramma di classe UML in Figura \ref{fig:diagramma_uml}, la classe \textit{Solver} è l'interfaccia astratta che implementa il metodo \textit{solve}, il quale delega il processo di ottimizzazione al metodo astratto \textit{solve\_problem}, che viene implementato concretamente nelle diverse classi risolutrici.
 
 \begin{figure}
     \includegraphics[scale=0.6]{images/diagramma_uml.png}
     \centering
-    \caption{Diagramma UML dello Strategy pattern implementato nel modulo di ottimizzazione dell'algoritmo $\mu$-learn.}
+    \caption{Diagramma di classe UML dello Strategy pattern implementato nel modulo di ottimizzazione dell'algoritmo $\mu$-learn.}
     \label{fig:diagramma_uml}
 \end{figure}
 
@@ -872,7 +874,6 @@ Di seguito vengono descritti i software con cui sono stati implementati i divers
 
 \section{CVXOPT}
 CVXOPT è un software gratuito utilizzato per l'ottimizzazione convessa basato su Python. Può essere utilizzato tramite un interprete interattivo in Python, attraverso riga di comando eseguendo script in Python, o integrandolo in altre applicazioni per l'ottimizzazione convessa grazie ai moduli di estensione. 
-%\cite{CVXOPT}
 
 Il framework di CVXOPT per la risoluzione di problemi di ottimizzazione quadratica vincolata si aspetta il problema formulato secondo la forma standard:
 \begin{equation*}
@@ -884,9 +885,9 @@ Il framework di CVXOPT per la risoluzione di problemi di ottimizzazione quadrati
 \end{equation*}
 
 \noindent dove $x^{T}$ denota la trasposta di $x$, e $Gx \preceq h$ indica che la diseguaglianza è applicata elemento per elemento tra i vettori $Gx$ e $h$. 
-CVXOPT per risolvere un problema di questo tipo richiede i parametri ${P,q,G,h,A,b}$; dove $P$ e $q$ sono richiesti, gli altri opzionali. Notiamo che il vettore contenente le variabili $x$ non viene passato al solver, ma viene definito implicitamente attraverso i parametri dati, per questo è essenziale che l'ordine delle variabili stesse sia mantenuto per i parametri realtivi (ad esempio $q_i$, $h_i$,$b_i$ devono corrispondere alla variabile $x_i$).
+Per risolvere un problema di questo tipo, CVXOPT richiede i parametri ${P,q,G,h,A,b}$; dove $P$ e $q$ sono richiesti, gli altri opzionali. Notiamo che il vettore contenente le variabili $x$ non viene passato al solver, ma viene definito implicitamente attraverso i parametri dati, per questo è essenziale che l'ordine delle variabili stesse sia mantenuto per i parametri relativi (ad esempio $q_i$, $h_i$,$b_i$ devono corrispondere alla variabile $x_i$).
 
-Il nostro problema (\ref{eq:problema_finale_2}) può essere riscritto nel seguente modo per rispettare la forma standard: 
+Il problema (\ref{eq:problema_finale_2} -- \ref{eq:v2_problema_finale_2}) può essere riscritto nel seguente modo per rispettare la forma standard: 
 \begin{equation}
     \min \displaystyle\sum_{i,j=1}^{n}\chi_i\chi_j k(x_i,x_j) - \displaystyle\sum_{i=1}^{n}\chi_ik(x_ix_i),
     \label{eq:forma_standard}
@@ -968,16 +969,16 @@ sottoposto ai seguenti vincoli:
 %     \end{bmatrix}
 % \end{equation*}
 
-\noindent \'E facile notare che il vettore delle variabili è definito da $\begin{bmatrix} \chi_1 \\ \vdots \\ \chi_n \end{bmatrix}$, e che i vincoli di diseguaglianza (\ref{eq:vincolo_1_forma_standard}) (\ref{eq:vincolo_2_forma_standard}) sono riportati in una singola matrice $G$ nella forma standard. Una volta ottenute queste matrici è facile trasporle in codice, utilizzando anche librerie come \textit{numpy}, così da permettere a CVXOPT di risolvere il problema.
+\noindent \`E facile notare che il vettore delle variabili è definito da $[\chi_1 \cdots \chi_n]^{T}$, e che i vincoli di diseguaglianza (\ref{eq:vincolo_1_forma_standard}) (\ref{eq:vincolo_2_forma_standard}) sono riportati in una singola matrice $G$ nella forma standard. Una volta ottenute queste matrici è facile trasporle in codice, utilizzando anche librerie come \textit{numpy}, così da permettere a CVXOPT di risolvere il problema.
 
 
 \section{CVXPY}
-L'ottimizzazione convessa ha molte applicazioni in diversi campi, tra cui anche il Machine Learning. Per utilizzare l'ottimizzazione convessa in un'applicazione spesso si ricorre a Solver che richiedono di porre il problema nella forma standard (come CVXOPT). Un alternativa è utilizzare un \textit{domain-specific language} (\textit{DSL}) per l'ottimizzazione convessa, che permette all'utente di specificare il problema in una maniera più naturale che rispecchia il linguaggio matematico, e successivamente questa specificazione viene convertita nella forma standard dal solver. CVX \cite{cvx} è un esempio tra i vari DSL esistenti.
-CVXPY \cite{CVXPY_1} \cite{CVXPY_2} è un nuovo domain-specific language per i problemi di ottimizzazione convessa. Permette di esprimere il problema in un linguaggio naturale piuttosto che nella restrittiva forma standard richiesta da altri solver. \`E basato su CVX, ma introduce nuove funzionalità. CVXPY è semplicemente una libreria in Python che permette di combinare facilmente l'ottimizzazone convessa con le funzionalità ad alto livello di Python come ad esempio il parallelismo e la programmazione ad oggetti.
+L'ottimizzazione convessa ha molte applicazioni in diversi campi, tra cui anche il Machine Learning. Per utilizzare l'ottimizzazione convessa in un'applicazione spesso si ricorre a Solver che richiedono di porre il problema nella forma standard (come CVXOPT). Un'alternativa è utilizzare un \textit{domain-specific language} (\textit{DSL}) per l'ottimizzazione convessa, che permette all'utente di specificare il problema in una maniera più naturale che rispecchia il linguaggio matematico, e successivamente questa specificazione viene convertita nella forma standard dal solver. CVX \cite{cvx} è un esempio tra i vari DSL esistenti.
+CVXPY \cite{CVXPY_1} \cite{CVXPY_2} è un nuovo domain-specific language per i problemi di ottimizzazione convessa. Permette di esprimere il problema in un linguaggio naturale piuttosto che nella restrittiva forma standard richiesta da altri solver. \`E basato su CVX, ma introduce nuove funzionalità. CVXPY è semplicemente una libreria in Python che permette di combinare facilmente l'ottimizzazione convessa con le funzionalità ad alto livello di Python, come ad esempio il parallelismo e la programmazione a oggetti.
 
 La sintassi di CVXPY è molto semplice, di seguito un'esemplificazione di come può essere costruito il nostro problema (\ref{eq:problema_finale_2}):
-\begin{figure}[H]
 
+\begin{figure}[H]
     \begin{minted}{python}
 
         chis = Variable(n)
@@ -986,11 +987,11 @@ La sintassi di CVXPY è molto semplice, di seguito un'esemplificazione di come p
         problem = Problem(objective, constraints)
         
         
-        \end{minted}
+    \end{minted}
 \end{figure}
 
-\noindent dove $q.T$ indica la trasposta della matrice $q$, e il simbolo $@$ è l'operatore di moltiplicazione tra matrici in Python. Come possiamo vedere, il problema diventa molto facilmente leggibile a livello utente, riuscendo ad individuare subito i protagonisti in gioco, quali le variabili, la funzione obiettivo, i vincoli e il problema finale. In realtà per quanto riguarda i vincoli, si possono riportare anche uno ad uno senza necessariamente ricorrere all'uso delle matrici.
-Come impostazioni di default, CVXPY chiama il solver più appropriato per il problema. Nel caso della programmazione quadratica CVXPY utilizza OSQP \cite{osqp}, utilizzato principalmente anche negli esperimenti del Capitolo \ref{Captiolo 3}.
+\noindent dove $q.T$ indica la trasposta della matrice $q$, e il simbolo $@$ è l'operatore di moltiplicazione tra matrici in Python. Come possiamo vedere, il problema diventa molto facilmente leggibile a livello utente, riuscendo a individuare subito i protagonisti in gioco, quali le variabili, la funzione obiettivo, i vincoli e il problema finale. In realtà, i vincoli si possono riportare anche uno a uno senza necessariamente ricorrere all'uso delle matrici.
+Come impostazioni di default, CVXPY invoca il solver più appropriato per il problema considerato. Nel caso della programmazione quadratica CVXPY utilizza OSQP \cite{osqp}, utilizzato principalmente anche negli esperimenti del Capitolo \ref{Captiolo 3}.
 
 
 
@@ -999,26 +1000,26 @@ Come impostazioni di default, CVXPY chiama il solver più appropriato per il pro
 
 \section{Gurobi}
 Gurobi \cite{gurobi} è un software commerciale, disponibile con licenza accademica, utilizzato per la risoluzione di problemi di ottimizzazione. Nato nel 2008, prende il nome dai suoi fondatori: Zonghao \textbf{Gu}, Edward \textbf{Ro}thberg and Robert \textbf{Bi}xby. Gurobi supporta una grande varietà di linguaggi di programmazione e modellazione, tra cui anche Python, al quale, grazie alle specifiche librerie, riesce a portare una nuova sintassi per creare modelli.
-Infatti nel modulo \textit{optimization} di $\mu-learn$ \cite{mulearn_documentation} viene creato un ambiente che rappresenta perfettamente il problema matematico che vogliamo risolvere.
-\begin{figure}[H]
-    \includegraphics[scale = 0.25]{images/gurobi.jpg}
-    \centering
-    \caption{Logo d Gurobi}
-    \label{fig:gurobi_logo}
-\end{figure}
+Infatti nel modulo \textit{optimization} di \textit{$\mu$-learn} \cite{mulearn_documentation} viene creato un ambiente che rappresenta perfettamente il problema matematico che vogliamo risolvere.
+% \begin{figure}[H]
+%     \includegraphics[scale = 0.25]{images/gurobi.jpg}
+%     \centering
+%     \caption{Logo d Gurobi}
+%     \label{fig:gurobi_logo}
+% \end{figure}
 
-\noindent A differenza dei solver gratuiti, Gurobi può essere più performante e veloce, sempre a seconda del contesto di ottimizzazione. Questo poiché spesso i solver gratuiti tendono a raggiungere i limiti di tempo previsti dal solver prima di aver effettivamente ottimizzato il problema, e quindi in alcuni casi dare risultati non propriamente corretti. Grazie all'affidabilità e la performance data da questo solver, viene utilizzato come metro di paragone per gli esperimenti del Capitolo \ref{Captiolo 3}.
+\noindent Gurobi può essere più performante e veloce dei solver gratuiti, sempre a seconda del contesto di ottimizzazione. Questo poiché spesso i solver gratuiti tendono a raggiungere i limiti di tempo previsti dal solver prima di aver effettivamente ottimizzato il problema, e quindi in alcuni casi dare risultati non propriamente corretti. Grazie all'affidabilità e la performance data da questo solver, viene utilizzato come metro di paragone per gli esperimenti del Capitolo \ref{Captiolo 3}.
 
 \section{TensorFlow} %TensorFlow
 TensorFlow \cite{tensorflow2015-whitepaper} è un software gratuito e open source utilizzato per machine learning e intelligenza artificiale. Inizialmente sviluppato dal team di Google Brain per un uso interno a Google, nel 2015 è stato rilasciato sotto una licenza Apache.
-\begin{figure}[H]
-    \includegraphics[scale = 0.3]{images/TensorFlow_Logo.png}
-    \centering
-    \caption{Logo di TensorFlow}
-    \label{fig:tensor_flow_logo}
-\end{figure}
+% \begin{figure}[H]
+%     \includegraphics[scale = 0.3]{images/TensorFlow_Logo.png}
+%     \centering
+%     \caption{Logo di TensorFlow}
+%     \label{fig:tensor_flow_logo}
+% \end{figure}
 
-\noindent TensorFlow permette agli sviluppatori di creare dei \textit{grafi di dataflow}, ossia delle strutture che descrivono come i dati si muovono attraverso un grafo, o una serie di nodi. Ogni nodo nel grafo rappresenta un'operazione matematica, e ogni connessione tra i nodi è un array multidimensionale di dati, o meglio chiamati \textit{tensori}. TensorFlow fornisce tutto il necessario per la costruzione di questo grafo attraverso il linguaggio di programmazione Python. Nodi e tensori in TensorFlow sono oggetti in Python, e le applicazioni in TensorFlow sono applicazioni in Python.
+\noindent TensorFlow permette agli sviluppatori di creare dei \textit{grafi di dataflow}, ossia delle strutture che descrivono una computazione. Ogni nodo nel grafo rappresenta un'operazione matematica, e ogni connessione tra i nodi è un array multidimensionale di dati, chiamato \textit{tensore}. TensorFlow fornisce tutto il necessario per la costruzione di questo grafo attraverso il linguaggio di programmazione Python. Nodi e tensori in TensorFlow sono oggetti in Python, e le applicazioni in TensorFlow sono applicazioni in Python.
 Grazie a queste librerie è possibile costruire un modello per il nostro problema (\ref{eq:forma_standard}).
 
 %\subsection{Rilassamento Lagrangiano}
@@ -1032,6 +1033,9 @@ Grazie a queste librerie è possibile costruire un modello per il nostro problem
 Spiegare come sono stati costruiti ed eventuali esperimenti
 Cercare un filo logico tra gli esperimenti, esperimenti miei e perché li ho fatti così.
 \section{Esperimenti a confronto}
+% Piccola Intro
+% Specificare Macchina e Dataset Utilizzati
+% Librerie Utilizzate e spiegate
 \subsection{CVXPY}
 \subsection{CVXOPT}
 \subsection{TensorFlow}
