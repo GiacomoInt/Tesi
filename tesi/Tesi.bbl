@@ -89,9 +89,15 @@ Refactoring.Guru, ``Design pattern strategy,'' 2014-2021. [Online]. Available:
   \url{https://refactoring.guru/design-patterns/strategy}
 \BIBentrySTDinterwordspacing
 
+\bibitem{cvxopt}
+\BIBentryALTinterwordspacing
+``{CVXOPT}: A python package for convex optimization version 1.1.6,'' 2013.
+  [Online]. Available: \url{https://abel.ee.ucla.edu/cvxopt}
+\BIBentrySTDinterwordspacing
+
 \bibitem{cvx}
 M.~Grant and S.~Boyd, ``{CVX}: Matlab software for disciplined convex
-  programming, version 2.1,'' \url{http://cvxr.com/cvx}, Mar. 2014.
+  programming, version 2.1,'' \url{http://cvxr.com/cvx}, mar 2014.
 
 \bibitem{CVXPY_1}
 S.~Diamond and S.~Boyd, ``{CVXPY}: {A} {P}ython-embedded modeling language for
@@ -128,6 +134,45 @@ M.~Abadi, A.~Agarwal, P.~Barham, E.~Brevdo, Z.~Chen, C.~Citro, G.~S. Corrado,
   X.~Zheng, ``{TensorFlow}: Large-scale machine learning on heterogeneous
   systems,'' 2015, software available from tensorflow.org. [Online]. Available:
   \url{https://www.tensorflow.org/}
+\BIBentrySTDinterwordspacing
+
+\bibitem{lagrangian_relaxation}
+J.~E. Beasley, ``Modern heuristic techniques for combinatorial problems,'' pp.
+  243--303, 1993.
+
+\bibitem{NumPy}
+\BIBentryALTinterwordspacing
+C.~R. Harris, K.~J. Millman, S.~J. van~der Walt, R.~Gommers, P.~Virtanen,
+  D.~Cournapeau, E.~Wieser, J.~Taylor, S.~Berg, N.~J. Smith, R.~Kern, M.~Picus,
+  S.~Hoyer, M.~H. van Kerkwijk, M.~Brett, A.~Haldane, J.~F. del R{\'{i}}o,
+  M.~Wiebe, P.~Peterson, P.~G{\'{e}}rard-Marchant, K.~Sheppard, T.~Reddy,
+  W.~Weckesser, H.~Abbasi, C.~Gohlke, and T.~E. Oliphant, ``Array programming
+  with {NumPy},'' \emph{Nature}, vol. 585, no. 7825, pp. 357--362, Sep. 2020.
+  [Online]. Available: \url{https://doi.org/10.1038/s41586-020-2649-2}
+\BIBentrySTDinterwordspacing
+
+\bibitem{scikit-learn}
+F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
+  M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg, J.~Vanderplas, A.~Passos,
+  D.~Cournapeau, M.~Brucher, M.~Perrot, and E.~Duchesnay, ``Scikit-learn:
+  Machine learning in {P}ython,'' \emph{Journal of Machine Learning Research},
+  vol.~12, pp. 2825--2830, 2011.
+
+\bibitem{pandas}
+\BIBentryALTinterwordspacing
+T.~pandas~development team, ``pandas-dev/pandas: Pandas,'' Feb. 2020. [Online].
+  Available: \url{https://doi.org/10.5281/zenodo.3509134}
+\BIBentrySTDinterwordspacing
+
+\bibitem{matplotlib}
+J.~D. Hunter, ``Matplotlib: A 2d graphics environment,'' \emph{Computing in
+  Science \& Engineering}, vol.~9, no.~3, pp. 90--95, 2007.
+
+\bibitem{gradient_descent}
+\BIBentryALTinterwordspacing
+N.~Donges, ``Gradient descent: An introduction to 1 of machine learning’s
+  most popular algorithms,'' 2021. [Online]. Available:
+  \url{https://builtin.com/data-science/gradient-descent}
 \BIBentrySTDinterwordspacing
 
 \end{thebibliography}
