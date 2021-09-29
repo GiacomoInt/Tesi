@@ -23,7 +23,7 @@
 \contentsline {section}{\numberline {3.1}Dataset}{26}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Hardware e Librerie Utilizzate}{26}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Esperimenti Preliminari}{28}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Confronto tra Solver}{28}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Discussione Risultati}{28}{section.3.5}%
-\contentsline {chapter}{Conclusioni}{29}{chapter*.36}%
-\contentsline {chapter}{Bibliografia}{33}{chapter*.38}%
+\contentsline {section}{\numberline {3.4}Confronto tra Solver}{34}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Discussione Risultati}{36}{section.3.5}%
+\contentsline {chapter}{Conclusioni}{37}{chapter*.46}%
+\contentsline {chapter}{Bibliografia}{40}{chapter*.47}%
