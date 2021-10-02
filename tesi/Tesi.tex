@@ -101,24 +101,23 @@
 \label{Introduzione}
 
 % Introduzione machine learning
-Quando si parla di machine learning si parla di una particolare branca dell'informatica in cui si studiano delle tecniche in grado di istruire la macchina a produrre regole e schemi per risolvere determinati compiti. Il machine learning è stato introdotto per problemi di cui non si conosce la soluzione o incontriamo problemi di elevata complessità computazionale.
+Quando si parla di machine learning si parla di una particolare branca dell'informatica in cui a partire dai dati che descrivono un problema si induce un modo per risolvere questo problema in modo approssimato. Il machine learning è stato introdotto per problemi di cui non si conosce la soluzione o di elevata complessità computazionale.
 
-A differenza della programmazione tradizionale, dove si scrivono le regole, si inseriscono i dati e la macchina restituisce delle risposte, nel machine learning si inseriscono sia i dati che le risposte attese, e la macchina restituisce le regole che ha appreso. \`E proprio questo il nocciolo della questione: non è più il programmatore a produrre regole che forniscono risposte a problemi ma è la macchina che studia le associazioni tra i dati e gli esempi per definire regole più generali di associazione che possono essere applicate a dati sconosciuti al sistema.
+A differenza della programmazione tradizionale, dove si codificano dei procedimenti che permettono di risolvere una generica istanza, si inseriscono i dati e la macchina restituisce delle risposte, nel machine learning si inseriscono sia i dati che le risposte attese, e la macchina restituisce la codifica di un procedimento per risolvere il problema, indotto a partire dai dati e dalle risposte osservate. \`E proprio questo il nocciolo della questione: non è più il programmatore a produrre regole che forniscono risposte a problemi, ma è la macchina che studia le associazioni tra alcune istanze di un problema e le soluzioni corrispondenti per definire un procedimento che permetta di trovare una soluzione approssimata per qualsiasi istanza del problema preso in considerazione.
 
 % Introduzione mu-learn
-Esistono molti algoritmi di machine learning per affrontare questa tematica ma nel corso di questa tesi è stato studiato in particolare l'algoritmo \textit{$\mu$-learn} Questo algoritmo si bassa sulla teoria degli insiemi fuzzy, la quale consente di riformulare la classica teoria insiemistica sulla base di un nuovo principio ovvero il grado di appartenenza di un oggetto a un insieme. 
-
+Esistono molti algoritmi di machine learning, ma nel corso del tirocinio descritto in questo elaborato è stato studiato in particolare l'algoritmo \textit{$\mu$-learn}. Questo algoritmo si basa sulla teoria degli insiemi fuzzy, la quale consente di riformulare la classica teoria insiemistica sulla base di un nuovo principio: il grado di appartenenza, un numero reale compreso tra 0 e 1 che indica quanto è vera una proprietà. {$\mu$-learn} si basa sulla risoluzione di un particolare problema di ottimizzazione quadratica vincolata, per la quale si deve ricorrere a degli algoritmi di ottimizzazione numerica, chiamati \textit{solver}.
+L'obiettivo di questo elaborato è lo studio dell'algoritmo e dell'implementazione di nuovi solver per risolvere la parte di ottimizzazione.
 % Su cosa verte la tesi
-L'obiettivo di questa tesi è lo studio dell'algoritmo \textit{$\mu$-learn} e dell'implementazione di nuovi solver per risolvere la parte di ottimizzazione.
 
 % Descrizione dei 3 Capitoli
-Il lavoro di tesi è così articolato: nel Capitolo \ref{Capitolo 1} vengono descritti e introdotti gli insiemi fuzzy e la logica fuzzy, le tecniche di machine learning con particolare attenzione sulla tecnica supervisionata, quella a cui appartiene anche l'algoritmo \textit{$\mu$-learn}; nel Capitolo \ref{Capitolo 2} viene descritto il modello matematico di induzione degli insiemi fuzzy su cui si basa l'algoritmo \textit{$\mu$-learn}, e i software con cui è possibile implementarlo e risolverlo in Python; nel Capitolo \ref{Captiolo 3} vengono descritti gli esperimenti effettuati durante questo percorso, analizzando il comportamento di \textit{$\mu$-learn} al variare dei suoi parametri, e le prestazioni con nuovi solver; nelle conclusioni, infine, vengono riassunti i risultati raggiunti e discusso un possibile sviluppo futuro per nuovi solver.
+L'elaborato è così articolato: nel Capitolo \ref{Capitolo 1} vengono descritti e introdotti gli insiemi fuzzy, la logica fuzzy e le tecniche di machine learning con particolare attenzione a quelle supervisionate, al cui interno ricade anche l'algoritmo \textit{$\mu$-learn}; nel Capitolo \ref{Capitolo 2} viene descritto il modello matematico di induzione degli insiemi fuzzy su cui si basa l'algoritmo \textit{$\mu$-learn}, e il modo con cui è possibile implementarlo in Python; nel Capitolo \ref{Captiolo 3} vengono descritti gli esperimenti effettuati durante il tirocinio, analizzando il comportamento di \textit{$\mu$-learn} al variare di alcune implementazioni possibili per il solver utilizzato; nelle conclusioni, infine, vengono riassunti i risultati raggiunti e discussi possibili sviluppi futuri.
 
 %			CAPITOLO 1: descrizione problema da affrontare
 
 \chapter{Insiemi fuzzy e Machine Learning}
 \label{Capitolo 1}
-In questo primo capitolo andremo a descrivere i fondamenti della logica fuzzy e degli insiemi fuzzy, e introdurremo dei concetti di Machine Learning, con particolare attenzione sull'apprendimento supervisionato.
+In questo primo capitolo andremo a descrivere le basi della logica fuzzy e degli insiemi fuzzy, e introdurremo dei concetti di machine learning, con particolare attenzione all'apprendimento supervisionato.
 
 \section{Logica fuzzy}
 La logica fuzzy \cite{logica_fuzzy} è un'estensione della logica booleana.
@@ -655,7 +654,7 @@ Quando la macchina prende una decisione otterrà successivamente una “ricompen
 % Link tra insiemi fuzzy e machine learning.
 \chapter{Tecnologie e metodologie}
 \label{Capitolo 2}
-Nel capitolo precedente abbiamo visto alcune tecniche utilizzate nel Machine Learning. In questo vedremo nello specifico un algoritmo, ovvero quello oggetto di studio del lavoro di tesi, e com'è possibile implementarne la parte di ottimizzazione.
+Nel capitolo precedente abbiamo visto alcune tecniche utilizzate nel machine learning. In questo analizzeremo un particolare algoritmo, che è stato analizzato durante il tirocinio soffermandoci sull'implementazione della relativa parte di ottimizzazione.
 
 \section{\texorpdfstring{$\mu$}{mu}-learn}
  L’algoritmo che andremo a descrivere, denominato \textit{$\mu$-learn} e descritto nel dettaglio in \cite{mulearn}, si basa sull’ induzione di insiemi fuzzy e ricade nell’approccio supervisionato, ovvero quella tecnica che necessita di dati preventivamente valutati per effettuare predizioni. In questo caso la predizione è il grado di appartenenza a un insieme fuzzy.
@@ -1054,7 +1053,7 @@ Nell'implementazione nel modulo \textit{optimization} di \textit{$\mu$-learn} \c
 \chapter{Esperimenti}
 \label{Captiolo 3}
 % Piccola Intro
-In questo capitolo ci concentreremo sui risultati ottenuti tramite l'utilizzo di \textit{$\mu$-learn} su due dataset mettendo a confronto i solver, sia come tempi di esecuzione che come precisione. In entrambi i paragone è stato effettuato con l'esecuzione dell'algoritmo con Gurobi. Di seguito delle informazioni aggiuntive per inquadrare gli esperimenti.
+In questo capitolo ci concentreremo sui risultati ottenuti tramite l'utilizzo di \textit{$\mu$-learn} su due dataset mettendo a confronto i solver pre-esistenti e quelli implementati durante il lavoro di tirocinio. Il confronto sarà fatto sulla base dei tempi di esecuzione e della precisione. In entrambi i casi il paragone si riferisce all'esecuzione dell'algoritmo fatta utilizzando il solver basato sulla libreria Gurobi. Di seguito delle informazioni aggiuntive per inquadrare gli esperimenti.
 
 %Dataset Utilizzati 
 
@@ -1062,61 +1061,64 @@ In questo capitolo ci concentreremo sui risultati ottenuti tramite l'utilizzo di
 I dataset utilizzati in questo studio sono principalmente due.
 \begin{itemize}
     \item \textbf{Iris Dataset}. Probabilmente uno dei dataset più conosciuti per l'allenamento di algoritmi di classificazione, contiene 3 classi di 50 istanze l'una, dove ogni classe si riferisce a una specie di iris (Setosa, Versicolor, Virginica). Ogni istanza ha 5 attributi, i primi 4 che specificano la lunghezza e la larghezza del petalo e del sepalo in centimetri, l'ultimo che indica la classe di appartenenza. 
-    \item \textbf{Dataset Gaussiano}. Dataset creato appositamente per questo studio. Si tratta di un insieme di istanze descritte da 3 attributi, i primi due sono coordinate generate randomicamente, mentre il terzo è dato dal calcolo di una funzione gaussiana su quei due punti, che indica il grado di appartenenza. Il numero delle istanze considerate per i singoli esperimenti varia da 100 a 6000/7000.
+    \item \textbf{Dataset Gaussiano}. Dataset creato appositamente per questo studio. Si tratta di un insieme di istanze descritte da 3 attributi, i primi due sono coordinate generate randomicamente, mentre il terzo è dato dal calcolo di una funzione gaussiana su quei due punti, scalata in modo da indicare il grado di appartenenza a un ipotetico insieme fuzzy. Il numero delle istanze considerate per i singoli esperimenti varia da 100 a 6000/7000.
 \end{itemize}
 
 % Hardware e Librerie Utilizzate
 \section{Hardware e Librerie Utilizzate}
-\subsection*{Specifiche Macchina}
-Tutti gli esperimenti di cui parleremo in questo capitolo sono stati svolti con la stessa macchina. \`E importante tenere in considerazione le specifiche tecniche elencate di seguito per contestualizzare i limiti e i tempi di esecuzione. 
+\paragraph{Specifiche Macchina}\mbox{}\\
+Tutti gli esperimenti di cui parleremo in questo capitolo sono stati svolti con la stessa macchina, la cui configurazione hardware è descritta nella Tabella \ref{tab:specifiche_macchina}. \`E importante tenere in considerazione le specifiche tecniche elencate di seguito per contestualizzare i limiti e i tempi di esecuzione. 
 \smallskip
 
-\begin{center}
-    \begin{tabular}{|l|l|}
-        \hline 
-        \textbf{Modello} & Asus K550VX-DM115T \\
-        \hline
-        \textbf{Processore} & Intel Core i7-6700HQ \\
-        \hline
-        \textbf{Memoria} & 16GB DDR4 \\
-        \hline
-        \textbf{Sistema Operativo} & Manjaro Linux 64 bit; ID Versione: rolling \\
-        \hline
-    \end{tabular}
-\end{center}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+    \hline 
+    \textbf{Modello} & Asus K550VX-DM115T \\
+    \hline
+    \textbf{Processore} & Intel Core i7-6700HQ \\
+    \hline
+    \textbf{Memoria} & 16GB DDR4 \\
+    \hline
+    \textbf{Sistema Operativo} & Manjaro Linux 64 bit; Versione: rolling \\
+    \hline
+\end{tabular}
+\caption{Specifiche macchina utilizzata per gli esperimenti.}
+\label{tab:specifiche_macchina}
+\end{table}
 
 \subsection*{Librerie Utilizzate}
-Sia nel corso degli esperimenti effettuati che della costruzione dei solver sono state utilizzate diverse librerie, come \textit{numpy} \cite{NumPy} per la costruzione e manipolazione delle matrici, \textit{scikit-learn} \cite{scikit-learn} per importare iris dataset, \textit{pandas} \cite{pandas} per la manipolazione dei dataset, \textit{matplotlib} \cite{matplotlib} per la realizzazione dei grafici presenti in questo Capitolo. Inoltre è stato utilizzato il pacchetto \textit{$\mu$-learn} \cite{mulearn_documentation} che contiene il codice per l'utilizzo dell'algoritmo \textit{$\mu$-learn}. Principalmente sono state utilizzate le seguenti funzionalità:
+Sia nel corso degli esperimenti effettuati che della costruzione dei solver sono state utilizzate diverse librerie, come \textit{numpy} \cite{NumPy} per la costruzione e manipolazione delle matrici, \textit{scikit-learn} \cite{scikit-learn} per importare iris dataset, \textit{pandas} \cite{pandas} per la manipolazione dei dataset, \textit{matplotlib} \cite{matplotlib} per la realizzazione dei grafici presenti in questo capitolo. Inoltre è stato utilizzato il pacchetto \textit{$\mu$-learn} \cite{mulearn_documentation} che contiene il codice per l'utilizzo dell'algoritmo \textit{$\mu$-learn}. Principalmente sono state utilizzate le seguenti funzionalità:
 \begin{itemize}
-    \item \texttt{FuzzyInductor()}: la classe che permette di creare un modello del problema. Permette di specificare il parametro $C$, la funzione kernel, il solver da utilizzare (che di default è GurobiSolver), e altri parametri. Ogni solver permette a sua volta di specificare dei parametri interni, negli esperimenti descritti successivamente vengono modificati i seguenti parametri di TensorFlow:
+    \item \texttt{FuzzyInductor()}: si tratta della classe che permette di creare un modello del problema. Permette di specificare il parametro $C$, la funzione kernel, il solver da utilizzare (che di default è GurobiSolver), e altri parametri. Ogni solver permette a sua volta di specificare dei parametri interni, negli esperimenti descritti successivamente vengono modificati i seguenti parametri di TensorFlow:
     \begin{itemize}
-        \item \texttt{penalization}: come descritto nel Capitolo \ref{Capitolo 2}, nell'implementazione in TensorFlow è stata utilizzata la tecnica del rilassamento lagrangiano, che dipende da un parametro $\lambda$ in questo caso fissato a priori nella creazione dell'oggetto solver. Di default impostato a $10$.
-        \item \texttt{learning rate}: dato che TensorFlow utilizza una variante dell'algoritmo del gradiente discendente \cite{gradient_descent}, questo è un parametro da specificare. Determina la dimensione dei `passi' che l'algoritmo fa nella direzione del minimo. Di default impostato a $10^{-4}$.
-        \item \texttt{optimizer}: questo parametro indica quale variante dell'algoritmo utilizzare. Di default viene scelto \textit{Adam}.
+        \item \texttt{penalization}: come descritto nel Capitolo \ref{Capitolo 2}, nell'implementazione in TensorFlow è stata utilizzata la tecnica del rilassamento lagrangiano, che dipende da un parametro $\lambda$ in questo caso fissato a priori nella creazione dell'oggetto solver. Il valore predefinito per questo parametro è impostato a $10$.
+        \item \texttt{learning rate}: dato che TensorFlow utilizza l'algoritmo del gradiente discendente \cite{gradient_descent}, questo è un parametro da specificare. Determina la dimensione dei `passi' che l'algoritmo fa nella direzione del minimo. Il valore predefinito per questo parametro è impostato a $10^{-4}$.
+        \item \texttt{optimizer}: questo parametro indica quale variante dell'algoritmo del gradiente discendente utilizzare. Il valore predefinito per questo parametro è \textit{Adam}.
         \item \texttt{n\_iter}: dato che l'algoritmo del gradiente discendente è un algoritmo d'ottimizzazione iterativo, questo parametro indica quante volte ripeterlo sugli stessi dati per ottenere un risultato ottimale. Di default impostato a $100$.
     \end{itemize}
-    \item \texttt{fit(X,y)}: la funzionalità principale di tutti i modelli di machine learning che è utilizzata per allenare un modello sui dati della variabile \texttt{X} conoscendone le rispettive etichette contenute nella variabile \texttt{y}.
-    \item \texttt{kernel.compute($x_{1}$,$x_{2}$)}: calcola il valore della funzione kernel per i due valori $x_{1}$ e $x_{2}$.
+    \item \texttt{fit(X,y)}: è il metodo principalmente invocato da tutti i modelli di machine learning per allenare un modello sui dati della variabile \texttt{X} conoscendone le rispettive etichette contenute nella variabile \texttt{y}.
+    \item \texttt{kernel.compute($x_{1}$,$x_{2}$)}: permette di calcolare il valore della funzione kernel per i due valori $x_{1}$ e $x_{2}$.
     \item \texttt{pyplot}: libreria di matplotlib utilizzata per la produzione di grafici 2D, come i grafici di questo capitolo.
-    \item \texttt{mean\_squared\_error(X,y,squared=false)}: funzione di \textit{sklearn.metrics} che permette di calcolare l'errore quadratico medio (con il flag \texttt{squared = false} restituisce la radice dell'errore quadratico medio). Negli esperimenti di questo capitolo il valore \texttt{X}, ovvero il valore centrale, è dato dal vettore contenente le variabili $\chi$ calcolate con GurobiSolver. Il valore \texttt{y}, il valore stimato, è dato dal vettore delle variabili $\chi$ calcolato con il solver da analizzare.
+    \item \texttt{mean\_squared\_error(x,y,squared=false)}: funzione di \textit{sklearn.metrics} che permette di calcolare l'errore quadratico medio (con il flag \texttt{squared = false} restituisce la radice dell'errore quadratico medio). Negli esperimenti di questo capitolo il valore \texttt{x}, ovvero il valore centrale, è dato dal vettore contenente le variabili $\chi$ calcolate con GurobiSolver. Il valore \texttt{y}, il valore stimato, è dato dal vettore delle variabili $\chi$ calcolato con il solver da analizzare.
 \end{itemize}
 
-\section{Esperimenti Preliminari}
+\section{Esperimenti preliminari}
 I primi esperimenti eseguiti vertono sull'utilizzo di TensorFlow come solver. La differenza principale nell'utilizzo di TensorFlow rispetto a Gurobi sta nel numero di istanze da poter trattare. Mentre Gurobi si suppone possa trattare fino a un massimo di punti pari a una decina di migliaia (limite che non è stato raggiunto nel corso di questi esperimenti principalmente per le limitazioni della macchina), TensorFlow teoricamente può essere utilizzato con dataset decisamente più grandi. Il problema principale sorto prima dell'inizio di questo studio, è che l'implementazione con TensorFlow non garantisce la precisione data da Gurobi.
 
-Inizialmente sono stati eseguiti degli esperimenti per capire come i parametri del modello influissero sulla predizione dell'algoritmo. Nel corso di tutti gli esperimenti è stato utilizzato il kernel Gaussiano, di conseguenza tra i parametri del modello è stato considerato anche $\sigma$. Nei grafici in Figura \ref{fig:Setosa_Preliminari}\ref{fig:Versicolor_Preliminari}\ref{fig:Virginica_Preliminari} vengono mostrati i risultati di alcuni di questi esperimenti preliminari. Nell'asse delle ascisse il numero di iterazioni effettuate utilizzando il solver implementato con TensorFlow; nell'asse delle ordinate, invece, troviamo la radice dell'errore quadratico medio (\textit{Root Mean Square Error}) calcolato tra il vettore delle $\chi$ ottenuto con TensorFlow e quello ottenuto con Gurobi.
+Inizialmente sono stati eseguiti degli esperimenti per capire come i parametri del modello influissero sulla predizione dell'algoritmo. Nel corso di tutti gli esperimenti è stato utilizzato il kernel Gaussiano, di conseguenza tra i parametri del modello è stato considerato anche $\sigma$. Nei grafici in Figura \ref{fig:Setosa_Preliminari}--\ref{fig:Virginica_Preliminari} vengono mostrati i risultati di alcuni di questi esperimenti preliminari. Nell'asse delle ascisse è mostrato il numero di iterazioni effettuate utilizzando il solver implementato con TensorFlow; nell'asse delle ordinate, invece, troviamo la radice dell'errore quadratico medio (\textit{Root Mean Square Error}) calcolato tra il vettore delle $\chi$ ottenuto con TensorFlow e quello ottenuto con Gurobi.
 
 \begin{figure}[H]
     \begin{subfigure}{0.47\textwidth}
         \centering
         \includegraphics[scale=0.5]{images/Grafici/Setosa_C200_sigmaDiversi.png}
-        \caption{Confronto nella scelta di $\sigma$ diversi.}
+        \caption{$C=200$}
         \label{subfig:Setosa_C200_sigmaDiversi}
     \end{subfigure}
     \begin{subfigure}{0.47\textwidth}
         \centering
         \includegraphics[scale=0.5]{images/Grafici/Setosa_Cdiversi_sigma025.png}
-        \caption{Confronto nella scelta di $C$ diversi.}
+        \caption{$\sigma=0.25$}
         \label{subfig:Setosa_Cdiversi_sigma025}
     \end{subfigure}
     \caption{In Figura vengono riportati alcuni esperimenti effettuati sulla classe \textit{Setosa} del dataset. Nel grafico in Figura (\subref{subfig:Setosa_C200_sigmaDiversi}) è stato fissato il parametro $C=200$ per mostrare come la scelta di $\sigma$ influisse sulla precisione dell'algoritmo. Nel grafico in Figura (\subref{subfig:Setosa_Cdiversi_sigma025}) invece è stato fissato il parametro $\sigma = 0.25$ per mostrare come influisse la scelta di C.}
@@ -1127,13 +1129,13 @@ Inizialmente sono stati eseguiti degli esperimenti per capire come i parametri d
     \begin{subfigure}{0.47\textwidth}
         \centering
         \includegraphics[scale=0.5]{images/Grafici/Versicolor_C200_sigmaDiversi.png}
-        \caption{Confronto nella scelta di $\sigma$ diversi.}
+        \caption{$C=200$}
         \label{subfig:Versicolor_C200_sigmaDiversi}
     \end{subfigure}
     \begin{subfigure}{0.47\textwidth}
         \centering
         \includegraphics[scale=0.5]{images/Grafici/Versicolor_Cdiversi_sigma01.png}
-        \caption{Confronto nella scelta di $C$ diversi.}
+        \caption{$\sigma=0.1$}
         \label{subfig:Versicolor_Cdiversi_sigma01}
     \end{subfigure}
     \caption{In Figura vengono riportati alcuni esperimenti effettuati sulla classe \textit{Versicolor} del dataset. Nel grafico in Figura (\subref{subfig:Versicolor_C200_sigmaDiversi}) è stato fissato il parametro $C=200$ per mostrare come la scelta di $\sigma$ influisse sulla precisione dell'algoritmo. Nel grafico in Figura (\subref{subfig:Versicolor_Cdiversi_sigma01}) invece è stato fissato il parametro $\sigma = 0.1$ per mostrare come influisse la scelta di C.}
@@ -1144,24 +1146,24 @@ Inizialmente sono stati eseguiti degli esperimenti per capire come i parametri d
     \begin{subfigure}{0.47\textwidth}
         \centering
         \includegraphics[scale=0.5]{images/Grafici/Virginica_C200_sigmaDiversi.png}
-        \caption{Confronto nella scelta di $\sigma$ diversi.}
+        \caption{$C=200$}
         \label{subfig:Virginica_C200_sigmaDiversi}
     \end{subfigure}
     \begin{subfigure}{0.47\textwidth}
         \centering
         \includegraphics[scale=0.5]{images/Grafici/Virginica_Cdiversi_sigma05.png}
-        \caption{Confronto nella scelta di $C$ diversi.}
+        \caption{$\sigma=0.5$}
         \label{subfig:Virginica_Cdiversi_sigma05}
     \end{subfigure}
     \caption{In Figura vengono riportati alcuni esperimenti effettuati sulla classe \textit{Virginica} del dataset. Nel grafico in Figura (\subref{subfig:Virginica_C200_sigmaDiversi}) è stato fissato il parametro $C=200$ per mostrare come la scelta di $\sigma$ influisse sulla precisione dell'algoritmo. Nel grafico in Figura (\subref{subfig:Virginica_Cdiversi_sigma05}) invece è stato fissato il parametro $\sigma = 0.5$ per mostrare come influisse la scelta di C.}
     \label{fig:Virginica_Preliminari}
 \end{figure}
 
-\noindent In tutti gli esperimenti effettuati con le tre classi diverse possiamo notare delle somiglianze. Osservando i grafici, vediamo che l'algoritmo eseguito con TensorFlow migliora la precisione nel caso di $\sigma$ piccoli. Mentre per quanto riguarda la scelta del parametro $C$ il comportamento è diverso a seconda della classe, però come possiamo notare dai valori dell'RMSE le differenze sono minime.
+\noindent In tutti gli esperimenti effettuati con le tre classi diverse possiamo notare delle somiglianze. Osservando i grafici, vediamo che l'algoritmo eseguito con TensorFlow migliora la precisione nel caso di $\sigma$ piccoli. Per quanto riguarda la scelta del parametro $C$ il comportamento è diverso a seconda della classe, sebbene come possiamo notare dai valori dell'RMSE le differenze sono minime.
 
 
 % Esperimenti con penalization
-Dopo aver capito meglio come influissero questi parametri, è stato considerato anche il parametro \textit{penalization}. Questo parametro da un certo `peso' all'utilizzo della tecnica del rilassamento lagrangiano. Nei grafici in Figura \ref{fig:esperimenti_penalization} viene mostrato come, per le tre diverse classi, questo parametro influisce. Rispetto gli esperimenti precedenti, in questo caso i parametri già considerati sono fissati, in particolare $C=1$ e $\sigma=0.25$. 
+Dopo aver capito meglio come influissero questi parametri, è stato considerato anche il parametro \textit{penalization}. Questo parametro da un certo `peso' all'utilizzo della tecnica del rilassamento lagrangiano. Nei grafici in Figura \ref{fig:esperimenti_penalization} viene mostrato come, per le tre diverse classi, questo parametro influisce sulla precisione. Rispetto agli esperimenti precedenti, in questo caso i parametri già considerati sono fissati, in particolare $C=1$ e $\sigma=0.25$. 
 
 \begin{figure}[H]
     \begin{subfigure}{0.47\textwidth}
@@ -1214,7 +1216,7 @@ Dopo aver capito meglio come influissero questi parametri, è stato considerato 
 \end{figure}
 
 % Esperimenti con learning rate
-\noindent Dopo questi esperimenti sui parametri specifici di \textit{$\mu$-learn} e sul parametro \textit{penalization},parametro specifico dell'implementazione con TensorFlow, sono stati considerati i parametri che riguardano l'algoritmo che utilizza TensorFlow, ovvero il \textit{learning rate} e l'\textit{optimizer}. Nei grafici in Figura \ref{fig:esperimenti_learning_rate} vediamo come la scelta del \textit{learning rate} abbia effetto sulla velocità con cui l'algoritmo eseguito con TensorFlow tenda ad avvicinarsi alla precisione di Gurobi, risultato prevedibile quando si va a modificare il \textit{learning rate}.
+\noindent Dopo questi esperimenti sui parametri specifici di \textit{$\mu$-learn} e sul parametro \textit{penalization}, parametro specifico dell'implementazione con TensorFlow, sono stati considerati i parametri che riguardano l'algoritmo del gradiente discendente, ovvero il \textit{learning rate} e l'\textit{optimizer}. Nei grafici in Figura \ref{fig:esperimenti_learning_rate} vediamo come la scelta del \textit{learning rate} abbia effetto sulla velocità con cui l'algoritmo eseguito con TensorFlow tenda ad avvicinarsi alla precisione di Gurobi, risultato prevedibile quando si va a modificare il \textit{learning rate}.
 
 \begin{figure}[H]
     \begin{subfigure}{0.47\textwidth}
@@ -1242,7 +1244,7 @@ Dopo aver capito meglio come influissero questi parametri, è stato considerato 
 
 
 % Esperimenti diversi optimizer
-\noindent Altro parametro considerato, e su cui è stato fatto un tentativo per capire come influisse sul solver, è la scelta dell'\textit{optimizer}. Nel grafico in Figura \ref{fig:different_optimizer} vediamo come si comporta l'algoritmo eseguito con TensorFlow a seconda del l'\textit{optimizer} scelto.
+\noindent Un altro dei parametri di cui è stata valutata l'influenza sul solver è legato alla scelta dell'\textit{optimizer}. Nel grafico in Figura \ref{fig:different_optimizer} vediamo come si comporta l'algoritmo eseguito con TensorFlow a seconda dell'\textit{optimizer} scelto.
 
 \begin{figure}[H]
     \centering
@@ -1257,7 +1259,7 @@ Dopo aver capito meglio come influissero questi parametri, è stato considerato 
 
 \section{Confronto tra Solver}
 % Introduzione sul perché nuovi solver
-Una volta effettuati gli esperimenti con i diversi parametri di TensorFlow, sono stati implementati nuovi solver per risolvere il problema. I solver implementati con CVXOPT e CVXPY sono risultati essere entrambi molto affidabili a livello di precisione. Sono stati effettuati confronti con Gurobi sia con il vettore delle variabili sia con il valore ottimo trovato dalla funzione. In entrambi i casi e con entrambi i solver l'RMSE calcolato è sull'ordine di $10^{-7}$. Nei grafici in Figura \ref{fig:differeSolver_Classification} \ref{fig:differeSolver_Regressione} i solver implementati con Gurobi, CVXOPT e CVXPY a confronto. Gli esperimenti sono stati effettuati sul Database Gaussiano, dove è stato eseguito più volte l'algoritmo su un numero di istanze sempre maggiore, così da poter analizzare il trend delle prestazioni. Nell'asse delle ascisse il numero di istanze su cui è stato eseguito l'algoritmo, mentre nell'asse delle ordinate il tempo di risoluzione in secondi. Nel caso della classificazione la macchina ha permesso di eseguire l'algoritmo fino a un massimo di 7000 istanze, mentre nel caso di regressione il limite è stato di 6000.
+Una volta effettuati gli esperimenti con i diversi parametri di TensorFlow, sono stati implementati nuovi solver per risolvere il problema. I solver implementati con CVXOPT e CVXPY sono risultati essere entrambi molto affidabili a livello di precisione. Sono stati effettuati confronti con Gurobi sia con il vettore delle variabili sia con il valore ottimo trovato dalla funzione. In entrambi i casi e con entrambi i solver l'RMSE calcolato è sull'ordine di $10^{-7}$. Nelle Figure \ref{fig:differeSolver_Classification} \ref{fig:differeSolver_Regressione} sono mostrati i grafici dei confronti tra solver implementati con Gurobi, CVXOPT e CVXPY. Gli esperimenti sono stati effettuati sul database Gaussiano, eseguendo ripetutamente l'algoritmo su un numero di istanze sempre maggiore, così da poter analizzare il trend delle prestazioni. Nell'asse delle ascisse è mostrato il numero di istanze su cui è stato eseguito l'algoritmo, mentre nell'asse delle ordinate troviamo il tempo di risoluzione in secondi. Sono stati effettuati esperimenti sia di classificazione che di regressione. I primi si basano sull'allenare il modello a predire le etichette delle classi, nel nostro caso due. Gli esperimenti di regressione si basano sull'alllenare l'algoritmo nel predire il grado di appartenenza ad un insieme. Nel caso della classificazione la macchina ha permesso di eseguire l'algoritmo fino a un massimo di 7000 istanze, mentre nel caso di regressione il limite è stato di 6000.
 
 % Grafici tempi CVXOPT-CVXPY-GUROBI
 \begin{figure}[H]
@@ -1277,7 +1279,8 @@ Una volta effettuati gli esperimenti con i diversi parametri di TensorFlow, sono
 \noindent In entrambi i casi i grafici mostrano come l'implementazione con CVXOPT sia molto efficiente. Al contrario l'implementazione con CVXPY sembra essere poco efficiente, avendo anche tempi tre volte superiori a quelli di CVXOPT. 
 
 % Specificare problema CVXPY
-\noindent Nel corso degli esperimenti è sorto un problema utilizzando il solver CVXPY. Con un dataset con poche istanze si è manifestato il seguente problema:
+\noindent Nel corso degli esperimenti è sorto un problema utilizzando il solver CVXPY. Con un dataset con poche istanze si è manifestato un problema di convergenza relativo alle librerie ARPACK \cite{ARPACK}, usate da CVXPY per controllare che la matrice inserita sia semidefinita positiva:
+
 \begin{figure}[H]
     \centering
     \begin{minted}{python}
@@ -1286,13 +1289,13 @@ Una volta effettuati gli esperimenti con i diversi parametri di TensorFlow, sono
     \end{minted}
 \end{figure}
 
-\noindent Il problema, che sembra essere un caso molto raro, si verifica anche con gli altri solver messi a disposizione da CVXPY. Questo sembra essere un problema che si verifica per un controllo interno di CVXPY. Per provare a risolvere questo problema è stato cambiato il valore dell'impostazione \texttt{EIGVAL\_TOL} di CVXPY, ma senza ottenere risultati. \`E stato fatto un tentativo anche provando ad applicare una perturbazione sulle matrici del problema, ma anche in questo caso non sono stati riscontrati risultati positivi. Però, grazie a diversi esperimenti, è stato accertato che questo problema si verifica per dataset con un numero di istanze comprese tra circa 150 e 500.
+\noindent Il problema, che sembra essere un caso molto raro, si verifica anche con gli altri solver messi a disposizione da CVXPY. Per provare a risolvere questo problema è stato cambiato il valore dell'impostazione \texttt{EIGVAL\_TOL} di CVXPY, ma senza ottenere risultati. \`E stato fatto un tentativo anche provando ad applicare una perturbazione sulle matrici del problema, ma anche in questo caso non sono stati riscontrati risultati positivi. Però, grazie a diversi esperimenti, è stato accertato che questo problema si verifica per dataset con un numero di istanze comprese tra circa 150 e 500.
 
 
-\section{Discussione Risultati}
+\section{Discussione dei risultati}
 Nei paragrafi precedenti abbiamo visto e commentato gli esperimenti eseguiti con l'algoritmo \textit{$\mu$-learn}. Tra gli esperimenti preliminari, il parametro principale da tenere in considerazione è \textit{penalization}. Potrebbe essere proprio questo il problema della poca precisione del solver implementato con TensorFlow. Il fattore di penalizzazione, piuttosto che essere fissato a priori, potrebbe essere calcolato iterativamente all'interno del solver, rendendo anch'esso una variabile. Altro parametro che influisce molto è la scelta dell'\textit{optimizer}, che però potrebbe dipendere dal caso di studio. 
 
-Per quanto riguarda i nuovi solver implementati, CVXOPT e CVXPY sono entrambi dei risolutori molto precisi. CVXOPT è molto veloce, anche più di Gurobi, ma c'è da considerare che è una prima implementazione senza tutti i controlli del caso. Mentre CVXPY per quanto permetta di rendere il problema più leggibile a livello di codice, è abbastanza lento, anche perché effettua diversi controlli interni prima di restituire il risultato.
+Per quanto riguarda i nuovi solver implementati, CVXOPT e CVXPY sono entrambi dei risolutori molto precisi. CVXOPT è molto veloce, anche più di Gurobi, ma c'è da considerare che è una prima implementazione senza tutti i controlli del caso. Per quanto CVXPY permetta di rendere il problema più leggibile a livello di codice, la sua esecuzione è abbastanza lento, anche perché vengono effettuati diversi controlli interni prima di restituire il risultato.
 
 Infine possiamo dire che \textit{$\mu$-learn} è un ottimo algoritmo che permette buone prestazioni nel caso di classificazione e regressione avendo a disposizione una potenza di calcolo sufficiente.
 % Penalization
@@ -1304,8 +1307,8 @@ Infine possiamo dire che \textit{$\mu$-learn} è un ottimo algoritmo che permett
 \chapter*{Conclusioni}
 \addcontentsline{toc}{chapter}{Conclusioni}
 \label{Conclusioni}
-Durante lo studio di questa tesi è stata effettuata una ricerca e uno studio sul machine learning e sugli insiemi fuzzy.
-Dopo aver assimilato gli argomenti, è stato studiato e analizzato il comportamento dell'algoritmo denominato \textit{$\mu$-learn} basato sull'induzione di insiemi fuzzy per casi di classificazione e regressione. Lo studio è stato effettuato principalmente su due dataset: Iris dataset e un dataset creato appositamente per l'occorrenza. I primi esperimenti sono stati eseguiti su Iris dataset per prendere confidenza con i parametri di \textit{$\mu$-learn}. Successivamente sono stati eseguiti degli esperimenti per cercare di capire il motivo per cui il solver implementato con TensorFlow non era performante come ci si aspettava. Dopo aver analizzato quali potessero essere i problemi del solver implementato con TensorFlow, sono stati implementati due nuovi risolutori, uno con CVXOPT e uno con CVXPY. Entrambi questi due solver sono risultati molto precisi, mentre come tempi di esecuzione CVXOPT risulta quasi tre volte più veloce di CVXPY.
+Durante il lavoro di tirocinio è stato effettuato uno studio sul machine learning e sugli insiemi fuzzy.
+Dopo aver assimilato gli argomenti, è stato studiato e analizzato il comportamento dell'algoritmo denominato \textit{$\mu$-learn} basato sull'induzione di insiemi fuzzy per casi di classificazione e regressione. Lo studio è stato effettuato principalmente su due dataset: Iris dataset e un dataset sintetico asppositamente creato. I primi esperimenti sono stati eseguiti su Iris dataset per prendere confidenza con i parametri di \textit{$\mu$-learn}. Successivamente sono stati eseguiti degli esperimenti per cercare di capire il motivo per cui il solver implementato con TensorFlow non era performante come ci si aspettava. Dopo aver analizzato quali potessero essere i problemi del solver implementato con TensorFlow, sono stati implementati due nuovi risolutori, uno con CVXOPT e uno con CVXPY. Entrambi questi due solver sono risultati molto precisi, sebbene CVXOPT abbia dei tempi di esecuzione quasi tre volte più veloci di CVXPY.
 
 Un possibile sviluppo futuro potrebbe consistere nel sviluppare un solver con TensorFlow dove il parametro \textit{penalization} viene calcolato iterativamente all'eseguirsi dell'algoritmo. A livello teorico questa potrebbe essere la scelta più giusta per il calcolo del parametro, che renderebbe l'algoritmo decisamente più preciso.
 
