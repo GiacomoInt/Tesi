@@ -1,0 +1,29 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+\begin{center}
+\LARGE \textbf{Riassunto elaborato finale}
+\bigskip
+
+\large Implementazione e confronto di algoritmi di ottimizzazione per l'apprendimento di insiemi fuzzy
+
+\bigskip
+
+\normalsize Giacomo Intagliata 873511
+\end{center}
+\vspace{3\baselineskip}
+
+\noindent Quando si parla di machine learning si parla di una particolare branca dell' informatica in cui a partire da dati che descrivono un problema si induce un modo per risolvere questo problema in modo approssimato. Il machine learning è stato introdotto per problemi di cui non si conosce la soluzione o di elevata complessità computazionale.
+
+A differenza della programmazione tradizionale, dove si codificano dei procedimenti che permettono di risolvere una generica istanza, si inseriscono i dati e la macchina restituisce delle risposte, nel machine learning si inseriscono sia i dati che le risposte attese, e la macchina restituisce la codifica di un procedimento per risolvere il problema, indotto a partire dai dati e dalle risposte osservate. \`E proprio questo il nocciolo della questione: non è più il programmatore a produrre regole che forniscono risposte a problemi, ma è la macchina che studia le associazioni tra alcune istanze di un problema e le soluzioni corrispondenti per definire un procedimento che permetta di trovare una soluzione approssimata per qualsiasi istanza del problema preso in considerazione.
+
+% Introduzione mu-learn
+Esistono molti algoritmi di machine learning, ma nel corso del tirocinio descritto in questo elaborato è stato studiato in particolare l'algoritmo \textit{$\mu$-learn}. Questo algoritmo si basa sulla teoria degli insiemi fuzzy, la quale consente di riformulare la classica teoria insiemistica sulla base di un nuovo principio: il grado di appartenenza, un numero reale compreso tra 0 e 1 che indica quanto è vera una proprietà. {$\mu$-learn} si basa sulla risoluzione di un particolare problema di ottimizzazione quadratica vincolata, per la quale si deve ricorrere a degli algoritmi di ottimizzazione numerica, chiamati \textit{solver}.
+L'obiettivo di questo elaborato è lo studio dell'algoritmo e dell'implementazione di nuovi solver per risolvere la parte di ottimizzazione.
+% Su cosa verte la tesi
+
+% Descrizione dei 3 Capitoli
+L'elaborato è così articolato: nel Capitolo 1 vengono descritti e introdotti gli insiemi fuzzy, la logica fuzzy e le tecniche di machine learning con particolare attenzione a quelle supervisionate, al cui interno ricade anche l'algoritmo \textit{$\mu$-learn}; nel Capitolo 2 viene descritto il modello matematico di induzione degli insiemi fuzzy su cui si basa l'algoritmo \textit{$\mu$-learn}, e il modo con cui è possibile implementarlo in Python; nel Capitolo 3 vengono descritti gli esperimenti effettuati durante il tirocinio, analizzando il comportamento di \textit{$\mu$-learn} al variare di alcune implementazioni possibili per il solver utilizzato; nelle conclusioni, infine, vengono riassunti i risultati raggiunti e discussi possibili sviluppi futuri.
+
+\end{document}

@@ -175,4 +175,10 @@ N.~Donges, ``Gradient descent: An introduction to 1 of machine learning’s
   \url{https://builtin.com/data-science/gradient-descent}
 \BIBentrySTDinterwordspacing
 
+\bibitem{ARPACK}
+\BIBentryALTinterwordspacing
+``Arpack - arnoldi package,'' 1996-2008. [Online]. Available:
+  \url{https://www.caam.rice.edu/software/ARPACK/}
+\BIBentrySTDinterwordspacing
+
 \end{thebibliography}

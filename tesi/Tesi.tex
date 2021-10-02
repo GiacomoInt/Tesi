@@ -101,7 +101,7 @@
 \label{Introduzione}
 
 % Introduzione machine learning
-Quando si parla di machine learning si parla di una particolare branca dell'informatica in cui a partire dai dati che descrivono un problema si induce un modo per risolvere questo problema in modo approssimato. Il machine learning è stato introdotto per problemi di cui non si conosce la soluzione o di elevata complessità computazionale.
+Quando si parla di machine learning si parla di una particolare branca dell'informatica in cui a partire da dati che descrivono un problema si induce un modo per risolvere questo problema in modo approssimato. Il machine learning è stato introdotto per problemi di cui non si conosce la soluzione o di elevata complessità computazionale.
 
 A differenza della programmazione tradizionale, dove si codificano dei procedimenti che permettono di risolvere una generica istanza, si inseriscono i dati e la macchina restituisce delle risposte, nel machine learning si inseriscono sia i dati che le risposte attese, e la macchina restituisce la codifica di un procedimento per risolvere il problema, indotto a partire dai dati e dalle risposte osservate. \`E proprio questo il nocciolo della questione: non è più il programmatore a produrre regole che forniscono risposte a problemi, ma è la macchina che studia le associazioni tra alcune istanze di un problema e le soluzioni corrispondenti per definire un procedimento che permetta di trovare una soluzione approssimata per qualsiasi istanza del problema preso in considerazione.
 
@@ -421,13 +421,13 @@ Il complemento di un insieme fuzzy $A$ è a sua volta un insieme fuzzy indicato 
 \end{figure}
 
 
-\section{Machine Learning}
-Il Machine Learning \cite{machine_learning_oreilly} è una branca dell'informatica nella quale in una macchina si predispone l'abilità di apprendere qualcosa dai dati in maniera induttiva.
-Metaforicamente, il Machine Learning permette ai computer di compiere attività imparando dall'esperienza (che in questo caso è costituita dai dati a disposizione). \newline
-Gli algoritmi di Machine Learning migliorano le loro prestazioni in modo adattivo mano a mano che gli esempi da cui apprendere aumentano.
+\section{Machine learning}
+Il machine learning \cite{machine_learning_oreilly} è una branca dell'informatica nella quale in una macchina si predispone l'abilità di apprendere qualcosa dai dati in maniera induttiva.
+Metaforicamente, il machine learning permette ai computer di compiere attività imparando dall'esperienza (che in questo caso è costituita dai dati a disposizione). \newline
+Gli algoritmi di machine learning migliorano le loro prestazioni in modo adattivo mano a mano che gli esempi da cui apprendere aumentano.
 
 \bigskip
-Gli algoritmi di Machine Learning differiscono tra loro a seconda dell'approccio utilizzato per apprendere a partire dai dati.
+Gli algoritmi di machine learning differiscono tra loro a seconda dell'approccio utilizzato per apprendere a partire dai dati.
 % \footnote{Esistono anche altri criteri che permettono di caratterizzare i diversi tipi di Machine Learning, ad esempio basati sui dati che utilizzano, che producono, o sul tipo di problema.\label{nota:tipi ml}}.
 %riferimento biografico nota
 Possiamo avere degli approcci di diverso tipo:
@@ -442,7 +442,7 @@ Possiamo avere degli approcci di diverso tipo:
 
 \subsection*{Approccio Supervisionato}
 L'\textit{Approccio Supervisionato} \cite{machine_learning_oreilly}\cite{unsupervised_learning} è una tecnica di apprendimento automatico che punta a istruire una macchina lavorando su un insieme di dati associati a etichette definite dall'utente.
-Come abbiamo già detto, gli algoritmi di Machine Learning apprendono da esempi, questi nell'approccio supervisionato sono costituiti da coppie composte da istanze del problema e dalla loro soluzione, e quest'ultima è spesso codificata con delle etichette definite dall'utente. 
+Come abbiamo già detto, gli algoritmi di machine learning apprendono da esempi, questi nell'approccio supervisionato sono costituiti da coppie composte da istanze del problema e dalla loro soluzione, e quest'ultima è spesso codificata con delle etichette definite dall'utente. 
 %Per esempio nella classificazione avremo un'etichetta per ogni classe da considerare.
 %Istriuire una macchina (?). Prima abbiamo detto che ci sono questi esempi utilizzati, nell'approccio supervisionato questi esempi sono delle coppie, l'istanza di un problema e la sua soluzione, codificata spesso con delle etichette definite dall'utente
 
@@ -564,7 +564,7 @@ Per la classificazione binaria, immaginando di avere due classi, $C_1$ e $C_0$, 
 
 \subsubsection{Alberi di decisione}
 
-Un albero di decisione (\textit{Decision Tree}) è un modello predittivo utilizzato sia per la classificazione che per la regressione, la cui logica si basa su una struttura ad albero.In quest'ultimo ogni nodo interno rappresenta un controllo su una variabile; ogni foglia corrisponde  alla classe o etichetta che rappresenta la predizione per l'oggetto di partenza.
+Un albero di decisione (\textit{Decision Tree}) è un modello predittivo utilizzato sia per la classificazione che per la regressione, la cui logica si basa su una struttura ad albero. In quest'ultimo ogni nodo interno rappresenta un controllo su una variabile; ogni foglia corrisponde  alla classe o etichetta che rappresenta la predizione per l'oggetto di partenza.
 I controlli sulle variabili sono spesso di tipo binario.
 
 \begin{figure}[h]
@@ -600,7 +600,7 @@ Per risolvere questo problema esistono due strategie:
 Le \textit{Support Vector Machine} sono dei modelli di apprendimento utilizzati sia per la regressione che la classificazione.
 Una \textit{Support Vector Machine} \cite{SVM} per la classificazione individua un iperpiano o un insieme di iperpiani per separare i punti in uno spazio e quindi dividerli in diversi gruppi.
 
-Supponiamo di avere un dataset con oggetti appartenenti a due classi, come in Figura \ref{fig:svm}, e di voler trovare un iperpiano che divide le due classi. Come possiamo vedere nella Figura 12(\ref{sub@fig:iperpiani_svm}) ci sono molti possibili iperpiani che dividono le due classi. Il nostro obiettivo è quello di trovare il piano che ha il margine massimo, ovvero quel piano che massimizza la distanza da entrambe le classi, come in Figura 12(\ref{sub@fig:iperpiano_ideale}). I punti del dataset più vicini all'iperpiano e che influenzano la sua posizione vengono chiamati \textit{vettori di supporto} (\textit{Support Vector}, da qui il nome dell'algoritmo). Eliminare uno di questi punti cambierebbe la posizione dell'iperpiano, Per questo motivo, possono essere considerati gli elementi critici di un set di dati.
+Supponiamo di avere un dataset con oggetti appartenenti a due classi, come in Figura \ref{fig:svm}, e di voler trovare un iperpiano che divide le due classi. Come possiamo vedere nella Figura 12(\ref{sub@fig:iperpiani_svm}) ci sono molti possibili iperpiani che dividono le due classi. Il nostro obiettivo è quello di trovare il piano che ha il margine massimo, ovvero quel piano che massimizza la distanza da entrambe le classi, come in Figura 12(\ref{sub@fig:iperpiano_ideale}). I punti del dataset più vicini all'iperpiano e che influenzano la sua posizione vengono chiamati \textit{vettori di supporto} (\textit{Support Vector}, da qui il nome dell'algoritmo). Eliminare uno di questi punti cambierebbe la posizione dell'iperpiano. Per questo motivo, possono essere considerati gli elementi critici di un set di dati.
 
 \begin{figure}[ht]
     \begin{subfigure}{0.47\textwidth}
@@ -631,13 +631,13 @@ Al contrario dell'apprendimento supervisionato, durante l'apprendimento vengono 
 La principale tecnica in questa categoria è il \textit{clustering}, ovvero una tecnica in grado di suddividere in gruppi distinti  gli oggetti presi in considerazione.
 Un esempio di utilizzo ricade nell'ambito della sicurezza informatica. Gli attacchi effettivamente rilevati sono probabilmente solo la punta dell'iceberg. Utilizzando tecniche di clustering è possibile individuare e bloccare attacchi ancora sconosciuti.
 
-Il Machine Learning non supervisionato potrebbe utilizzare informazioni dei clienti sugli utilizzi abituali dei servizi di una banca. Se un malintenzionato provasse a effettuare delle operazioni tramite il nostro conto bancario dall'altra parte del mondo a un orario differente da quello abituale, l'uso di tecniche di clustering permette di riconoscere le operazioni abituali e mandare un messaggio di allarme se vengono individuati casi anomali.
+Il machine learning non supervisionato potrebbe utilizzare informazioni dei clienti sugli utilizzi abituali dei servizi di una banca. Se un malintenzionato provasse a effettuare delle operazioni tramite il nostro conto bancario dall'altra parte del mondo a un orario differente da quello abituale, l'uso di tecniche di clustering permette di riconoscere le operazioni abituali e mandare un messaggio di allarme se vengono individuati casi anomali.
 
 \subsection*{Approccio Semi-Supervisionato}
 A metà strada tra l'apprendimento supervisionato e quello non supervisionato c'è l'apprendimento \textit{Semi-Supervisionato} \cite{supervisedlearning}.
 
 Questo approccio consiste nel combinare le due tecniche descritte nei paragrafi precedenti e fornire un risultato basandosi su un input eterogeneo costituito da dati etichettati e dati non etichettati.
-Questo perché le etichette dei dati a volte possono essere difficili da reperire, costosi e dispendiosi in termini di tempo e di denaro da recuperare, dato che spesso i dati vengono etichettati manualmente da utenti specializzati. Allo stesso tempo i dati non etichettati possono essere relativamente facili da raccogliere, ma ci sono pochi modi di utilizzarli. 
+Questo perché le etichette dei dati a volte possono essere difficili da reperire, costose e dispendiose in termini di tempo e di denaro da recuperare, dato che spesso i dati vengono etichettati manualmente da utenti specializzati. Allo stesso tempo i dati non etichettati possono essere relativamente facili da raccogliere, ma ci sono pochi modi di utilizzarli. 
 L'approccio semi-supervisionato risolve questi problemi utilizzando una grande quantità di dati non etichettati, insieme a una porzione di dati etichettati, per costruire classificatori migliori. 
 
 Ma com'è possibile, avendo a confronto l'apprendimento supervisionato che utilizza solo dati etichettati, avere classificatori migliori tenendo in considerazione i dati non etichettati?
@@ -715,7 +715,7 @@ ovvero che la distanza della trasformazione di $x_i$ da $a$ deve possibilmente e
 \end{equation*}
 che è già incorporato nel vincolo (\ref{eq:vincolo_3}), e quindi l'ottimizzazione tenderà a posizionare l'immagine all'interno della sfera.
 
-Allo stesso modo, quando $\mu_i = 0$ il vincolo (\ref{eq:vincolo_2}) diventa:
+Allo stesso modo, quando $\mu_i = 0$ il vincolo (\ref{eq:vincolo_2}) divena:
 \begin{equation*}
     \|\Phi(x_i)-a\|^2 \ge R^2 - \tau_i,
 \end{equation*}
@@ -757,7 +757,7 @@ In particolare, la maggior parte dei punti $x$ con un valore di membership $\mu_
 Apprendere la funzione di membership richiede di trovare il giusto compromesso nella scelta del parametro $C$, così come nei parametri del kernel.
 
 \subsection*{Configurazione degli iperparametri}
-Nel contesto del Machine Learning si parla spesso di iperparametri. Si definiscono iperparametri quei parametri utilizzati per aver un certo tipo di controllo sul processo di apprendimento. 
+Nel contesto del machine learning si parla spesso di iperparametri. Si definiscono iperparametri quei parametri utilizzati per aver un certo tipo di controllo sul processo di apprendimento. 
 % In altre parole, tutti i dati forniti dall'utente che influiscono sul design del modello sono considerati iperparametri. 
 Un primo parametro da considerare è quello della scelta della funzione kernel.
 Esistono diversi tipi di funzioni kernel: quelli principalmente utilizzati sono elencati di seguito.
@@ -987,7 +987,7 @@ sottoposto ai seguenti vincoli:
 
 
 \section{CVXPY}
-L'ottimizzazione convessa ha molte applicazioni in diversi campi, tra cui anche il Machine Learning. Per utilizzare l'ottimizzazione convessa in un'applicazione spesso si ricorre a Solver che richiedono di porre il problema nella forma standard (come CVXOPT). Un'alternativa è utilizzare un \textit{domain-specific language} (\textit{DSL}) per l'ottimizzazione convessa, che permette all'utente di specificare il problema in una maniera più naturale che rispecchia il linguaggio matematico, e successivamente questa specificazione viene convertita nella forma standard dal solver. CVX \cite{cvx} è un esempio tra i vari DSL esistenti.
+L'ottimizzazione convessa ha molte applicazioni in diversi campi, tra cui anche il machine learning. Per utilizzare l'ottimizzazione convessa in un'applicazione spesso si ricorre a solver che richiedono di porre il problema nella forma standard (come CVXOPT). Un'alternativa è utilizzare un \textit{domain-specific language} (\textit{DSL}) per l'ottimizzazione convessa, che permette all'utente di specificare il problema in una maniera più naturale che rispecchia il linguaggio matematico, e successivamente questa specificazione viene convertita nella forma standard dal solver. CVX \cite{cvx} è un esempio tra i vari DSL esistenti.
 CVXPY \cite{CVXPY_1} \cite{CVXPY_2} è un nuovo domain-specific language per i problemi di ottimizzazione convessa. Permette di esprimere il problema in un linguaggio naturale piuttosto che nella restrittiva forma standard richiesta da altri solver. \`E basato su CVX, ma introduce nuove funzionalità. CVXPY è semplicemente una libreria in Python che permette di combinare facilmente l'ottimizzazione convessa con le funzionalità della programmazione a oggetti.
 
 La sintassi di CVXPY è molto semplice, di seguito un'esemplificazione di come può essere costruito il nostro problema (\ref{eq:problema_finale_2} -- \ref{eq:v2_problema_finale_2}):
@@ -1053,7 +1053,7 @@ Nell'implementazione nel modulo \textit{optimization} di \textit{$\mu$-learn} \c
 \chapter{Esperimenti}
 \label{Captiolo 3}
 % Piccola Intro
-In questo capitolo ci concentreremo sui risultati ottenuti tramite l'utilizzo di \textit{$\mu$-learn} su due dataset mettendo a confronto i solver pre-esistenti e quelli implementati durante il lavoro di tirocinio. Il confronto sarà fatto sulla base dei tempi di esecuzione e della precisione. In entrambi i casi il paragone si riferisce all'esecuzione dell'algoritmo fatta utilizzando il solver basato sulla libreria Gurobi. Di seguito delle informazioni aggiuntive per inquadrare gli esperimenti.
+In questo capitolo ci concentreremo sui risultati ottenuti tramite l'utilizzo di \textit{$\mu$-learn} su due dataset mettendo a confronto i solver pre-esistenti e quelli implementati durante il lavoro di tirocinio. Il confronto sarà fatto sulla base dei tempi di esecuzione e della precisione. In entrambi i casi il paragone si riferisce all'esecuzione dell'algoritmo fatta utilizzando il solver basato sulla libreria Gurobi.
 
 %Dataset Utilizzati 
 
@@ -1194,7 +1194,7 @@ Dopo aver capito meglio come influissero questi parametri, è stato considerato 
 \begin{figure}[H]
     \begin{subfigure}{0.47\textwidth}
         \centering
-        \includegraphics[scale=0.5]{images/Grafici/Versicolor_DiffPen_10k.png}
+        \includegraphics[scale=0.5]{images/Grafici/Setosa_DiffPen_10k.png}
         \caption{Classe \textit{Setosa}.}
         \label{subfig:Setosa_diffPen_10k}
     \end{subfigure}
@@ -1259,7 +1259,7 @@ Dopo aver capito meglio come influissero questi parametri, è stato considerato 
 
 \section{Confronto tra Solver}
 % Introduzione sul perché nuovi solver
-Una volta effettuati gli esperimenti con i diversi parametri di TensorFlow, sono stati implementati nuovi solver per risolvere il problema. I solver implementati con CVXOPT e CVXPY sono risultati essere entrambi molto affidabili a livello di precisione. Sono stati effettuati confronti con Gurobi sia con il vettore delle variabili sia con il valore ottimo trovato dalla funzione. In entrambi i casi e con entrambi i solver l'RMSE calcolato è sull'ordine di $10^{-7}$. Nelle Figure \ref{fig:differeSolver_Classification} \ref{fig:differeSolver_Regressione} sono mostrati i grafici dei confronti tra solver implementati con Gurobi, CVXOPT e CVXPY. Gli esperimenti sono stati effettuati sul database Gaussiano, eseguendo ripetutamente l'algoritmo su un numero di istanze sempre maggiore, così da poter analizzare il trend delle prestazioni. Nell'asse delle ascisse è mostrato il numero di istanze su cui è stato eseguito l'algoritmo, mentre nell'asse delle ordinate troviamo il tempo di risoluzione in secondi. Sono stati effettuati esperimenti sia di classificazione che di regressione. I primi si basano sull'allenare il modello a predire le etichette delle classi, nel nostro caso due. Gli esperimenti di regressione si basano sull'alllenare l'algoritmo nel predire il grado di appartenenza ad un insieme. Nel caso della classificazione la macchina ha permesso di eseguire l'algoritmo fino a un massimo di 7000 istanze, mentre nel caso di regressione il limite è stato di 6000.
+Una volta effettuati gli esperimenti con i diversi parametri di TensorFlow, sono stati implementati nuovi solver per risolvere il problema. I solver implementati con CVXOPT e CVXPY sono risultati essere entrambi molto affidabili a livello di precisione. Sono stati effettuati confronti con Gurobi sia con il vettore delle variabili sia con il valore ottimo trovato dalla funzione. In entrambi i casi e con entrambi i solver l'RMSE calcolato è sull'ordine di $10^{-7}$. Nelle Figure \ref{fig:differeSolver_Classification} \ref{fig:differeSolver_Regressione} sono mostrati i grafici dei confronti tra solver implementati con Gurobi, CVXOPT e CVXPY. Gli esperimenti sono stati effettuati sul database Gaussiano, eseguendo ripetutamente l'algoritmo su un numero di istanze sempre maggiore, così da poter analizzare il trend delle prestazioni. Nell'asse delle ascisse è mostrato il numero di istanze su cui è stato eseguito l'algoritmo, mentre nell'asse delle ordinate troviamo il tempo di risoluzione in secondi. Sono stati effettuati esperimenti sia di classificazione che di regressione. I primi si basano sull'allenare il modello a predire le etichette delle classi, nel nostro caso due. Gli esperimenti di regressione si basano sull'allenare l'algoritmo nel predire un numero reale, che nel nostro caso rappresenta il grado di appartenenza ad un insieme. Nel caso della classificazione la macchina ha permesso di eseguire l'algoritmo fino a un massimo di 7000 istanze, mentre nel caso di regressione il limite è stato di 6000.
 
 % Grafici tempi CVXOPT-CVXPY-GUROBI
 \begin{figure}[H]
@@ -1279,7 +1279,7 @@ Una volta effettuati gli esperimenti con i diversi parametri di TensorFlow, sono
 \noindent In entrambi i casi i grafici mostrano come l'implementazione con CVXOPT sia molto efficiente. Al contrario l'implementazione con CVXPY sembra essere poco efficiente, avendo anche tempi tre volte superiori a quelli di CVXOPT. 
 
 % Specificare problema CVXPY
-\noindent Nel corso degli esperimenti è sorto un problema utilizzando il solver CVXPY. Con un dataset con poche istanze si è manifestato un problema di convergenza relativo alle librerie ARPACK \cite{ARPACK}, usate da CVXPY per controllare che la matrice inserita sia semidefinita positiva:
+Nel corso degli esperimenti è sorto un problema utilizzando il solver CVXPY. Con un dataset con poche istanze si è manifestato un problema di convergenza relativo alle librerie ARPACK \cite{ARPACK}, usate da CVXPY per controllare che la matrice inserita sia semidefinita positiva:
 
 \begin{figure}[H]
     \centering
@@ -1295,7 +1295,7 @@ Una volta effettuati gli esperimenti con i diversi parametri di TensorFlow, sono
 \section{Discussione dei risultati}
 Nei paragrafi precedenti abbiamo visto e commentato gli esperimenti eseguiti con l'algoritmo \textit{$\mu$-learn}. Tra gli esperimenti preliminari, il parametro principale da tenere in considerazione è \textit{penalization}. Potrebbe essere proprio questo il problema della poca precisione del solver implementato con TensorFlow. Il fattore di penalizzazione, piuttosto che essere fissato a priori, potrebbe essere calcolato iterativamente all'interno del solver, rendendo anch'esso una variabile. Altro parametro che influisce molto è la scelta dell'\textit{optimizer}, che però potrebbe dipendere dal caso di studio. 
 
-Per quanto riguarda i nuovi solver implementati, CVXOPT e CVXPY sono entrambi dei risolutori molto precisi. CVXOPT è molto veloce, anche più di Gurobi, ma c'è da considerare che è una prima implementazione senza tutti i controlli del caso. Per quanto CVXPY permetta di rendere il problema più leggibile a livello di codice, la sua esecuzione è abbastanza lento, anche perché vengono effettuati diversi controlli interni prima di restituire il risultato.
+Per quanto riguarda i nuovi solver implementati, CVXOPT e CVXPY sono entrambi dei risolutori molto precisi. CVXOPT è molto veloce, anche più di Gurobi, ma c'è da considerare che è una prima implementazione senza tutti i controlli del caso. Per quanto CVXPY permetta di rendere il problema più leggibile a livello di codice, la sua esecuzione è abbastanza lenta, anche perché vengono effettuati diversi controlli interni prima di restituire il risultato.
 
 Infine possiamo dire che \textit{$\mu$-learn} è un ottimo algoritmo che permette buone prestazioni nel caso di classificazione e regressione avendo a disposizione una potenza di calcolo sufficiente.
 % Penalization
@@ -1308,7 +1308,7 @@ Infine possiamo dire che \textit{$\mu$-learn} è un ottimo algoritmo che permett
 \addcontentsline{toc}{chapter}{Conclusioni}
 \label{Conclusioni}
 Durante il lavoro di tirocinio è stato effettuato uno studio sul machine learning e sugli insiemi fuzzy.
-Dopo aver assimilato gli argomenti, è stato studiato e analizzato il comportamento dell'algoritmo denominato \textit{$\mu$-learn} basato sull'induzione di insiemi fuzzy per casi di classificazione e regressione. Lo studio è stato effettuato principalmente su due dataset: Iris dataset e un dataset sintetico asppositamente creato. I primi esperimenti sono stati eseguiti su Iris dataset per prendere confidenza con i parametri di \textit{$\mu$-learn}. Successivamente sono stati eseguiti degli esperimenti per cercare di capire il motivo per cui il solver implementato con TensorFlow non era performante come ci si aspettava. Dopo aver analizzato quali potessero essere i problemi del solver implementato con TensorFlow, sono stati implementati due nuovi risolutori, uno con CVXOPT e uno con CVXPY. Entrambi questi due solver sono risultati molto precisi, sebbene CVXOPT abbia dei tempi di esecuzione quasi tre volte più veloci di CVXPY.
+Dopo aver assimilato gli argomenti, è stato studiato e analizzato il comportamento dell'algoritmo denominato \textit{$\mu$-learn} basato sull'induzione di insiemi fuzzy per casi di classificazione e regressione. Lo studio è stato effettuato principalmente su due dataset: Iris dataset e un dataset sintetico appositamente creato. I primi esperimenti sono stati eseguiti su Iris dataset per prendere confidenza con i parametri di \textit{$\mu$-learn}. Successivamente sono stati eseguiti degli esperimenti per cercare di capire il motivo per cui il solver implementato con TensorFlow non era performante come ci si aspettava. Dopo aver analizzato quali potessero essere i problemi del solver implementato con TensorFlow, sono stati implementati due nuovi risolutori, uno con CVXOPT e uno con CVXPY. Entrambi questi due solver sono risultati molto precisi, sebbene CVXOPT abbia dei tempi di esecuzione quasi tre volte più veloci di CVXPY.
 
 Un possibile sviluppo futuro potrebbe consistere nel sviluppare un solver con TensorFlow dove il parametro \textit{penalization} viene calcolato iterativamente all'eseguirsi dell'algoritmo. A livello teorico questa potrebbe essere la scelta più giusta per il calcolo del parametro, che renderebbe l'algoritmo decisamente più preciso.
 

@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+        \PYG{n}{chis} \PYG{o}{=} \PYG{n}{Variable}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)}
+        \PYG{n}{objective} \PYG{o}{=} \PYG{n}{Minimize}\PYG{p}{(}\PYG{n}{quad\PYGZus{}form}\PYG{p}{(}\PYG{n}{chis}\PYG{p}{,} \PYG{n}{P}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n}{q}\PYG{o}{.}\PYG{n}{T} \PYG{o}{@} \PYG{n}{chis}\PYG{p}{)}
+        \PYG{n}{constraints} \PYG{o}{=} \PYG{p}{[}\PYG{n}{G} \PYG{o}{@} \PYG{n}{chis} \PYG{o}{\PYGZlt{}=} \PYG{n}{h}\PYG{p}{,} \PYG{n}{A} \PYG{o}{@} \PYG{n}{chis} \PYG{o}{==} \PYG{n}{b}\PYG{p}{]}
+        \PYG{n}{problem} \PYG{o}{=} \PYG{n}{Problem}\PYG{p}{(}\PYG{n}{objective}\PYG{p}{,} \PYG{n}{constraints}\PYG{p}{)}
+\end{Verbatim}

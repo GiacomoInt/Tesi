@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{n}{ArpackNoConvergence}\PYG{p}{:} \PYG{n}{ARPACK} \PYG{n}{error} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{:}
+    \PYG{n}{No} \PYG{n}{convergence}\PYG{p}{(}\PYG{l+m+mi}{1001} \PYG{n}{iterations}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{o}{/}\PYG{l+m+mi}{1} \PYG{n}{eigenvectors} \PYG{n}{converged}\PYG{p}{)}
+\end{Verbatim}
