@@ -27,4 +27,5 @@
 \contentsline {section}{\numberline {3.4}Confronto tra Solver}{34}{section.3.4}%
 \contentsline {section}{\numberline {3.5}Discussione dei risultati}{36}{section.3.5}%
 \contentsline {chapter}{Conclusioni}{37}{chapter*.47}%
-\contentsline {chapter}{Bibliografia}{40}{chapter*.48}%
+\contentsline {chapter}{Ringraziamenti}{38}{chapter*.48}%
+\contentsline {chapter}{Bibliografia}{42}{chapter*.49}%
